@@ -1682,6 +1682,9 @@ public class npdstracker extends Thread
 }
 
 // ================================================	//
-// "*Beware of these column-writing CEOs.*"			//
-//		- Jean-Louis Gassée column, 24 May 2000		//
+//                                                  //
+//     “Beware of these column-writing CEOs.”       //
+//                                                  //
+//             — Jean-Louis Gassée, 24 May 2000     //
+//                                                  //
 // ================================================	//
