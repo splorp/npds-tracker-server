@@ -104,6 +104,55 @@ register.
 
 -----------------------------------------------------------
 
+Page Template Tag Syntax
+
+-----------------------------------------------------------
+
+(Moved from the npdstracker.ini file)
+
+The HTML template can use the following pseudo XML tags:
+
+
+<hit-counter/>
+
+	the number of hits since last restart
+
+<http-doc/>
+
+	What comes after the GET (usually "/")
+
+<last-validation/>
+
+	Last validation: <foo> or "Validation is in progress."
+
+<meta-refresh/>
+
+	meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
+
+<servers/>
+
+	the table of the servers
+
+<server-counter/>
+
+	Number of registered NPDS servers
+
+<url/>
+
+	the url of this server (used reading the host header, useful for w3 syntax check button)
+
+<validate-time/>
+
+	the time (in minutes) between validations
+
+<version/>
+
+	Returns the version (e.g. 0.1.2221)
+
+
+
+-----------------------------------------------------------
+
 Licensing
 
 -----------------------------------------------------------
