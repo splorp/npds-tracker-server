@@ -4,102 +4,7 @@
 // many thanks to Matt Vaughn <LightyearMedia@mac.com> for NPDS
 // last modified 2006 April 6
 
-// CHANGELOG (version numbers are defined as major.minor.build)
-// 0.1.34 [VR] Added 'shouldIlog' setting in INI file to disable all logging
-// 0.1.33 [MP] Added SSI tag for displaying the number of registered servers in the template.
-//		- Made the <meta-refresh/> SSI XHTML-compatible.
-//		- Changed the default port number to 3680 ;-)
-//		- Refined the listing table elements for extensive use of CSS.
-//		- Added code to allow ONE hostname with a private IP to register.
-// 0.1.32 [VR] Makes sure that the hostname isn't empty on a REGUP command
-//		- changed kRTFMStr to reflect new NPDS website address
-// 0.1.31 [PG] NPDS Tracker can now listen on several ports.
-// 0.1.30 [PG] Fixed the bug in 192.168 address filtering.
-// 0.1.29 [PG] Fixed the bug in processing of console commands, so now lowercase commands work.
-//		- The console now says "server validation test started" before it finishes the validation.
-//		- The tracker was waiting forever for an answer from fellow trackers, which was bad.
-//		- Added style information to colorize the table.
-//		- The server performs a verification on startup.
-//		- Vector copy constructor is no longer called, so this should compile on Java < 1.2
-//			(but it will have problems because of bugs in the JVM)
-//		- The server now checks the hosts passed as REGUP parameters to be correct
-//			(to resolve and to be not private).
-// 0.1.28 [PG] No longer dumps the shared servers to npdscmd.txt.
-//		- Fixed the shareEnabled .ini read process (getBoolean is not what we want, it's valueOf).
-// 0.1.27 [VR] Now saves registered server information for automatic reloading upon a crash
-//		or restart
-// 0.1.26 [PG] Fixed the java.lang.ArrayIndexOutOfBoundsException bug which
-//		happened on Wed Aug 15 11:50:45 EST 2001. This bug was introduced with 0.1.24.
-// 0.1.25 [PG] Fixed the java.lang.IllegalArgumentException: timeout value is negative bug (well, I think)
-// 0.1.24 [PG] Fixed the reload 0 bug.
-//		- Fixed the lock bug.
-//		- Set the timeout to 20 secs (was 10 secs) so my Newton is no longer considered as down ;)
-//		- Added last validation template element.
-// 0.1.23 [VR] No actual code changes, but to workaround a bug in JDK < 1.1
-//		you must use Java 1.2 or better and set the sun.net.inetaddr.ttl
-//		property to 0 on the command line, like this:
-//		'java -Dsun.net.inetaddr.ttl=0 npdstracker'
-// 0.1.22 [PG] Implemented the template stuff 
-//		- Re-organized the ProcessQuery method
-//		- There is now a single class with embedded sub classes (so we'll have a single .java binary)
-//		- Improved answer to the GET request (with many headers now)
-// 0.1.21 [PG] No longer uses the bugged URL interface to check if Newton servers are up.
-//			Instead, I use a Socket.
-//		- the REGUP command tokenizer now accepts any standard token
-//			(and no longer only spaces which wasn't protocol-compliant)
-//		- added several syntax checking with an appropriate status message.
-// 0.1.20 [VR] Retrieving SHARE records from other trackers now works!!
-// 0.1.19 [VR] Will now read optionsfile and cmdfile from default location
-//		- fixed up options file parsing
-//		- HTML now easily customizable (see npdstracker.ini, header.html, footer.html)
-// 0.1.18 [VR] Minor admin console fixes
-//		- implemented command-line arguments for logfile, cmdfile, optionsfile
-//		- now can specify files to log to, read options from, or read initial commands from
-//		- finally implemented LOGS command in admin console.
-//		- code and syntax cleanups.
-//        [PG] Use SimpleDateFormat in the ReturnRFCTime function. (this also fixes the GMT bug).
-//		- Fixed a little HTML bug.
-// 0.1.17 [VR] VTEST command added to the admin console
-//		- SHARE command is now actually sent (forgot to flush PrintWriter)
-//		- changed return code of SHARE command if sharing is disabled
-// 0.1.16 [PG] The server now only sleeps in the validator loop.
-// 0.1.15 [PG] Now the server always uses CRLF except for the log
-//		- fixed a little bug in the validation date.
-// 0.1.14 [PG] Now supports multiple connections
-// 0.1.13 [VR] trying to fix intermittent bug in server validation code
-// 0.1.12 [VR] more bugs in server validation fixed
-// 0.1.11 [VR] added more features to GET code
-//		-fixed up RFC times somewhat
-//		-fixed bug in validation code with Connection Refused socket exceptions
-// 0.1.10 [VR] fixed bug with exception passing and server socket code
-//		-rewrote GET code to return a nice HTML table (HTML 4.01 compliant)
-// 0.1.9  [VR] admin console is now complete save for the LOGS command
-//		-now retrieves, updates, and properly handles records from other servers via
-//		the SHARE command
-// 0.0.8  [VR] added SHARE, ABOUT, VERIFY, and STATS command to admin console
-//		-fixed the problem with the verification code repeating many times per minute
-//		-added a REGUP counter for the STATS admin command
-// 0.0.7  [VR] now accepts commands regardless of case
-//		-checks for an existing host entry before processing a REGUP
-//		-started implementing the ADMIN command for live configuration of the server
-// 0.0.6  [VR] first implementation of SHARE command
-//		-cleaned up some return codes
-//		-fixed some status handling and checking
-// 0.0.5  [VR] server validation actually works!  woohoo!
-//		-implemented a socket timeout so that the loop doesn't get stuck
-//		-removed the QHTML extended command
-// 0.0.4  [VR] implemented Return Codes
-// 0.0.3  [VR] Fixed GET method - now returns DTD HTML 2.0 compliant pages
-//		-Rewrote internal storage of records - is now good and extensible
-//		-Now we store time server last checked, and server status
-//		-Implemented QueryMethod function for finding a record when we do a REGDN -
-//		could also use this method for an possible SRCH command later
-// 0.0.2  [VR] Added QHTML method for returning HTMLized results
-//		-Added GET method support for returning a basic web page to web browsers
-
-// GOALS for 0.1
-// -be fully v1 protocol compliant
-// -ability to save state when server is shutdown / restore state
+/
 
 import java.io.*;
 import java.net.*;
@@ -164,6 +69,7 @@ public class npdstracker extends Thread
 	public static String logfile = "";
 	public static boolean shouldIlog = true;
 	public static String templateFile = "";
+	public static String stylesheetFile = "";
 	public static String cmdfile = defaultCmdFile;
 	// Define private host string
 	public static String acceptPrivateHost = "";
@@ -635,6 +541,14 @@ public class npdstracker extends Thread
 					logMessage("error reading optionsfile, line " + linenumber);
 				else
 					templateFile = st.nextToken();
+			}
+			else if (tempoption.startsWith("stylesheetTemplate"))
+			{
+				garbage = st.nextToken();
+				if (!(garbage.equals("=")))
+					logMessage("error reading optionsfile, line " + linenumber);
+				else
+					stylesheetFile = st.nextToken();
 			}
 			else if (tempoption.startsWith("privateHostToAccept"))
 			{
@@ -1130,6 +1044,8 @@ public class npdstracker extends Thread
 				
 				String metaRefreshStr = "<meta http-equiv=\"refresh\" content=\"" + refreshCount + "; url=" + HTTPDocStr + "\" />\r\n";
 
+				String stylesheetStr = "<link rel=\"stylesheet\" href=\"" + stylesheetFile + "\" type=\"text/css\" media=\"screen\" />\r\n";
+
 				out.print( "Refresh: " + refreshCount + "; url=" + HTTPDocStr + "\r\n" );
 				out.print( "Server: " + kServerStr + "\r\n" );
 
@@ -1158,18 +1074,20 @@ public class npdstracker extends Thread
 					// <servers/>			-> the table of the servers
 					// <validate-time/>		-> the time (in minutes) between validations
 					// <hit-counter/>		-> the number of hits since last restart
-					// <url/>			-> the url of this server (used reading the host header, useful for w3 syntax check button)
+					// <url/>				-> the url of this server (used reading the host header, useful for w3 syntax check button)
 					// <meta-refresh/>		-> meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
-					// <http-doc/>		-> What comes after the GET (usually "/")
+					// <stylesheet/>		-> link element for main stylesheet
+					// <http-doc/>			-> What comes after the GET (usually "/")
 					// <version/>			-> Returns the version (e.g. 0.1.2221)
 					// <last-validation/>	-> Last validation: <foo> or "Validation is in progress."
-					// <server-counter/>		-> Number of registered NPDS servers
+					// <server-counter/>	-> Number of registered NPDS servers
 					
 					templateLine = StrReplace( templateLine, "<servers/>", tableStr );
 					templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
 					templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
 					templateLine = StrReplace( templateLine, "<url/>", urlStr );
 					templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
+					templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
 					templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
 					templateLine = StrReplace( templateLine, "<version/>", versionStr );
 					templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
