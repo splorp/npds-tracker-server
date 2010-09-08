@@ -176,17 +176,17 @@ Version History
 
 Please note that the version numbering scheme is defined as major.minor.build.
 
-0.1.35 [2010 September 06]
+0.1.35 [06 September 2010]
 
 	[GH] Moved source to Github
 	[GH] Added user definable stylesheet template
 	[GH] Moved stylesheet from template.html into its own file
 
-0.1.34 [2006 April 06]
+0.1.34 [06 April 2006]
 
 	[VR] Added 'shouldIlog' setting in INI file to disable all logging
 
-0.1.33
+0.1.33 [22 February 2004]
 
 	[MP] Added SSI tag for displaying the number of registered servers in the template.
 	[MP] Made the <meta-refresh/> SSI XHTML-compatible.
@@ -194,20 +194,20 @@ Please note that the version numbering scheme is defined as major.minor.build.
 	[MP] Refined the listing table elements for extensive use of CSS.
 	[MP] Added code to allow ONE hostname with a private IP to register.
 
-0.1.32
+0.1.32 [02 May 2003]
 
 	[VR] Makes sure that the hostname isn't empty on a REGUP command
 	[VR] Changed kRTFMStr to reflect new NPDS website address
 	
-0.1.31
+0.1.31 [30 July 2002]
 
 	[PG] NPDS Tracker can now listen on several ports.
 
-0.1.30
+0.1.30 [28 April 2002]
 
 	[PG] Fixed the bug in 192.168 address filtering.
 
-0.1.29
+0.1.29 [16 March 2002]
 
 	[PG] Fixed the bug in processing of console commands, so now lowercase commands work.
 	[PG] The console now says "server validation test started" before it finishes the validation.
@@ -217,20 +217,20 @@ Please note that the version numbering scheme is defined as major.minor.build.
 	[PG] Vector copy constructor is no longer called, so this should compile on Java < 1.2 (but it will have problems because of bugs in the JVM)
 	[PG] The server now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private).
 
-0.1.28
+0.1.28 [29 November 2001]
 
 	[PG] No longer dumps the shared servers to npdscmd.txt.
 	[PG] Fixed the shareEnabled .ini read process (getBoolean is not what we want, it's valueOf).
 
-0.1.27
+0.1.27 [20 October 2001]
 
 	[VR] Now saves registered server information for automatic reloading upon a crash or restart
 
-0.1.26
+0.1.26 [18 August 2001]
 
 	[PG] Fixed the java.lang.ArrayIndexOutOfBoundsException bug which happened on Wed Aug 15 11:50:45 EST 2001. This bug was introduced with 0.1.24.
 
-0.1.25
+0.1.25 [06 June 2001]
 
 	[PG] Fixed the java.lang.IllegalArgumentException: timeout value is negative bug (well, I think)
 
