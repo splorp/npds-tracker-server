@@ -1,8 +1,8 @@
 // NPDSTracker for Java 1.2
-// written by Victor Rehorst <chuma@chuma.org> and Paul Guyot <pguyot@kallisys.net>
-// contributions by Manuel Probsthain <manu@xonxion.net>
-// many thanks to Matt Vaughn <LightyearMedia@mac.com> for NPDS
-// last modified 2006 April 6
+// Written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://www.kallisys.com/>
+// Contributions by Manuel Probsthain
+// Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for NPDS
+// Last Modified: 06 April 2006
 
 /
 
