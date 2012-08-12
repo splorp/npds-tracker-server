@@ -148,7 +148,11 @@ the aforementioned files, especially:
 	cssTemplate = /usr/local/share/npdstracker/template.css
 	logfile = /var/log/npdstracker.log
 
-* On Darwin/Mac OS X, you can create a launch daemon to automatically start 
+* You can now manually start npdstracker at the command line:
+
+	java -cp /usr/local/bin/npdstracker.jar npdstracker -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
+
+* Or, on Darwin/Mac OS X, you can create a launch daemon to automatically start 
 npdstracker on boot by creating & editing /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
 and pasting in the following (this is assuming following the above Advanced 
 Configuration steps):
@@ -184,6 +188,9 @@ It can be loaded immediately by running the following at the command line, or
 you can wait until the next reboot:
 
 	sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
+
+* Or, on Linux or BSD systems you can create init.d or rc.d scripts,
+respectively, to automatically start npdstracker on boot.
 
 
 -----------------------------------------------------------
