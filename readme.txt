@@ -73,7 +73,7 @@ startnpds.sh
 
 -----------------------------------------------------------
 
-Configuration
+Basic Configuration
 
 -----------------------------------------------------------
 
@@ -103,6 +103,94 @@ or, for Java 1.2.x:
 
 * Configure and NPDS server to point to the tracker and make sure it can 
 register.
+
+
+-----------------------------------------------------------
+
+Advanced Configuration
+
+-----------------------------------------------------------
+
+
+The basic configuration is great for development, testing, and Windows 
+deployment, but for those running Linux or Mac OS X, it's preferable to
+install npdstracker more permanently and appropriately. Specifically:
+
+* For a cleaner installation, create a JAR file at the command line:
+
+	jar cvf npdstracker.jar *.class
+
+* Install the JAR file to /usr/local/bin from at the command line:
+
+	mkdir -p /usr/local/bin
+	install npdstracker.jar /usr/local/bin
+
+* Install the npdstracker.ini & npdscmd.txt files in /etc at the command 
+line:
+
+	mkdir -p /etc/npdstracker
+	install npdstracker.ini npdscmd.txt /etc/npdstracker
+
+* Install the template.html & template.css files in /usr/local/share at the 
+command line:
+
+	mkdir -p /usr/local/share/npdstracker
+	install template.html template.css /usr/local/share/npdstracker
+
+* Create the log file at the command line:
+
+	touch /var/log/npdstracker.log
+
+* Edit /etc/npdstracker/npdstracker.ini to point to the new paths for all 
+the aforementioned files, especially:
+
+	pageTemplate = /usr/local/share/npdstracker/template.html
+	cssTemplate = /usr/local/share/npdstracker/template.css
+	logfile = /var/log/npdstracker.log
+
+* You can now manually start npdstracker at the command line:
+
+	java -cp /usr/local/bin/npdstracker.jar npdstracker -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
+
+* Or, on Darwin/Mac OS X, you can create a launch daemon to automatically start 
+npdstracker on boot by creating & editing /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
+and pasting in the following (this is assuming following the above Advanced 
+Configuration steps):
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+	<plist version="1.0">
+		<dict>
+			<key>Label</key>
+			<string>fr.free.npds.npdstracker</string>
+			<key>ProgramArguments</key>
+			<array>
+				<string>java</string>
+				<string>-cp</string>
+				<string>/usr/local/bin/npdstracker.jar</string>
+				<string>npdstracker</string>
+				<string>-c</string>
+				<string>/etc/npdstracker/npdscmd.txt</string>
+				<string>-o</string>
+				<string>/etc/npdstracker/npdstracker.ini</string>
+			</array>
+			<key>KeepAlive</key>
+			<dict>
+				<key>NetworkState</key>
+				<true/>
+			</dict>
+			<key>RunAtLoad</key>
+			<true/>
+		</dict>
+	</plist>
+
+It can be loaded immediately by running the following at the command line, or 
+you can wait until the next reboot:
+
+	sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
+
+* Or, on Linux or BSD systems you can create init.d or rc.d scripts,
+respectively, to automatically start npdstracker on boot.
 
 
 -----------------------------------------------------------

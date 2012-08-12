@@ -4,8 +4,6 @@
 // Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for NPDS
 // Last Modified: 06 April 2006
 
-/
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
