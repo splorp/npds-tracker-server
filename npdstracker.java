@@ -1058,7 +1058,7 @@ public class npdstracker extends Thread
 				{
 					lastValidationStr = "Validation is in progress.";
 				} else {
-					lastValidationStr = "Last validation: " + mLastValidation + ".";
+					lastValidationStr = "Last validation check: " + mLastValidation + ".";
 				}
 
 				// Define count of servers as string
@@ -1068,7 +1068,7 @@ public class npdstracker extends Thread
 				String templateLine = template.readLine();
 				while (templateLine != null)
 				{
-					// I replace the following sgml tags. (note: this isn't pure sgml as my tags can be inside other tags arguments)
+					// I replace the following SGML tags. (note: this isn't pure SGML as my tags can be inside other tags arguments)
 					// <servers/>			-> the table of the servers
 					// <validate-time/>		-> the time (in minutes) between validations
 					// <hit-counter/>		-> the number of hits since last restart
@@ -1077,7 +1077,7 @@ public class npdstracker extends Thread
 					// <stylesheet/>		-> link element for main stylesheet
 					// <http-doc/>			-> What comes after the GET (usually "/")
 					// <version/>			-> Returns the version (e.g. 0.1.2221)
-					// <last-validation/>	-> Last validation: <foo> or "Validation is in progress."
+					// <last-validation/>	-> Date and time of last validation check: <foo> or "Validation is in progress."
 					// <server-counter/>	-> Number of registered NPDS servers
 					
 					templateLine = StrReplace( templateLine, "<servers/>", tableStr );
