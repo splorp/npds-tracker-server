@@ -2,7 +2,7 @@
 // Written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://www.kallisys.com/>
 // Contributions by Manuel Probsthain
 // Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for NPDS
-// Last Modified: 06 April 2006
+// Last Modified: 13 August 2012
 
 import java.io.*;
 import java.net.*;
@@ -540,7 +540,7 @@ public class npdstracker extends Thread
 				else
 					templateFile = st.nextToken();
 			}
-			else if (tempoption.startsWith("stylesheetTemplate"))
+			else if (tempoption.startsWith("cssTemplate"))
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))

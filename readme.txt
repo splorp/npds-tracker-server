@@ -131,21 +131,20 @@ line:
 	mkdir -p /etc/npdstracker
 	install npdstracker.ini npdscmd.txt /etc/npdstracker
 
-* Install the template.html & template.css files in /usr/local/share at the 
+* Install the template.html files in /usr/local/share at the 
 command line:
 
 	mkdir -p /usr/local/share/npdstracker
-	install template.html template.css /usr/local/share/npdstracker
+	install template.html /usr/local/share/npdstracker
 
 * Create the log file at the command line:
 
 	touch /var/log/npdstracker.log
 
 * Edit /etc/npdstracker/npdstracker.ini to point to the new paths for all 
-the aforementioned files, especially:
+the aforementioned files (note that the CSS file is a URL path), especially:
 
 	pageTemplate = /usr/local/share/npdstracker/template.html
-	cssTemplate = /usr/local/share/npdstracker/template.css
 	logfile = /var/log/npdstracker.log
 
 * You can now manually start npdstracker at the command line:
@@ -230,7 +229,7 @@ The HTML template can use the following pseudo XML tags:
 
 <stylesheet/>
 
-	Inserts the stylesheet specified by npdstracker.ini (default: template.css)
+	Inserts the stylesheet specified by npdstracker.ini (default: template.css; remark: this is a URL path, not filesystem path)
 
 <url/>
 
