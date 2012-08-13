@@ -118,7 +118,7 @@ install npdstracker more permanently and appropriately. Specifically:
 
 * For a cleaner installation, create a JAR file at the command line:
 
-	jar cvf npdstracker.jar *.class
+	jar cvfm npdstracker.jar manifest *.class
 
 * Install the JAR file to /usr/local/bin from at the command line:
 
@@ -150,7 +150,7 @@ the aforementioned files, especially:
 
 * You can now manually start npdstracker at the command line:
 
-	java -cp /usr/local/bin/npdstracker.jar npdstracker -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
+	java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
 
 * Or, on Darwin/Mac OS X, you can create a launch daemon to automatically start 
 npdstracker on boot by creating & editing /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
@@ -166,9 +166,8 @@ Configuration steps):
 			<key>ProgramArguments</key>
 			<array>
 				<string>java</string>
-				<string>-cp</string>
+				<string>-jar</string>
 				<string>/usr/local/bin/npdstracker.jar</string>
-				<string>npdstracker</string>
 				<string>-c</string>
 				<string>/etc/npdstracker/npdscmd.txt</string>
 				<string>-o</string>
