@@ -6,7 +6,7 @@ A Java based server for tracking and listing Newton Personal Data Sharing client
 http://npds.info/
 
 
-NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain and Grant Hutchinson <http://splorp.com/>.
+NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, and Grant Hutchinson <http://splorp.com/>.
 
 Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for developing NPDS in the first place.
 
