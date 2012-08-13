@@ -264,11 +264,21 @@ Version History
 
 Please note that the version numbering scheme is defined as major.minor.build.
 
-0.1.35 [06 September 2010]
+0.1.36 [TBD]
+
+	[MA] Removed rogue slash in npdstracker.java
+	[MA] Added advanced configuration to read me
+	[GH] Minor formatting and nomenclature edits
+	[GH] Removed deprecated elements and formatting attributes
+
+0.1.35 [08 September 2010]
 
 	[GH] Moved source to Github
 	[GH] Added user definable stylesheet template
 	[GH] Moved stylesheet from template.html into its own file
+	[GH] Moved version history from Java source file into read me
+	[GH] Minor text formatting updates
+	[GH] Changed encoding to UTF-8
 
 0.1.34 [06 April 2006]
 
