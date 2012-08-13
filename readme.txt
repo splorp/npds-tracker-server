@@ -28,7 +28,7 @@ Sun Java 1.1 or better
 
 	Java 1.3 or higher is HIGHLY RECOMMENDED due to DNS caching bugs in 
 	prior Java versions.  If you have to use Java 1.2 there is a 
-	workaround: add the parameter "-Dsun.net.inetaddr.ttl=0" to the 
+	workaround: add the parameter ‘-Dsun.net.inetaddr.ttl=0’ to the 
 	Java command-line.
 
 A connection to the internet
@@ -47,7 +47,7 @@ Files
 
 readme.txt
 
-	You're reading it now
+	You’re reading it now
 
 npdstracker.java
 
@@ -113,7 +113,7 @@ Advanced Configuration
 
 
 The basic configuration is great for development, testing, and Windows 
-deployment, but for those running Linux or Mac OS X, it's preferable to
+deployment, but for those running Linux or Mac OS X, it’s preferable to
 install npdstracker more permanently and appropriately. Specifically:
 
 * For a cleaner installation, create a JAR file at the command line:
@@ -210,11 +210,11 @@ The HTML template can use the following pseudo XML tags:
 
 <http-doc/>
 
-	What comes after the GET (usually "/")
+	What comes after the GET (usually ‘/’)
 
 <last-validation/>
 
-	Last validation: <foo> or "Validation is in progress."
+	Last validation: <foo> or “Validation is in progress.”
 
 <meta-refresh/>
 
@@ -272,7 +272,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.34 [06 April 2006]
 
-	[VR] Added 'shouldIlog' setting in INI file to disable all logging
+	[VR] Added ‘shouldIlog’ setting in INI file to disable all logging
 
 0.1.33 [22 February 2004]
 
@@ -284,7 +284,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.32 [02 May 2003]
 
-	[VR] Makes sure that the hostname isn't empty on a REGUP command
+	[VR] Makes sure that the hostname isn’t empty on a REGUP command
 	[VR] Changed kRTFMStr to reflect new NPDS website address
 	
 0.1.31 [30 July 2002]
@@ -298,7 +298,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 0.1.29 [16 March 2002]
 
 	[PG] Fixed the bug in processing of console commands, so now lowercase commands work.
-	[PG] The console now says "server validation test started" before it finishes the validation.
+	[PG] The console now says “server validation test started” before it finishes the validation.
 	[PG] The tracker was waiting forever for an answer from fellow trackers, which was bad.
 	[PG] Added style information to colorize the table.
 	[PG] The server performs a verification on startup.
@@ -308,7 +308,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 0.1.28 [29 November 2001]
 
 	[PG] No longer dumps the shared servers to npdscmd.txt.
-	[PG] Fixed the shareEnabled .ini read process (getBoolean is not what we want, it's valueOf).
+	[PG] Fixed the shareEnabled .ini read process (getBoolean is not what we want, it’s valueOf).
 
 0.1.27 [20 October 2001]
 
@@ -331,19 +331,19 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.23
 
-	[VR] No actual code changes, but to workaround a bug in JDK < 1.1 you must use Java 1.2 or better and set the sun.net.inetaddr.ttl property to 0 on the command line, like this: 'java -Dsun.net.inetaddr.ttl=0 npdstracker'
+	[VR] No actual code changes, but to workaround a bug in JDK < 1.1 you must use Java 1.2 or better and set the sun.net.inetaddr.ttl property to 0 on the command line, like this: ‘java -Dsun.net.inetaddr.ttl=0 npdstracker’
 
 0.1.22
 
 	[PG] Implemented the template stuff
 	[PG] Re-organized the ProcessQuery method
-	[PG] There is now a single class with embedded sub classes (so we'll have a single .java binary)
+	[PG] There is now a single class with embedded sub classes (so we’ll have a single .java binary)
 	[PG] Improved answer to the GET request (with many headers now)
 
 0.1.21
 
-	[PG] No longer uses the bugged URL interface to check if Newton servers are up. Instead, I use a Socket.
-	[PG] the REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn't protocol-compliant)
+	[PG] No longer uses the bugged URL interface to check if Newton servers are up. Instead, I use a socket.
+	[PG] the REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn’t protocol-compliant)
 	[PG] added several syntax checking with an appropriate status message.
 
 0.1.20
@@ -430,7 +430,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 0.0.5
 
 	[VR] server validation actually works!  woohoo!
-	[VR] implemented a socket timeout so that the loop doesn't get stuck
+	[VR] implemented a socket timeout so that the loop doesn’t get stuck
 	[VR] removed the QHTML extended command
 
 0.0.4
