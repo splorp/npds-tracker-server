@@ -6,7 +6,7 @@ A Java based server for tracking and listing Newton Personal Data Sharing client
 http://npds.info/
 
 
-NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain and Grant Hutchinson <http://splorp.com/>.
+NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, and Grant Hutchinson <http://splorp.com/>.
 
 Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for developing NPDS in the first place.
 
@@ -118,7 +118,7 @@ install npdstracker more permanently and appropriately. Specifically:
 
 * For a cleaner installation, create a JAR file at the command line:
 
-	jar cvf npdstracker.jar *.class
+	jar cvfm npdstracker.jar manifest *.class
 
 * Install the JAR file to /usr/local/bin from at the command line:
 
@@ -149,7 +149,7 @@ the aforementioned files (note that the CSS file is a URL path), especially:
 
 * You can now manually start npdstracker at the command line:
 
-	java -cp /usr/local/bin/npdstracker.jar npdstracker -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
+	java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
 
 * Or, on Darwin/Mac OS X, you can create a launch daemon to automatically start 
 npdstracker on boot by creating & editing /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
@@ -165,9 +165,8 @@ Configuration steps):
 			<key>ProgramArguments</key>
 			<array>
 				<string>java</string>
-				<string>-cp</string>
+				<string>-jar</string>
 				<string>/usr/local/bin/npdstracker.jar</string>
-				<string>npdstracker</string>
 				<string>-c</string>
 				<string>/etc/npdstracker/npdscmd.txt</string>
 				<string>-o</string>
@@ -285,11 +284,11 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.33 [22 February 2004]
 
-	[MP] Added SSI tag for displaying the number of registered servers in the template.
-	[MP] Made the <meta-refresh/> SSI XHTML-compatible.
-	[MP] Changed the default port number to 3680 ;-)
-	[MP] Refined the listing table elements for extensive use of CSS.
-	[MP] Added code to allow ONE hostname with a private IP to register.
+	[MP] Added SSI tag for displaying the number of registered servers in the template
+	[MP] Made the <meta-refresh/> SSI XHTML-compatible
+	[MP] Changed the default port number to 3680
+	[MP] Refined the listing table elements for extensive use of CSS
+	[MP] Added code to allow one hostname with a private IP to register
 
 0.1.32 [02 May 2003]
 
@@ -298,26 +297,26 @@ Please note that the version numbering scheme is defined as major.minor.build.
 	
 0.1.31 [30 July 2002]
 
-	[PG] NPDS Tracker can now listen on several ports.
+	[PG] NPDS Tracker can now listen on several ports
 
 0.1.30 [28 April 2002]
 
-	[PG] Fixed the bug in 192.168 address filtering.
+	[PG] Fixed the bug in 192.168 address filtering
 
 0.1.29 [16 March 2002]
 
-	[PG] Fixed the bug in processing of console commands, so now lowercase commands work.
-	[PG] The console now says “server validation test started” before it finishes the validation.
-	[PG] The tracker was waiting forever for an answer from fellow trackers, which was bad.
-	[PG] Added style information to colorize the table.
-	[PG] The server performs a verification on startup.
+	[PG] Fixed the bug in processing of console commands, so now lowercase commands work
+	[PG] The console now says “server validation test started” before it finishes the validation
+	[PG] The tracker was waiting forever for an answer from fellow trackers, which was bad
+	[PG] Added style information to colorize the table
+	[PG] The server performs a verification on startup
 	[PG] Vector copy constructor is no longer called, so this should compile on Java < 1.2 (but it will have problems because of bugs in the JVM)
-	[PG] The server now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private).
+	[PG] The server now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private)
 
 0.1.28 [29 November 2001]
 
-	[PG] No longer dumps the shared servers to npdscmd.txt.
-	[PG] Fixed the shareEnabled .ini read process (getBoolean is not what we want, it’s valueOf).
+	[PG] No longer dumps the shared servers to npdscmd.txt
+	[PG] Fixed the shareEnabled .ini read process (getBoolean is not what we want, it’s valueOf)
 
 0.1.27 [20 October 2001]
 
@@ -333,10 +332,10 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.24
 
-	[PG] Fixed the reload 0 bug.
-	[PG] Fixed the lock bug.
+	[PG] Fixed the reload 0 bug
+	[PG] Fixed the lock bug
 	[PG] Set the timeout to 20 secs (was 10 secs) so my Newton is no longer considered as down ;)
-	[PG] Added last validation template element.
+	[PG] Added last validation template element
 
 0.1.23
 
@@ -352,8 +351,8 @@ Please note that the version numbering scheme is defined as major.minor.build.
 0.1.21
 
 	[PG] No longer uses the bugged URL interface to check if Newton servers are up. Instead, I use a socket.
-	[PG] the REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn’t protocol-compliant)
-	[PG] added several syntax checking with an appropriate status message.
+	[PG] The REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn’t protocol-compliant)
+	[PG] Added several syntax checking with an appropriate status message.
 
 0.1.20
 
@@ -362,16 +361,16 @@ Please note that the version numbering scheme is defined as major.minor.build.
 0.1.19
 
 	[VR] Will now read optionsfile and cmdfile from default location
-	[VR] fixed up options file parsing
+	[VR] Fixed up options file parsing
 	[VR] HTML now easily customizable (see npdstracker.ini, header.html, footer.html)
 
 0.1.18
 
 	[VR] Minor admin console fixes
-	[VR] implemented command-line arguments for logfile, cmdfile, optionsfile
-	[VR] now can specify files to log to, read options from, or read initial commands from
-	[VR] finally implemented LOGS command in admin console.
-	[VR] code and syntax cleanups.
+	[VR] Implemented command-line arguments for logfile, cmdfile, optionsfile
+	[VR] Now can specify files to log to, read options from, or read initial commands from
+	[VR] Finally implemented LOGS command in admin console.
+	[VR] Code and syntax cleanups.
 	[PG] Use SimpleDateFormat in the ReturnRFCTime function. (this also fixes the GMT bug).
 	[PG] Fixed a little HTML bug.
 
@@ -379,7 +378,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 	[VR] VTEST command added to the admin console
 	[VR] SHARE command is now actually sent (forgot to flush PrintWriter)
-	[VR] changed return code of SHARE command if sharing is disabled
+	[VR] Changed return code of SHARE command if sharing is disabled
 
 0.1.16
 
@@ -388,7 +387,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 0.1.15
 
 	[PG] Now the server always uses CRLF except for the log
-	[PG] fixed a little bug in the validation date.
+	[PG] Fixed a little bug in the validation date.
 
 0.1.14
 
@@ -396,51 +395,51 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.13
 
-	[VR] trying to fix intermittent bug in server validation code
+	[VR] Trying to fix intermittent bug in server validation code
 
 0.1.12
 
-	[VR] more bugs in server validation fixed
+	[VR] More bugs in server validation fixed
 
 0.1.11
 
-	[VR] added more features to GET code
-	[VR] fixed up RFC times somewhat
-	[VR] fixed bug in validation code with Connection Refused socket exceptions
+	[VR] Added more features to GET code
+	[VR] Fixed up RFC times somewhat
+	[VR] Fixed bug in validation code with Connection Refused socket exceptions
 
 0.1.10
 
-	[VR] fixed bug with exception passing and server socket code
-	[VR] rewrote GET code to return a nice HTML table (HTML 4.01 compliant)
+	[VR] Fixed bug with exception passing and server socket code
+	[VR] Rewrote GET code to return a nice HTML table (HTML 4.01 compliant)
 
 0.1.9
 
-	[VR] admin console is now complete save for the LOGS command
-	[VR] now retrieves, updates, and properly handles records from other servers via the SHARE command
+	[VR] Admin console is now complete save for the LOGS command
+	[VR] Now retrieves, updates, and properly handles records from other servers via the SHARE command
 
 0.0.8
 
-	[VR] added SHARE, ABOUT, VERIFY, and STATS command to admin console
-	[VR] fixed the problem with the verification code repeating many times per minute
-	[VR] added a REGUP counter for the STATS admin command
+	[VR] Added SHARE, ABOUT, VERIFY, and STATS command to admin console
+	[VR] Fixed the problem with the verification code repeating many times per minute
+	[VR] Added a REGUP counter for the STATS admin command
 
 0.0.7
 
-	[VR] now accepts commands regardless of case
-	[VR] checks for an existing host entry before processing a REGUP
-	[VR] started implementing the ADMIN command for live configuration of the server
+	[VR] Now accepts commands regardless of case
+	[VR] Checks for an existing host entry before processing a REGUP
+	[VR] Started implementing the ADMIN command for live configuration of the server
 
 0.0.6
 
-	[VR] first implementation of SHARE command
-	[VR] cleaned up some return codes
-	[VR] fixed some status handling and checking
+	[VR] First implementation of SHARE command
+	[VR] Cleaned up some return codes
+	[VR] Fixed some status handling and checking
 
 0.0.5
 
-	[VR] server validation actually works!  woohoo!
-	[VR] implemented a socket timeout so that the loop doesn’t get stuck
-	[VR] removed the QHTML extended command
+	[VR] Server validation actually works!  woohoo!
+	[VR] Implemented a socket timeout so that the loop doesn’t get stuck
+	[VR] Removed the QHTML extended command
 
 0.0.4
 
