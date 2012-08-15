@@ -949,154 +949,8 @@ public class npdstracker extends Thread
 			{
 				String HTTPDocStr = st.nextToken();
 				
-				// return a WEB PAGE
 				logMessage("Processing GET command");
-				out.print("HTTP/1.0 ");
-				ReturnCode(HTTP_OK, "", out);
-				hitcounter++;
-
-				// I prepare the result strings.
-				// Find out what my address is. I use the host header if present.
-				String urlStr = socket.getLocalAddress().getHostName();
-				String requestLine = in.readLine();
-				while ((requestLine != null) && (requestLine.length() > 0) )
-				{
-					StringTokenizer headerTk = new StringTokenizer( requestLine, ": \t" );
-					if (headerTk.hasMoreTokens() == false)
-					{
-						break;
-					}
-					String theHeader = headerTk.nextToken().toLowerCase();
-					if (theHeader.equals("host"))
-					{
-						// Cool, I have a host header.
-						urlStr = "http://" + headerTk.nextToken();
-						break;
-					}
-					
-					requestLine = in.readLine();
-				}
-				
-				int thePort;
-				if (socket == null) {
-					// Take the first port
-					thePort = ((Integer) kPort.get(0)).intValue();
-				} else {
-					// Take the socket port
-					thePort = socket.getLocalPort();
-				}
-
-				if (thePort != 80) {
-					urlStr += ":" + thePort;
-				}
-				
-				urlStr += HTTPDocStr;
-
-				String tableStr = "<table border=\"0\" width=\"100%\" summary=\"List of online Newtons\" class=\"list\">\r\n<tr class=\"header\"><th width=\"10%\">Active</th><th width=\"75%\">Server Name</th><th>Last Verified</th></tr>\r\n";
-					
-				int index_i;
-				synchronized (mHostInfoVector)
-				{
-					for (index_i = 0; index_i < mHostInfoVector.size(); index_i++)
-					{
-						THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(index_i);
-						String classStr;	// String representing the class of the raw.
-						String labelStr;	// String for the label.
-						
-						switch ( theInfo.mStatus )
-						{
-							case -1:
-								classStr = "up-sharing";
-								labelStr = "UP-sharing";
-								break;
-							
-							case 0:
-								classStr = "up";
-								labelStr = "UP";
-								break;
-								
-							default:
-								classStr = "down";
-								labelStr = "DOWN";
-								break;
-						}
-						
-						tableStr += "<tr valign=\"middle\" class=\"" + classStr + "\"><td class=\"listing\"><div align=\"center\"><b>"
-									+ labelStr
-									+ "</b></div></td><td class=\"listing\"><a href=\"http://"
-									+ theInfo.mName
-									+ "\">" + theInfo.mDesc + "</a></td>";
-						tableStr += "<td class=\"listing\"><div align=\"center\">" + theInfo.mLastValidation + "</div></td></tr>\r\n";
-					}
-				} // synchronized (mHostInfoVector)
-				if (index_i == 0)
-				{
-					tableStr += "<tr valign=\"top\" class=\"empty\"><td class=\"listing\" colspan=\"3\"><p align=\"center\"><i>No Newtons have registered with this Tracker.</i></p></td></tr>\r\n";
-				}
-				tableStr += "</table>\r\n";	
-
-				String validateTimeStr = Integer.toString( validateTime );
-				String hitCounterStr = Integer.toString( hitcounter );
-				// Refresh is validate time / 2
-				long refreshCount = (npdstracker.validateTime * npdstracker.kValidateTimeUnit ) / (kRefreshTimeUnit * 2);
-				
-				String metaRefreshStr = "<meta http-equiv=\"refresh\" content=\"" + refreshCount + "; url=" + HTTPDocStr + "\" />\r\n";
-
-				String stylesheetStr = "<link rel=\"stylesheet\" href=\"" + stylesheetFile + "\" type=\"text/css\" media=\"screen\" />\r\n";
-
-				out.print( "Refresh: " + refreshCount + "; url=" + HTTPDocStr + "\r\n" );
-				out.print( "Server: " + kServerStr + "\r\n" );
-
-				Date now = new Date();
-
-				out.print( "Date: " + ReturnRFCTime( now ) + "\r\n" );
-				out.print( "Last-Modified: " + ReturnRFCTime( mValidator.mLastCheck ) + "\r\n" );
-				out.print( "Content-type: text/html\r\n\r\n" );
-
-				String lastValidationStr;
-				if (mValidationInProgress != 0)
-				{
-					lastValidationStr = "Validation is in progress.";
-				} else {
-					lastValidationStr = "Last validation check: " + mLastValidation + ".";
-				}
-
-				// Define count of servers as string
-				String serverCounterStr = Integer.toString( mHostInfoVector.size() );
-
-				BufferedReader template = new BufferedReader (new FileReader(templateFile));
-				String templateLine = template.readLine();
-				while (templateLine != null)
-				{
-					// I replace the following SGML tags. (note: this isn't pure SGML as my tags can be inside other tags arguments)
-					// <servers/>			-> the table of the servers
-					// <validate-time/>		-> the time (in minutes) between validations
-					// <hit-counter/>		-> the number of hits since last restart
-					// <url/>				-> the url of this server (used reading the host header, useful for w3 syntax check button)
-					// <meta-refresh/>		-> meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
-					// <stylesheet/>		-> link element for main stylesheet
-					// <http-doc/>			-> What comes after the GET (usually "/")
-					// <version/>			-> Returns the version (e.g. 0.1.2221)
-					// <last-validation/>	-> Date and time of last validation check: <foo> or "Validation is in progress."
-					// <server-counter/>	-> Number of registered NPDS servers
-					
-					templateLine = StrReplace( templateLine, "<servers/>", tableStr );
-					templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
-					templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
-					templateLine = StrReplace( templateLine, "<url/>", urlStr );
-					templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
-					templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
-					templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
-					templateLine = StrReplace( templateLine, "<version/>", versionStr );
-					templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
-					templateLine = StrReplace( templateLine, "<server-counter/>", serverCounterStr );
-
-					out.print(templateLine + "\r\n");
-					templateLine = template.readLine();
-				}
-
-				out.print( "\r\n\r\n" );
-				out.flush();
+				htmlStatusPage(HTTPDocStr, in, out, socket);
 			}
 			else if (query.startsWith("ADMIN"))
 			{
@@ -1122,7 +976,162 @@ public class npdstracker extends Thread
 			ReturnCode( HTTP_ERR, theQueryException.getMessage(), out );
 		}
 	}
+	
+	// ==================================================================== //
+	// void htmlStatusPage( String, BufferedReader, PrintWriter, Socket ) [static, private]
+	// ==================================================================== //
+	
+	private static void htmlStatusPage( String HTTPDocStr, BufferedReader in, PrintWriter out, Socket socket ) throws SocketException, IOException
+	{
+		// return a WEB PAGE
+		out.print("HTTP/1.0 ");
+		ReturnCode(HTTP_OK, "", out);
+		hitcounter++;
 
+		// I prepare the result strings.
+		// Find out what my address is. I use the host header if present.
+		String urlStr = socket.getLocalAddress().getHostName();
+		String requestLine = in.readLine();
+		while ((requestLine != null) && (requestLine.length() > 0) )
+		{
+			StringTokenizer headerTk = new StringTokenizer( requestLine, ": \t" );
+			if (headerTk.hasMoreTokens() == false)
+			{
+				break;
+			}
+			String theHeader = headerTk.nextToken().toLowerCase();
+			if (theHeader.equals("host"))
+			{
+				// Cool, I have a host header.
+				urlStr = "http://" + headerTk.nextToken();
+				break;
+			}
+			
+			requestLine = in.readLine();
+		}
+		
+		int thePort;
+		if (socket == null) {
+			// Take the first port
+			thePort = ((Integer) kPort.get(0)).intValue();
+		} else {
+			// Take the socket port
+			thePort = socket.getLocalPort();
+		}
+
+		if (thePort != 80) {
+			urlStr += ":" + thePort;
+		}
+		
+		urlStr += HTTPDocStr;
+
+		String tableStr = "<table border=\"0\" width=\"100%\" summary=\"List of online Newtons\" class=\"list\">\r\n<tr class=\"header\"><th width=\"10%\">Active</th><th width=\"75%\">Server Name</th><th>Last Verified</th></tr>\r\n";
+			
+		int index_i;
+		synchronized (mHostInfoVector)
+		{
+			for (index_i = 0; index_i < mHostInfoVector.size(); index_i++)
+			{
+				THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(index_i);
+				String classStr;	// String representing the class of the raw.
+				String labelStr;	// String for the label.
+				
+				switch ( theInfo.mStatus )
+				{
+					case -1:
+						classStr = "up-sharing";
+						labelStr = "UP-sharing";
+						break;
+					
+					case 0:
+						classStr = "up";
+						labelStr = "UP";
+						break;
+						
+					default:
+						classStr = "down";
+						labelStr = "DOWN";
+						break;
+				}
+				
+				tableStr += "<tr valign=\"middle\" class=\"" + classStr + "\"><td class=\"listing\"><div align=\"center\"><b>"
+							+ labelStr
+							+ "</b></div></td><td class=\"listing\"><a href=\"http://"
+							+ theInfo.mName
+							+ "\">" + theInfo.mDesc + "</a></td>";
+				tableStr += "<td class=\"listing\"><div align=\"center\">" + theInfo.mLastValidation + "</div></td></tr>\r\n";
+			}
+		} // synchronized (mHostInfoVector)
+		if (index_i == 0)
+		{
+			tableStr += "<tr valign=\"top\" class=\"empty\"><td class=\"listing\" colspan=\"3\"><p align=\"center\"><i>No Newtons have registered with this Tracker.</i></p></td></tr>\r\n";
+		}
+		tableStr += "</table>\r\n";	
+
+		String validateTimeStr = Integer.toString( validateTime );
+		String hitCounterStr = Integer.toString( hitcounter );
+		// Refresh is validate time / 2
+		long refreshCount = (npdstracker.validateTime * npdstracker.kValidateTimeUnit ) / (kRefreshTimeUnit * 2);
+		
+		String metaRefreshStr = "<meta http-equiv=\"refresh\" content=\"" + refreshCount + "; url=" + HTTPDocStr + "\" />\r\n";
+
+		String stylesheetStr = "<link rel=\"stylesheet\" href=\"" + stylesheetFile + "\" type=\"text/css\" media=\"screen\" />\r\n";
+
+		out.print( "Refresh: " + refreshCount + "; url=" + HTTPDocStr + "\r\n" );
+		out.print( "Server: " + kServerStr + "\r\n" );
+
+		Date now = new Date();
+
+		out.print( "Date: " + ReturnRFCTime( now ) + "\r\n" );
+		out.print( "Last-Modified: " + ReturnRFCTime( mValidator.mLastCheck ) + "\r\n" );
+		out.print( "Content-type: text/html\r\n\r\n" );
+
+		String lastValidationStr;
+		if (mValidationInProgress != 0)
+		{
+			lastValidationStr = "Validation is in progress.";
+		} else {
+			lastValidationStr = "Last validation check: " + mLastValidation + ".";
+		}
+
+		// Define count of servers as string
+		String serverCounterStr = Integer.toString( mHostInfoVector.size() );
+
+		BufferedReader template = new BufferedReader (new FileReader(templateFile));
+		String templateLine = template.readLine();
+		while (templateLine != null)
+		{
+			// I replace the following SGML tags. (note: this isn't pure SGML as my tags can be inside other tags arguments)
+			// <servers/>			-> the table of the servers
+			// <validate-time/>		-> the time (in minutes) between validations
+			// <hit-counter/>		-> the number of hits since last restart
+			// <url/>				-> the url of this server (used reading the host header, useful for w3 syntax check button)
+			// <meta-refresh/>		-> meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
+			// <stylesheet/>		-> link element for main stylesheet
+			// <http-doc/>			-> What comes after the GET (usually "/")
+			// <version/>			-> Returns the version (e.g. 0.1.2221)
+			// <last-validation/>	-> Date and time of last validation check: <foo> or "Validation is in progress."
+			// <server-counter/>	-> Number of registered NPDS servers
+			
+			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
+			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
+			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
+			templateLine = StrReplace( templateLine, "<url/>", urlStr );
+			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
+			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
+			templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
+			templateLine = StrReplace( templateLine, "<version/>", versionStr );
+			templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
+			templateLine = StrReplace( templateLine, "<server-counter/>", serverCounterStr );
+
+			out.print(templateLine + "\r\n");
+			templateLine = template.readLine();
+		}
+
+		out.print( "\r\n\r\n" );
+		out.flush();
+	}
+	
 	// ====================================================================	//
 	// void adminConsole( BufferedReader, PrintWriter, Socket ) [static, private]
 	// ====================================================================	//
