@@ -27,11 +27,12 @@ public class npdstracker extends Thread
 	public static final String kServerStr = "Victor Rehorst's NPDS Tracker " + versionStr;
 	public static final String kUserAgentStr = "Mozilla/5.0 (compatible; " + kServerStr + "; Java)";
 
-	// 200, 400, 403 are HTTP codes - 202 is the "special" NPDS code
+	// 200, 400, 403m 404 are HTTP codes - 202 is the "special" NPDS code
 	public static final int HTTP_OK = 200;
 	public static final int NPDS_OK = 202;
 	public static final int HTTP_ERR = 400;
 	public static final int HTTP_FORBID = 403;
+	public static final int HTTP_NOTFOUND = 404;
 
 	public static final int kValidateTimeUnit = 60000;	// a minute in milliseconds
 	public static final int kRefreshTimeUnit = 1000;	// a second in milliseconds
@@ -365,9 +366,14 @@ public class npdstracker extends Thread
 			out.print(" OK" + message + "\r\n");
 			out.flush();
 		}
-		else if (codetype == (HTTP_ERR))
+		else if (codetype == HTTP_ERR)
 		{
 			out.print(" Bad Request" + message + "\r\n");
+			out.flush();
+		}
+		else if (codetype == HTTP_NOTFOUND)
+		{
+			out.print(" File Not Found" + message + "\r\n");
 			out.flush();
 		}
 		else
@@ -948,9 +954,21 @@ public class npdstracker extends Thread
 			else if (theCommand.equals("GET"))
 			{
 				String HTTPDocStr = st.nextToken();
+				File stylesheet = new File(stylesheetFile);
 				
-				logMessage("Processing GET command");
-				htmlStatusPage(HTTPDocStr, in, out, socket);
+				logMessage("Processing GET command" );
+				if (HTTPDocStr.equals("/"))
+				{
+					htmlStatusPage(HTTPDocStr, in, out, socket);
+				}
+				else if (HTTPDocStr.equals("/" + stylesheet.getName()) && stylesheet.exists())
+				{
+					stylesheetPage(stylesheet, in, out, socket);
+				}
+				else {
+					logMessage("File '" + HTTPDocStr + "' not found");
+					ReturnCode(HTTP_NOTFOUND, "", out);
+				}
 			}
 			else if (query.startsWith("ADMIN"))
 			{
@@ -1074,8 +1092,9 @@ public class npdstracker extends Thread
 		long refreshCount = (npdstracker.validateTime * npdstracker.kValidateTimeUnit ) / (kRefreshTimeUnit * 2);
 		
 		String metaRefreshStr = "<meta http-equiv=\"refresh\" content=\"" + refreshCount + "; url=" + HTTPDocStr + "\" />\r\n";
-
-		String stylesheetStr = "<link rel=\"stylesheet\" href=\"" + stylesheetFile + "\" type=\"text/css\" media=\"screen\" />\r\n";
+		
+		File stylesheet = new File(stylesheetFile);
+		String stylesheetStr = "<link rel=\"stylesheet\" href=\"" + stylesheet.getName() + "\" type=\"text/css\" media=\"screen\" />\r\n";
 
 		out.print( "Refresh: " + refreshCount + "; url=" + HTTPDocStr + "\r\n" );
 		out.print( "Server: " + kServerStr + "\r\n" );
@@ -1129,6 +1148,29 @@ public class npdstracker extends Thread
 		}
 
 		out.print( "\r\n\r\n" );
+		out.flush();
+	}
+	
+	// ==================================================================== //
+	private static void stylesheetPage( File stylesheet, BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
+	{
+		// return a CSS FILE
+		out.print("HTTP/1.0 ");
+		ReturnCode(HTTP_OK, "", out);
+		out.print( "Server: " + kServerStr + "\r\n" );
+		Date now = new Date();
+		out.print( "Date: " + ReturnRFCTime( now ) + "\r\n" );
+		Date modified = new Date (stylesheet.lastModified());
+		out.print( "Last-Modified: " + ReturnRFCTime( modified ) + "\r\n" );
+		out.print( "Content-type: text/css\r\n\r\n" );
+		
+		BufferedReader css = new BufferedReader (new FileReader(stylesheet.getPath()));
+		String cssLine = css.readLine();
+		while (cssLine != null)
+		{
+			out.print(cssLine + "\r\n");
+			cssLine = css.readLine();
+		}
 		out.flush();
 	}
 	
