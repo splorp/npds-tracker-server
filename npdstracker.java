@@ -1043,7 +1043,7 @@ public class npdstracker extends Thread
 		
 		urlStr += HTTPDocStr;
 
-		String tableStr = "<table border=\"0\" width=\"100%\" summary=\"List of online Newtons\" class=\"list\">\r\n<tr class=\"header\"><th width=\"10%\">Active</th><th width=\"75%\">Server Name</th><th>Last Verified</th></tr>\r\n";
+		String tableStr = "<table border=\"0\" width=\"100%\" summary=\"List of online Newtons\" class=\"list\">\r\n<tr class=\"header\"><th width=\"10%\">Status</th><th width=\"75%\">Server</th><th>Last Verified</th></tr>\r\n";
 			
 		int index_i;
 		synchronized (mHostInfoVector)
@@ -1058,17 +1058,17 @@ public class npdstracker extends Thread
 				{
 					case -1:
 						classStr = "up-sharing";
-						labelStr = "UP-sharing";
+						labelStr = "Up (Sharing)";
 						break;
 					
 					case 0:
 						classStr = "up";
-						labelStr = "UP";
+						labelStr = "Up";
 						break;
 						
 					default:
 						classStr = "down";
-						labelStr = "DOWN";
+						labelStr = "Down";
 						break;
 				}
 				
