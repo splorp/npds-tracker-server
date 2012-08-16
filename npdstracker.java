@@ -1,8 +1,8 @@
-// NPDSTracker for Java 1.2
-// Written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://www.kallisys.com/>
-// Contributions by Manuel Probsthain
+// NPDSTracker for Java
+// Written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>
+// Contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, and Grant Hutchinson <http://splorp.com/>
 // Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for NPDS
-// Last Modified: 13 August 2012
+// Last Modified: 16 August 2012
 
 import java.io.*;
 import java.net.*;
@@ -21,7 +21,7 @@ public class npdstracker extends Thread
 	public static final String serverdesc = "NPDSTracker for Java";
 	public static final int majorversion = 0;
 	public static final int minorversion = 1;
-	public static final int build = 34;
+	public static final int build = 36;
 	public static final int protocolversion = 1;
 	public static final String versionStr = majorversion + "." + minorversion + "." + build;
 	public static final String kServerStr = "Victor Rehorst's NPDS Tracker " + versionStr;
