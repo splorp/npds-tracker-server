@@ -198,9 +198,7 @@ Page Template Tag Syntax
 
 -----------------------------------------------------------
 
-(Moved from the npdstracker.ini file)
-
-The HTML template can use the following pseudo XML tags:
+The HTML template file (template.html) can use the following pseudo XML tags:
 
 
 <hit-counter/>
@@ -247,6 +245,14 @@ The HTML template can use the following pseudo XML tags:
 
 -----------------------------------------------------------
 
+Remote Administration
+
+-----------------------------------------------------------
+
+
+
+-----------------------------------------------------------
+
 Licensing
 
 -----------------------------------------------------------
@@ -265,10 +271,15 @@ Please note that the version numbering scheme is defined as major.minor.build.
 
 0.1.36 [TBD]
 
+	[MA] Split out display of HTML status into its own method
+	[MA] Updated HTTP GET processing to support rendering the HTML status page
+	[MA] Fixed stylesheet configuration and template insertion
 	[MA] Removed rogue slash in npdstracker.java
-	[MA] Added advanced configuration to read me
-	[GH] Minor formatting and nomenclature edits
+	[MA] Added manifest file
+	[MA] Added advanced configuration documentation
+	[GH] Converted template to use HTML5 structure
 	[GH] Removed deprecated elements and formatting attributes
+	[GH] Minor formatting and nomenclature edits
 
 0.1.35 [08 September 2010]
 
