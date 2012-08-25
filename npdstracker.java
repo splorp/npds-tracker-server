@@ -70,6 +70,8 @@ public class npdstracker extends Thread
 	public static String templateFile = "";
 	public static String stylesheetFile = "";
 	public static String cmdfile = defaultCmdFile;
+	public static String hostName = "";
+	public static String hostLink = "";
 	// Define private host string
 	public static String acceptPrivateHost = "";
 
@@ -554,6 +556,22 @@ public class npdstracker extends Thread
 				else
 					stylesheetFile = st.nextToken();
 			}
+			else if (tempoption.startsWith("trackerName"))
+			{
+				garbage = st.nextToken();
+				if (!(garbage.equals("=")))
+					logMessage("error reading optionsfile, line " + linenumber);
+				else
+					hostName = st.nextToken();
+			}
+			else if (tempoption.startsWith("trackerHost"))
+			{
+				garbage = st.nextToken();
+				if (!(garbage.equals("=")))
+					logMessage("error reading optionsfile, line " + linenumber);
+				else
+					hostLink = st.nextToken();
+			}			
 			else if (tempoption.startsWith("privateHostToAccept"))
 			{
 				garbage = st.nextToken();
@@ -1136,6 +1154,8 @@ public class npdstracker extends Thread
 			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
 			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
 			templateLine = StrReplace( templateLine, "<url/>", urlStr );
+			templateLine = StrReplace( templateLine, "<trackerName/>", hostName);
+			templateLine = StrReplace( templateLine, "<trackerHost/>", hostLink);
 			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
 			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
 			templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
