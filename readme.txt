@@ -6,7 +6,7 @@ A Java based server for tracking and listing Newton Personal Data Sharing client
 http://npds.info/
 
 
-NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, and Grant Hutchinson <http://splorp.com/>.
+NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, Grant Hutchinson <http://splorp.com/>, and Ron Parker <http://quadzilla.net/>.
 
 Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for developing NPDS in the first place.
 
@@ -211,7 +211,7 @@ The HTML template file (template.html) can use the following pseudo XML tags:
 
 <last-validation/>
 
-	Last validation: <foo> or “Validation is in progress.”
+	The date and time of the last validation or “Validation is in progress.”
 
 <meta-refresh/>
 
@@ -227,7 +227,15 @@ The HTML template file (template.html) can use the following pseudo XML tags:
 
 <stylesheet/>
 
-	Inserts the stylesheet specified by npdstracker.ini (default: template.css)
+	Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
+
+<trackerHost/>
+
+	The URL of the host site or server as specified in npdstracker.ini
+
+<trackerName/>
+
+	The name of the host site or server as specified in npdstracker.ini
 
 <url/>
 
@@ -239,7 +247,7 @@ The HTML template file (template.html) can use the following pseudo XML tags:
 
 <version/>
 
-	The current version (e.g. 0.1.35)
+	The current version of the tracker software
 
 
 
@@ -274,6 +282,7 @@ Please note that the version numbering scheme is defined as major.minor.build.
 	[MA] Split out display of HTML status into its own method
 	[MA] Updated HTTP GET processing to support rendering the HTML status page
 	[MA] Fixed stylesheet configuration and template insertion
+	[RP] Added host name and link to the header and page title
 	[MA] Removed rogue slash in npdstracker.java
 	[MA] Added manifest file
 	[MA] Added advanced configuration documentation
