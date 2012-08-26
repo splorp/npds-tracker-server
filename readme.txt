@@ -6,7 +6,7 @@ A Java based server for tracking and listing Newton Personal Data Sharing client
 http://npds.info/
 
 
-NPDS Tracker Server was written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, Grant Hutchinson <http://splorp.com/>, and Ron Parker <http://quadzilla.net/>.
+The NPDS Tracker Server was originally developed by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>, with additional contributions by Morgan Aldridge <http://makkintosshu.com/>, Grant Hutchinson <http://splorp.com/>, Ron Parker <http://quadzilla.net/>, and Manuel Probsthain.
 
 Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for developing NPDS in the first place.
 
@@ -24,21 +24,27 @@ Requirements
 -----------------------------------------------------------
 
 
-Sun Java 1.1 or better
+Java 1.1 or higher
 
-	Java 1.3 or higher is HIGHLY RECOMMENDED due to DNS caching bugs in 
-	prior Java versions.  If you have to use Java 1.2 there is a 
-	workaround: add the parameter ‘-Dsun.net.inetaddr.ttl=0’ to the 
-	Java command-line.
+	Java 1.3 or higher is highly recommended due to DNS caching bugs in 
+	prior versions of Java. If you must use Java 1.1 or 1.2, there is a 
+	workaround for this bug. Add the parameter ‘-Dsun.net.inetaddr.ttl=0’
+	to the Java command-line.
 
-A connection to the internet
+An internet connection
 
-	NPDSTracker has an official TCP port assigned by the IANA: 3680.
-	Many trackers also listen on port 80 or 8080.
+	The NPDS Tracker Server uses TCP port 3680, as assigned by IANA.
+	
+	<http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml>
+	
+	Trackers may also be configured to also listen on port 80 or 8080.
 
-Text editor
+A text editor
 
-
+	For editing the configuration and template files.
+	
+	
+	
 -----------------------------------------------------------
 
 Files
@@ -103,6 +109,7 @@ or, for Java 1.2.x:
 
 * Configure and NPDS server to point to the tracker and make sure it can 
 register.
+
 
 
 -----------------------------------------------------------
@@ -192,6 +199,7 @@ you can wait until the next reboot:
 respectively, to automatically start npdstracker on boot.
 
 
+
 -----------------------------------------------------------
 
 Page Template Tag Syntax
@@ -257,6 +265,8 @@ Remote Administration
 
 -----------------------------------------------------------
 
+Coming soon.
+
 
 
 -----------------------------------------------------------
@@ -286,9 +296,9 @@ Please note that the version numbering scheme is defined as major.minor.build.
 	[MA] Removed rogue slash in npdstracker.java
 	[MA] Added manifest file
 	[MA] Added advanced configuration documentation
-	[GH] Converted template to use HTML5 structure
+	[GH] Converted template to HTML5
 	[GH] Removed deprecated elements and formatting attributes
-	[GH] Minor formatting and nomenclature edits
+	[GH] Minor formatting and nomenclature edits abound!
 
 0.1.35 [08 September 2010]
 
