@@ -1142,13 +1142,15 @@ public class npdstracker extends Thread
 			// <servers/>			-> the table of the servers
 			// <validate-time/>		-> the time (in minutes) between validations
 			// <hit-counter/>		-> the number of hits since last restart
-			// <url/>				-> the url of this server (used reading the host header, useful for w3 syntax check button)
+			// <url/> 			-> the url of this server (used reading the host header, useful for w3 syntax check button)
+			// <trackerName/>		-> a short name of the hosting site (to insert in the head/title of the html)
+			// <trackerHost/>		-> the top level URL of the hosting site (to link to a URL other than the <url/> of the tracker itself)
 			// <meta-refresh/>		-> meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
 			// <stylesheet/>		-> link element for main stylesheet
 			// <http-doc/>			-> What comes after the GET (usually "/")
 			// <version/>			-> Returns the version (e.g. 0.1.2221)
-			// <last-validation/>	-> Date and time of last validation check: <foo> or "Validation is in progress."
-			// <server-counter/>	-> Number of registered NPDS servers
+			// <last-validation/>		-> Date and time of last validation check: <foo> or "Validation is in progress."
+			// <server-counter/>		-> Number of registered NPDS servers
 			
 			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
 			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
