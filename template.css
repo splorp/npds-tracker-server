@@ -6,20 +6,17 @@ body {
 	}
 
 table {
-	border-collapse: collapse;
-	}
-
-table.list {
-	border: solid;
-	border-width: 1.5px;
-	border-color: #666;
 	background-color: #CCC;
+	border-collapse: collapse;
+	border-color: #666;
+	border-width: 1.5px;
+	border: solid;
 	}
 
-td.listing {
-	border: solid;
-	border-width: 1.5px;
+td {
 	border-color: #666;
+	border-width: 1.5px;
+	border: solid;
 	padding: 5px 10px 5px 10px;
 	}
 

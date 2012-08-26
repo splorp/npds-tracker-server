@@ -1061,7 +1061,7 @@ public class npdstracker extends Thread
 		
 		urlStr += HTTPDocStr;
 
-		String tableStr = "<table border=\"0\" width=\"100%\" summary=\"List of online Newtons\" class=\"list\">\r\n<tr class=\"header\"><th width=\"10%\">Status</th><th width=\"75%\">Server</th><th>Last Verified</th></tr>\r\n";
+		String tableStr = "<table>\r\n<tr>\r\n<th>Status</th>\r\n<th>Server</th>\r\n<th>Last Verified</th>\r\n</tr>\r\n";
 			
 		int index_i;
 		synchronized (mHostInfoVector)
@@ -1090,17 +1090,17 @@ public class npdstracker extends Thread
 						break;
 				}
 				
-				tableStr += "<tr valign=\"middle\" class=\"" + classStr + "\"><td class=\"listing\"><div align=\"center\"><b>"
+				tableStr += "<tr class=\"" + classStr + "\">\r\n<td><strong>"
 							+ labelStr
-							+ "</b></div></td><td class=\"listing\"><a href=\"http://"
+							+ "</strong></td>\r\n<td><a href=\"http://"
 							+ theInfo.mName
-							+ "\">" + theInfo.mDesc + "</a></td>";
-				tableStr += "<td class=\"listing\"><div align=\"center\">" + theInfo.mLastValidation + "</div></td></tr>\r\n";
+							+ "\">" + theInfo.mDesc + "</a></td>\r\n";
+				tableStr += "<td>" + theInfo.mLastValidation + "</td>\r\n</tr>\r\n";
 			}
 		} // synchronized (mHostInfoVector)
 		if (index_i == 0)
 		{
-			tableStr += "<tr valign=\"top\" class=\"empty\"><td class=\"listing\" colspan=\"3\"><p align=\"center\"><i>No Newtons have registered with this Tracker.</i></p></td></tr>\r\n";
+			tableStr += "<tr>\r\n<td colspan=\"3\"><em>No devices are registered with this tracker server.</em></td>\r\n</tr>\r\n";
 		}
 		tableStr += "</table>\r\n";	
 
