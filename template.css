@@ -1,45 +1,44 @@
-
 body {
-font-family: helvetica, arial, verdana, sans-serif;
-font-size: 12px;
-margin: 10px;
-}
+  	font-family: helvetica, arial, verdana, sans-serif;
+  	font-size: 12px;
+  	margin: 10px;
+	}
 
 header {
-text-align: left;
-}
+	text-align: left;
+	}
 
 section {
-text-align: left;
-}
+	text-align: left;
+	}
 
 article {
-text-align: left;
-}
+	text-align: left;
+	}
 
 footer {
-text-align: left;
-}
+	text-align: left;
+	}
 
 table {
-border: solid 1px #666;
-background-color: #CCC;
-border-collapse: collapse;
-width: 100%;
-}
+	border: solid 1px #666;
+	background-color: #CCC;
+	border-collapse: collapse;
+	width: 100%;
+	}
 
 td, th {
-border: solid 1px #666;
-padding: 5px 10px;
-}
+	border: solid 1px #666;
+	padding: 5px 10px;
+	}
 
 tr.down {
-background-color: #ECC;
-}
+	background-color: #ECC;
+	}
 
 tr.up {
-background-color: #CCE;
-}
+	background-color: #CCE;
+	}
 
 tr.up-sharing {
 background-color: #CEC;
