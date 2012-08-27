@@ -61,11 +61,15 @@ npdstracker.java
 
 npdstracker.ini
 
-	Settings file read at startup
+	Tracker settings and configuration
 
 template.html
 
 	Tracker page template
+
+template.css
+
+	Tracker page stylesheet
 
 npdscmd.txt
 
@@ -74,6 +78,10 @@ npdscmd.txt
 startnpds.sh
 
 	Example startup script for *NIX-like operating systems
+	
+manifest.mf
+
+	Contains information specific to the Java source file
 
 
 
