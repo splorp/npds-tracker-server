@@ -1138,32 +1138,33 @@ public class npdstracker extends Thread
 		String templateLine = template.readLine();
 		while (templateLine != null)
 		{
-			// I replace the following SGML tags. (note: this isn't pure SGML as my tags can be inside other tags arguments)
-			// <servers/>			-> the table of the servers
-			// <validate-time/>		-> the time (in minutes) between validations
-			// <hit-counter/>		-> the number of hits since last restart
-			// <url/> 			-> the url of this server (used reading the host header, useful for w3 syntax check button)
-			// <trackerName/>		-> a short name of the hosting site (to insert in the head/title of the html)
-			// <trackerHost/>		-> the top level URL of the hosting site (to link to a URL other than the <url/> of the tracker itself)
-			// <meta-refresh/>		-> meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
-			// <stylesheet/>		-> link element for main stylesheet
-			// <http-doc/>			-> What comes after the GET (usually "/")
-			// <version/>			-> Returns the version (e.g. 0.1.2221)
-			// <last-validation/>		-> Date and time of last validation check: <foo> or "Validation is in progress."
-			// <server-counter/>		-> Number of registered NPDS servers
+			// Replace the following pseudo-SGML tags in the HTML template
+			//
+			// <hit-counter/>		->	The number of hits since last restart
+			// <http-doc/>			->	What comes after the GET (usually “/”)
+			// <last-validation/>	->	The date and time of the last validation or “Validation is in progress.”
+			// <meta-refresh/>		->	The meta element containing the http-equiv="refresh" value
+			// <server-counter/>	->	The number of registered NPDS servers
+			// <servers/>			->	The list of NPDS servers formatted as a table
+			// <stylesheet/>		->	The link element containing the stylesheet as specified in npdstracker.ini
+			// <trackerHost/>		->	The URL of the host site or server as specified in npdstracker.ini
+			// <trackerName/>		->	The name of the host site or server as specified in npdstracker.ini
+			// <url/> 				->	The URL of this server, obtained by reading the HTTP header
+			// <validate-time/>		->	The time (in minutes) between validations
+			// <version/>			->	The current version of the tracker software
 			
-			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
-			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
 			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
-			templateLine = StrReplace( templateLine, "<url/>", urlStr );
-			templateLine = StrReplace( templateLine, "<trackerName/>", hostName);
-			templateLine = StrReplace( templateLine, "<trackerHost/>", hostLink);
-			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
-			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
 			templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
-			templateLine = StrReplace( templateLine, "<version/>", versionStr );
 			templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
+			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
 			templateLine = StrReplace( templateLine, "<server-counter/>", serverCounterStr );
+			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
+			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
+			templateLine = StrReplace( templateLine, "<trackerHost/>", hostLink);
+			templateLine = StrReplace( templateLine, "<trackerName/>", hostName);
+			templateLine = StrReplace( templateLine, "<url/>", urlStr );
+			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
+			templateLine = StrReplace( templateLine, "<version/>", versionStr );
 
 			out.print(templateLine + "\r\n");
 			templateLine = template.readLine();

@@ -214,53 +214,52 @@ Page Template Tag Syntax
 
 -----------------------------------------------------------
 
-The HTML template file (template.html) can use the following pseudo XML tags:
-
+The HTML template (```template.html```) can use the following pseudo-SGML tags to insert various bits of information into the page.
 
 <hit-counter/>
 
 	The number of hits since last restart
-
+	
 <http-doc/>
 
-	What comes after the GET (usually ‘/’)
-
+	What comes after the GET (usually “/”)
+	
 <last-validation/>
 
 	The date and time of the last validation or “Validation is in progress.”
-
+	
 <meta-refresh/>
 
-	The meta-HTTP equiv refresh line (remark: the refresh line is sent in the HTTP headers)
-
+	The meta element containing the http-equiv="refresh" value
+	
 <servers/>
 
 	The list of NPDS servers formatted as a table
-
+	
 <server-counter/>
 
 	The number of registered NPDS servers
-
+	
 <stylesheet/>
 
 	Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
-
+	
 <trackerHost/>
 
 	The URL of the host site or server as specified in npdstracker.ini
-
+	
 <trackerName/>
 
 	The name of the host site or server as specified in npdstracker.ini
-
+	
 <url/>
 
-	The URL of this server (used reading the host header, useful for W3C syntax check button)
-
+	The URL of this server, obtained by reading the HTTP header
+	
 <validate-time/>
 
 	The time (in minutes) between validations
-
+	
 <version/>
 
 	The current version of the tracker software
