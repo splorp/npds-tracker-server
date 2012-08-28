@@ -133,7 +133,7 @@ install npdstracker more permanently and appropriately. Specifically:
 
 * For a cleaner installation, create a JAR file at the command line:
 
-	jar cvfm npdstracker.jar manifest *.class
+	jar cvfm npdstracker.jar manifest.fm *.class
 
 * Install the JAR file to /usr/local/bin from at the command line:
 
