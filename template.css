@@ -18,14 +18,26 @@ td, th {
 	text-align: left;
 	}
 
-tr.down {
+.down {
 	background-color: #ECC;
 	}
 
-tr.up {
+.down td:first-child {
+	color: #533;
+	}
+
+.up {
 	background-color: #CCE;
 	}
 
-tr.up-sharing {
+.up td:first-child {
+	color: #335;
+	}
+
+.up-sharing {
 	background-color: #CEC;
+	}
+
+.up-sharing td:first-child {
+	color: #353;
 	}
