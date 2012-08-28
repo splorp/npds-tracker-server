@@ -191,7 +191,7 @@ Coming soon.
 
 Please note that the version numbering scheme is defined as: major.minor.build
 
-### 0.1.36 [TBD]
+### 0.1.36 [28 August 2012]
 
 + [MA] Split out display of HTML status into its own method
 + [MA] Updated HTTP GET processing to support rendering the HTML status page
