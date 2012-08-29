@@ -55,17 +55,18 @@ For editing the various configuration and template files.
 
 * Assuming you already have Java 1.3 or later set up properly, open a command line and compile the server:
 
-    javac npdstracker.java
+```javac npdstracker.java```
 
 * Edit ```npdstracker.ini``` and change any settings you see fit. Pay attention to the log settings - NPDS Tracker Server logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
 
 * Start the server at the command line:
 
-    java npdstracker
+```java npdstracker```
 
 For Java 1.1 and 1.2 installations, start the server using this additional parameter:
 
-    java -Dsun.net.inetaddr.ttl=0 npdstracker
+```java -Dsun.net.inetaddr.ttl=0 npdstracker
+```
 
 * Test the connection to the server by launching your web browser using the following URL:
 
