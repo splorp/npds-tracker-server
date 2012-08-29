@@ -55,29 +55,29 @@ For editing the various configuration and template files.
 
 * Assuming you already have Java 1.3 or later set up properly, open a command line and compile the server:
 
-<pre>
-<code>javac npdstracker.java</code>
-</pre>
+```sh
+javac npdstracker.java
+```
 
 * Edit ```npdstracker.ini``` and change any settings you see fit. Pay attention to the log settings - NPDS Tracker Server logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
 
 * Start the server at the command line:
 
-<pre>
-<code>java npdstracker</code>
-</pre>
+```sh
+java npdstracker
+```
 
 For Java 1.1 and 1.2 installations, start the server using this additional parameter:
 
-<pre>
-<code>java -Dsun.net.inetaddr.ttl=0 npdstracker</code>
-</pre>
+```sh
+java -Dsun.net.inetaddr.ttl=0 npdstracker
+```
 
 * Test the connection to the server by launching your web browser using the following URL:
 
-<pre>
-<code>http://<ip_address/hostname>:3680/</code>
-</pre>
+```sh
+http://<ip_address/hostname>:3680/
+```
 
 * Configure an NPDS client to point at the tracker server, making sure it can register properly.
 
@@ -88,55 +88,55 @@ The basic configuration is great for development, testing, and Windows deploymen
 
 + For a cleaner installation, create a JAR file at the command line:
 
-<pre>
-<code>jar cvfm npdstracker.jar manifest.mf *.class</code>
-</pre>
+```sh
+jar cvfm npdstracker.jar manifest.mf *.class
+```
 
 + Install the JAR file to ```/usr/local/bin``` from at the command line:
 
-<pre>
-<code>mkdir -p /usr/local/bin
-install npdstracker.jar /usr/local/bin</code>
-</pre>
+```sh
+mkdir -p /usr/local/bin
+install npdstracker.jar /usr/local/bin
+```
 
 + Install the ```npdstracker.ini``` and ```npdscmd.txt``` files in ```/etc``` at the command line:
 
-<pre>
-<code>mkdir -p /etc/npdstracker
-install npdstracker.ini npdscmd.txt /etc/npdstracker</code>
-</pre>
+```sh
+mkdir -p /etc/npdstracker
+install npdstracker.ini npdscmd.txt /etc/npdstracker
+```
 
 + Install the ```template.html``` and ```template.css``` files in ```/usr/local/share``` at the command line:
 
-<pre>
-<code>mkdir -p /usr/local/share/npdstracker
-install template.html template.css /usr/local/share/npdstracker</code>
-</pre>
+```sh
+mkdir -p /usr/local/share/npdstracker
+install template.html template.css /usr/local/share/npdstracker
+```
 
 + Create the log file at the command line:
 
-<pre>
-<code>touch /var/log/npdstracker.log</code>
-</pre>
+```sh
+touch /var/log/npdstracker.log
+```
 
 + Edit ```/etc/npdstracker/npdstracker.ini``` to point to the new paths for all the aforementioned files, especially:
 
-<pre>
-<code>pageTemplate = /usr/local/share/npdstracker/template.html
+```sh
+pageTemplate = /usr/local/share/npdstracker/template.html
 cssTemplate = /usr/local/share/npdstracker/template.css
-logfile = /var/log/npdstracker.log</code>
-</pre>
+logfile = /var/log/npdstracker.log
+```
 
 + You can now manually start the NPDS Tracker Server at the command line:
 
-<pre>
-<code>java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini</code>
-</pre>
+```sh
+java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
+```
 
 + On Darwin or Mac OS X, you can create a launch daemon to automatically start the NPDS Tracker Server on boot by creating and editing ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` and pasting in the following (this is assuming following the above Advanced Configuration steps):
 
-<pre>
-<code><?xml version="1.0" encoding="UTF-8"?>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
@@ -160,14 +160,14 @@ logfile = /var/log/npdstracker.log</code>
         <key>RunAtLoad</key>
         <true/>
     </dict>
-</plist></code>
-</pre>
+</plist>
+```
 
 It can be loaded immediately by running the following at the command line, or you can wait until the next reboot:
 
-<pre>
-<code>sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist</code>
-</pre>
+```sh
+sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
+```
 
 + On Linux or BSD systems, you can create ```init.d``` or ```rc.d``` scripts, respectively, to automatically start the NPDS Tracker Server on boot.
 
