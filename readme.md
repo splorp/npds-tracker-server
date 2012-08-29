@@ -2,18 +2,20 @@
 
 A Java based server for tracking and listing [Newton Personal Data Sharing](http://npds.free.fr/) clients.
 
-The NPDS Tracker Server was originally developed by [Victor Rehorst](http://www.chuma.org/) and [Paul Guyot](http://kallisys.com/), with additional contributions by [Morgan Aldridge](http://makkintosshu.com/), [Grant Hutchinson](http://splorp.com/), [Ron Parker](http://quadzilla.net/), and Manuel Probsthain.
+The NPDS Tracker Server was originally developed by [Victor Rehorst](http://www.chuma.org/) and [Paul Guyot](http://kallisys.com/).
+
+Additional contributions and updates have been by generously provided and applied by [Morgan Aldridge](http://makkintosshu.com/), [Grant Hutchinson](http://splorp.com/), [Ron Parker](http://quadzilla.net/), and Manuel Probsthain.
 
 Many thanks to [Matt Vaughn](http://chromatin.cshl.edu/vaughn/) for developing NPDS in the first place.
 
-Need support? Join the [NPDS mailing list](http://npds.free.fr/list/).
+Looking for support? Join the [NPDS mailing list](http://npds.free.fr/list/).
 
 
 ## Requirements
 
-### Java 1.1 or later
+### Java 1.3 or later
 
-Java 1.3 or later is highly recommended due to DNS caching bugs in prior versions of the runtime. If you must use Java 1.1 or 1.2, there is a workaround for this caching bug. Add the parameter ```-Dsun.net.inetaddr.ttl=0``` to the Java command-line.
+The NPDS Tracker Server will also work with Java 1.1 and 1.2, but this is not recommended due to DNS caching bugs in these versions of the runtime. If you must use a version of Java earlier than version 1.3, add the parameter ```-Dsun.net.inetaddr.ttl=0``` to the command line when starting the server. See the [Basic Configuration](#basic-configuration) section for more information.
 
 The current release of the NPDS Tracker Server has been tested with Java SE versions 1.4, 1.5, and 1.6.
 
@@ -44,14 +46,14 @@ For editing the various configuration and template files.
 
 ```npdscmd.txt``` — Initial tracker server commands. Registered servers are written to this file upon shutdown
 
-```startnpds.sh``` — An example startup script for *NIX-like operating systems
+```startnpds.sh``` — An example shell script for *NIX-like operating systems
 	
 ```manifest.mf``` — Information specific to the Java source code
 	
 
 ## Basic Configuration
 
-* Assuming you already have the Java SDK or runtime set up properly, open a command line and compile the server:
+* Assuming you already have Java 1.3 or later set up properly, open a command line and compile the server:
 
     javac npdstracker.java
 
@@ -61,15 +63,15 @@ For editing the various configuration and template files.
 
     java npdstracker
 
-or, for Java 1.2.x:
+For Java 1.1 and 1.2 installations, start the server using this additional parameter:
 
     java -Dsun.net.inetaddr.ttl=0 npdstracker
 
-* Test connecting to the server. Fire up a web browser and point it to
+* Test the connection to the server by launching your web browser using the following URL:
 
     http://<ip_address/hostname>:3680/
 
-* Configure and NPDS server to point to the tracker and make sure it can register.
+* Configure an NPDS client to point at the tracker server, making sure it can register properly.
 
 
 ## Advanced Configuration
@@ -189,7 +191,7 @@ Coming soon.
 
 ## Version History
 
-Please note that the version numbering scheme is defined as: major.minor.build
+### 0.1.37 [TBD]
 
 ### 0.1.36 [28 August 2012]
 
@@ -261,7 +263,7 @@ Please note that the version numbering scheme is defined as: major.minor.build
 
 ### 0.1.26 [18 August 2001]
 
-+ [PG] Fixed the ```java.lang.ArrayIndexOutOfBoundsException``` bug which happened on Wed Aug 15 11:50:45 EST 2001. This bug was introduced in version 0.1.24
++ [PG] Fixed the ```java.lang.ArrayIndexOutOfBoundsException``` bug introduced in version 0.1.24
 
 ### 0.1.25 [06 June 2001]
 
