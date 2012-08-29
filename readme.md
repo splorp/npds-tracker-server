@@ -55,7 +55,9 @@ For editing the various configuration and template files.
 
 * Assuming you already have Java 1.3 or later set up properly, open a command line and compile the server:
 
-javac npdstracker.java
+<pre>
+<code>javac npdstracker.java</code>
+</pre>
 
 * Edit ```npdstracker.ini``` and change any settings you see fit. Pay attention to the log settings - NPDS Tracker Server logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
 
@@ -137,27 +139,27 @@ logfile = /var/log/npdstracker.log</code>
 <code><?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-	<dict>
-		<key>Label</key>
-		<string>fr.free.npds.npdstracker</string>
-		<key>ProgramArguments</key>
-		<array>
-			<string>java</string>
-			<string>-jar</string>
-			<string>/usr/local/bin/npdstracker.jar</string>
-			<string>-c</string>
-			<string>/etc/npdstracker/npdscmd.txt</string>
-			<string>-o</string>
-			<string>/etc/npdstracker/npdstracker.ini</string>
-		</array>
-		<key>KeepAlive</key>
-		<dict>
-			<key>NetworkState</key>
-			<true/>
-		</dict>
-		<key>RunAtLoad</key>
-		<true/>
-	</dict>
+    <dict>
+        <key>Label</key>
+        <string>fr.free.npds.npdstracker</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>java</string>
+            <string>-jar</string>
+            <string>/usr/local/bin/npdstracker.jar</string>
+            <string>-c</string>
+            <string>/etc/npdstracker/npdscmd.txt</string>
+            <string>-o</string>
+            <string>/etc/npdstracker/npdstracker.ini</string>
+        </array>
+        <key>KeepAlive</key>
+        <dict>
+            <key>NetworkState</key>
+            <true/>
+        </dict>
+        <key>RunAtLoad</key>
+        <true/>
+    </dict>
 </plist></code>
 </pre>
 
