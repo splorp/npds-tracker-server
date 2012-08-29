@@ -30,8 +30,8 @@ Trackers may also be configured to also listen on port 80 or 8080.
 ### A text editor
 
 For editing the various configuration and template files.
-	
-	
+
+
 ## Files
 
 ```readme.md``` — You’re soaking in it
@@ -113,31 +113,31 @@ The basic configuration is great for development, testing, and Windows deploymen
 
 + On Darwin or Mac OS X, you can create a launch daemon to automatically start the NPDS Tracker Server on boot by creating and editing ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` and pasting in the following (this is assuming following the above Advanced Configuration steps):
 
-	<?xml version="1.0" encoding="UTF-8"?>
-	<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-	<plist version="1.0">
-		<dict>
-			<key>Label</key>
-			<string>fr.free.npds.npdstracker</string>
-			<key>ProgramArguments</key>
-			<array>
-				<string>java</string>
-				<string>-jar</string>
-				<string>/usr/local/bin/npdstracker.jar</string>
-				<string>-c</string>
-				<string>/etc/npdstracker/npdscmd.txt</string>
-				<string>-o</string>
-				<string>/etc/npdstracker/npdstracker.ini</string>
-			</array>
-			<key>KeepAlive</key>
-			<dict>
-				<key>NetworkState</key>
-				<true/>
-			</dict>
-			<key>RunAtLoad</key>
-			<true/>
-		</dict>
-	</plist>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+        <dict>
+            <key>Label</key>
+            <string>fr.free.npds.npdstracker</string>
+            <key>ProgramArguments</key>
+            <array>
+                <string>java</string>
+                <string>-jar</string>
+                <string>/usr/local/bin/npdstracker.jar</string>
+                <string>-c</string>
+                <string>/etc/npdstracker/npdscmd.txt</string>
+                <string>-o</string>
+                <string>/etc/npdstracker/npdstracker.ini</string>
+            </array>
+            <key>KeepAlive</key>
+            <dict>
+                <key>NetworkState</key>
+                <true/>
+            </dict>
+            <key>RunAtLoad</key>
+            <true/>
+        </dict>
+    </plist>
 
 It can be loaded immediately by running the following at the command line, or you can wait until the next reboot:
 
