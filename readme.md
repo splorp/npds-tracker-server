@@ -127,7 +127,7 @@ cssTemplate = /usr/local/share/npdstracker/template.css
 logfile = /var/log/npdstracker.log
 ```
 
-+ You can now manually start the NPDS Tracker Server at the command line:
++ You can now manually start the NPDS Tracker Server at the command line. See [Command Line Usage](#command-line-usage) for further details.
 
 ```sh
 java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
@@ -172,6 +172,21 @@ sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
 + On Linux or BSD systems, you can create ```init.d``` or ```rc.d``` scripts, respectively, to automatically start the NPDS Tracker Server on boot.
 
 
+## Command Line Usage
+
+```sh
+java npdstracker [-h] [-c cmdfile] [-o optionsfile]
+```
++ ```-h``` - Display help
++ ```-c cmdfile```  - Specifies the path of the ```npdscmd.txt``` file containing any commands to run at startup (defaults to none)
++ ```-o optionsfile``` - Specifies the path of the ```npdstracker.ini``` file containing configuration and option settings (defaults to settings at compile time)
+
+
+## Remote Administration
+
+Coming soon.
+
+
 ## Page Template Tag Syntax
 
 The HTML template (```template.html```) can be customized using the following pseudo-SGML tags to insert information into the page.
@@ -199,12 +214,6 @@ The HTML template (```template.html```) can be customized using the following ps
 ```<validate-time/>``` — The time (in minutes) between validations
 
 ```<version/>``` - The current version of the tracker software
-
-
-
-## Remote Administration
-
-Coming soon.
 
 
 
