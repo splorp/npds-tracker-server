@@ -17,23 +17,23 @@ td, th {
 	text-align: left;
 	}
 	
-ul.servers {
+ul {
 	padding: 0;
 	}
 
-ul.servers li {
+ul li {
 	display: inline;
 	}
 	
-ul.servers li:first-child {
+ul li:first-child {
 	padding-left: 0;
 	}
 
-ul.servers li:after {
+ul li:after {
 	content: " | ";
 	}
 
-ul.servers li:last-child:after {
+ul li:last-child:after {
 	content: "";
 	}
 
