@@ -236,6 +236,9 @@ Coming soon.
 
 ### 0.1.37 [TBD]
 
++ [RP] New ```<server-shares/>``` template tag for list of shared tracker servers
++ [GH] Added command list usage information
+
 ### 0.1.36 [28 August 2012]
 
 + [MA] Split out display of HTML status into its own method

@@ -21,7 +21,7 @@ public class npdstracker extends Thread
 	public static final String serverdesc = "NPDSTracker for Java";
 	public static final int majorversion = 0;
 	public static final int minorversion = 1;
-	public static final int build = 36;
+	public static final int build = 37;
 	public static final int protocolversion = 1;
 	public static final String versionStr = majorversion + "." + minorversion + "." + build;
 	public static final String kServerStr = "Victor Rehorst's NPDS Tracker " + versionStr;
