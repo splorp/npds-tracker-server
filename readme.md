@@ -236,7 +236,7 @@ Coming soon.
 
 ### 0.1.37 [TBD]
 
-+ [RP] New ```<server-shares/>``` template tag for list of shared tracker servers
++ [RP] New ```<server-shares/>``` template tag inserts a list of shared tracker servers
 + [GH] Added command list usage information
 
 ### 0.1.36 [28 August 2012]
@@ -301,7 +301,7 @@ Coming soon.
 ### 0.1.28 [29 November 2001]
 
 + [PG] No longer dumps the shared servers to npdscmd.txt
-+ [PG] Fixed the shareEnabled .ini read process (getBoolean is not what we want, it’s valueOf)
++ [PG] Fixed the ```shareEnabled``` .ini read process (```getBoolean``` is not what we want, it’s ```valueOf```)
 
 ### 0.1.27 [20 October 2001]
 
@@ -319,7 +319,7 @@ Coming soon.
 
 + [PG] Fixed the reload 0 bug
 + [PG] Fixed the lock bug
-+ [PG] Set the timeout to 20 secs (was 10 secs) so my Newton is no longer considered as down
++ [PG] Set the timeout to 20 seconds (was 10 seconds) so my Newton is no longer considered as down
 + [PG] Added last validation template element
 
 ### 0.1.23
@@ -329,7 +329,7 @@ Coming soon.
 ### 0.1.22
 
 + [PG] Implemented the template stuff
-+ [PG] Re-organized the ProcessQuery method
++ [PG] Reorganized the ```ProcessQuery``` method
 + [PG] There is now a single class with embedded sub classes (so we’ll have a single .java binary)
 + [PG] Improved answer to the GET request (with many headers now)
 
@@ -341,28 +341,28 @@ Coming soon.
 
 ### 0.1.20
 
-+ [VR] Retrieving SHARE records from other trackers now works!!
++ [VR] Retrieving SHARE records from other trackers now works!
 
 ### 0.1.19
 
-+ [VR] Will now read optionsfile and cmdfile from default location
++ [VR] Will now read ```optionsfile``` and ```cmdfile``` from default location
 + [VR] Fixed up options file parsing
-+ [VR] HTML now easily customizable (see npdstracker.ini, header.html, footer.html)
++ [VR] HTML now easily customizable using ```npdstracker.ini```, ```header.html```, ```footer.html```
 
 ### 0.1.18
 
 + [VR] Minor admin console fixes
-+ [VR] Implemented command-line arguments for logfile, cmdfile, optionsfile
++ [VR] Implemented command-line arguments for ```logfile```, ```cmdfile```, ```optionsfile```
 + [VR] Now can specify files to log to, read options from, or read initial commands from
 + [VR] Finally implemented LOGS command in admin console
 + [VR] Code and syntax cleanups
-+ [PG] Use SimpleDateFormat in the ReturnRFCTime function. (this also fixes the GMT bug)
++ [PG] Use ```SimpleDateFormat``` in the ```ReturnRFCTime``` function. (this also fixes the GMT bug)
 + [PG] Fixed a little HTML bug
 
 ### 0.1.17
 
 + [VR] VTEST command added to the admin console
-+ [VR] SHARE command is now actually sent (forgot to flush PrintWriter)
++ [VR] SHARE command is now actually sent (forgot to flush ```PrintWriter```)
 + [VR] Changed return code of SHARE command if sharing is disabled
 
 ### 0.1.16
@@ -390,7 +390,7 @@ Coming soon.
 
 + [VR] Added more features to GET code
 + [VR] Fixed up RFC times somewhat
-+ [VR] Fixed bug in validation code with Connection Refused socket exceptions
++ [VR] Fixed bug in validation code with “Connection Refused” socket exceptions
 
 ### 0.1.10
 
