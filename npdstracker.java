@@ -1140,7 +1140,7 @@ public class npdstracker extends Thread
 		for (int foo = 0; foo < mSharingInfoVector.size(); foo++)
 			{
 				TServerInfo theServerInfo = (TServerInfo) mSharingInfoVector.elementAt(foo);
-				serverSharesStr += "<li class=\"servers\"><a href=\"http://" + theServerInfo.mHost
+				serverSharesStr += "<li><a href=\"http://" + theServerInfo.mHost
 				+ ":" + theServerInfo.mPort
 				+ "\">" + theServerInfo.mHost
 				+ "</a></li>";
