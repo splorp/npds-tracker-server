@@ -1134,6 +1134,19 @@ public class npdstracker extends Thread
 		// Define count of servers as string
 		String serverCounterStr = Integer.toString( mHostInfoVector.size() );
 
+		// Define SHAREd server list as hyperlinks
+		String serverSharesStr;
+		serverSharesStr = "<ul class=\"servers\">";
+		for (int foo = 0; foo < mSharingInfoVector.size(); foo++)
+			{
+				TServerInfo theServerInfo = (TServerInfo) mSharingInfoVector.elementAt(foo);
+				serverSharesStr += "<li class=\"servers\"><a href=\"http://" + theServerInfo.mHost
+				+ ":" + theServerInfo.mPort
+				+ "\">" + theServerInfo.mHost
+				+ "</a></li>";
+			}
+		serverSharesStr += "</ul>"
+
 		BufferedReader template = new BufferedReader (new FileReader(templateFile));
 		String templateLine = template.readLine();
 		while (templateLine != null)
@@ -1151,6 +1164,7 @@ public class npdstracker extends Thread
 			// <trackerName/>		->	The name of the host site or server as specified in npdstracker.ini
 			// <url/> 				->	The URL of this server, obtained by reading the HTTP header
 			// <validate-time/>		->	The time (in minutes) between validations
+			// <server-shares/>		->	A hyperlinked list of SHAREd servers
 			// <version/>			->	The current version of the tracker software
 			
 			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
@@ -1164,6 +1178,7 @@ public class npdstracker extends Thread
 			templateLine = StrReplace( templateLine, "<trackerName/>", hostName);
 			templateLine = StrReplace( templateLine, "<url/>", urlStr );
 			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
+			templateLine = StrReplace( templateLine, "<server-shares/>", serverSharesStr );
 			templateLine = StrReplace( templateLine, "<version/>", versionStr );
 
 			out.print(templateLine + "\r\n");
