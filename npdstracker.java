@@ -1158,13 +1158,13 @@ public class npdstracker extends Thread
 			// <last-validation/>	->	The date and time of the last validation or “Validation is in progress.”
 			// <meta-refresh/>		->	The meta element containing the http-equiv="refresh" value
 			// <server-counter/>	->	The number of registered NPDS servers
+			// <server-shares/>		->	A linked list of SHARE’d tracker servers formatted as an unordered list
 			// <servers/>			->	The list of NPDS servers formatted as a table
 			// <stylesheet/>		->	The link element containing the stylesheet as specified in npdstracker.ini
 			// <trackerHost/>		->	The URL of the host site or server as specified in npdstracker.ini
 			// <trackerName/>		->	The name of the host site or server as specified in npdstracker.ini
 			// <url/> 				->	The URL of this server, obtained by reading the HTTP header
 			// <validate-time/>		->	The time (in minutes) between validations
-			// <server-shares/>		->	A hyperlinked list of SHAREd servers
 			// <version/>			->	The current version of the tracker software
 			
 			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
@@ -1172,13 +1172,13 @@ public class npdstracker extends Thread
 			templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
 			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
 			templateLine = StrReplace( templateLine, "<server-counter/>", serverCounterStr );
+			templateLine = StrReplace( templateLine, "<server-shares/>", serverSharesStr );
 			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
 			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
 			templateLine = StrReplace( templateLine, "<trackerHost/>", hostLink);
 			templateLine = StrReplace( templateLine, "<trackerName/>", hostName);
 			templateLine = StrReplace( templateLine, "<url/>", urlStr );
 			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
-			templateLine = StrReplace( templateLine, "<server-shares/>", serverSharesStr );
 			templateLine = StrReplace( templateLine, "<version/>", versionStr );
 
 			out.print(templateLine + "\r\n");
