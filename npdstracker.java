@@ -1128,7 +1128,7 @@ public class npdstracker extends Thread
 		{
 			lastValidationStr = "Validation is in progress.";
 		} else {
-			lastValidationStr = "Last validation check: " + mLastValidation + ".";
+			lastValidationStr = "<strong>Last validation:</strong> " + mLastValidation + ".";
 		}
 
 		// Define count of servers as string
@@ -1215,13 +1215,13 @@ public class npdstracker extends Thread
 	// ====================================================================	//
 	// void adminConsole( BufferedReader, PrintWriter, Socket ) [static, private]
 	// ====================================================================	//
-	// Function to handle administrator console commands.
+	// Function to handle administration console commands.
 	
 	private static void adminConsole( BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
 	{
-		// funky cool admin console
+		// Funky cool admin console
 		inSocket.setSoTimeout( 0 );
-		out.print("Welcome to the NPDSTracker admin console!  Type HELP for help.\r\n");
+		out.print("Welcome to the NPDS Tracker Server administration console! (Type HELP for command reference.)\r\n");
 		out.flush();
 		String commandline = "";
 		while (!(commandline.startsWith("Q")) || !(commandline.startsWith("q")))
@@ -1232,20 +1232,21 @@ public class npdstracker extends Thread
 			if (commandline.equals("HELP"))
 			{
 				out.print("Valid commands are:\r\n");
-				out.print("ABOUT     show the server's current settings.\r\n");
-				out.print("HALT      stop the server (asks for confirmation)\r\n");
-				out.print("LOGS      dump the server's logs\r\n");
-				out.print("SHARE     change the server's share settings\r\n");
-				out.print("SLIST     view/modify the list of servers to get SHARE records from\r\n");
-				out.print("VTEST     trigger a server validation now\r\n");
-				out.print("STATS     show the server's statistics\r\n");
-				out.print("VERIFY    change the server's NPDS verification settings\r\n");
-				out.print("QUIT      quit the admin console and close the connection\r\n");
+				out.print("\r\n");
+				out.print("ABOUT     Display the current server settings\r\n");
+				out.print("HALT      Stop the server (with confirmation)\r\n");
+				out.print("LOGS      Dump the server logs\r\n");
+				out.print("SHARE     Change the server share settings\r\n");
+				out.print("SLIST     View or modify the list of servers to get SHARE records from\r\n");
+				out.print("VTEST     Trigger a server validation\r\n");
+				out.print("STATS     Display the server statistics\r\n");
+				out.print("VERIFY    Change the server verification settings\r\n");
+				out.print("QUIT      Exit the administration console and close the connection\r\n");
 				out.flush();
 			}
 			else if (commandline.equals("QUIT"))
 			{
-				out.print("Bye!\r\n");
+				out.print("Goodbye!\r\n");
 				out.flush();
 				break;
 			}
@@ -1259,7 +1260,7 @@ public class npdstracker extends Thread
 				String confirm = in.readLine();
 				if (confirm.startsWith("y") || confirm.startsWith("Y"))
 				{
-					logMessage("server shutting down via admin console");
+					logMessage("Server shutting down via administration console.");
 					System.gc();
 					System.exit(0);
 				}
@@ -1268,12 +1269,12 @@ public class npdstracker extends Thread
 			{
 				if (logfile.equals(""))
 				{
-					out.print("Sorry, logs can only be read remotely if they are being written to a file (they aren't).\r\n");
+					out.print("Sorry, logs can only be read remotely if they are being written to a file. (They aren’t.)\r\n");
 					out.flush();
 				}
 				else
 				{
-					out.print("start your terminal's capture feature, then hit enter.\r\n");
+					out.print("Start your terminal capture feature, then hit enter.\r\n");
 					out.flush();
 					String foo = in.readLine();
 					BufferedReader dumplogs = new BufferedReader (new FileReader(logfile));
@@ -1321,7 +1322,7 @@ public class npdstracker extends Thread
 			}
 			else if (commandline.equals("VTEST"))
 			{
-				out.print("server validation test started\r\n");
+				out.print("Server validation test started\r\n");
 				out.flush();
 				npdstracker.validateServers();
 			}
@@ -1352,7 +1353,7 @@ public class npdstracker extends Thread
 			}
 			else if (commandline.equals("SLIST"))
 			{
-				out.print("NPDSTrackers to get SHARE records from:\r\n");
+				out.print("NPDS Trackers to get SHARE records from:\r\n");
 				out.flush();
 				synchronized (mSharingInfoVector)
 				{
@@ -1364,7 +1365,7 @@ public class npdstracker extends Thread
 					}
 				}
 
-				out.print("Add or Delete record? (A/D): ");
+				out.print("Add or delete a record? (A/D): ");
 				out.flush();
 				String confirm = in.readLine();
 				if (confirm.startsWith("A") || confirm.startsWith("a"))
@@ -1375,7 +1376,7 @@ public class npdstracker extends Thread
 					out.flush();
 					theServerInfo.mHost = in.readLine();
 
-					out.print("Enter port (leave empty for 2110): ");
+					out.print("Enter port: (Leave empty for 3680) ");
 					out.flush();
 					String thePortStr = in.readLine();
 					if (thePortStr != null)
@@ -1395,7 +1396,7 @@ public class npdstracker extends Thread
 			}
 			else
 			{
-				out.print("Invalid command - type HELP for command reference\r\n");
+				out.print("Invalid command. (Type HELP for command reference.)\r\n");
 				out.flush();
 			}
 		}
