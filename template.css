@@ -17,13 +17,14 @@ td, th {
 	text-align: left;
 	}
 	
-ul.servers, li.servers {
+ul.servers,
+ul.servers li {
 	display: inline;
 	padding-right: 10px;
 	padding-left: 10px;
 	}
 	
-a.servers {
+ul.servers a {
 	display: block;
 	float: left;
 	}

@@ -208,7 +208,9 @@ The HTML template (```template.html```) can be customized using the following ps
 
 ```<servers/>``` — The list of NPDS servers formatted as a table
 
-```<server-counter/>``` — The number of registered NPDS servers
+```<server-counter/>``` — The number of registered NPDS servers
+
+```<server-shares/>``` — A linked list of SHARE’d tracker servers formatted as an unordered list
 
 ```<stylesheet/>``` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
 
