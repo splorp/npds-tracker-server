@@ -17,16 +17,24 @@ td, th {
 	text-align: left;
 	}
 	
-ul.servers,
+ul.servers {
+	padding: 0;
+	}
+
 ul.servers li {
 	display: inline;
-	padding-right: 10px;
-	padding-left: 10px;
 	}
 	
-ul.servers a {
-	display: block;
-	float: left;
+ul.servers li:first-child {
+	padding-left: 0;
+	}
+
+ul.servers li:after {
+	content: " | ";
+	}
+
+ul.servers li:last-child:after {
+	content: "";
 	}
 
 .down {
