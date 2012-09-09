@@ -1145,7 +1145,7 @@ public class npdstracker extends Thread
 				+ "\">" + theServerInfo.mHost
 				+ "</a></li>";
 			}
-		serverSharesStr += "</ul><br style=\"clear:both\" />\r\n"
+		serverSharesStr += "</ul>"
 
 		BufferedReader template = new BufferedReader (new FileReader(templateFile));
 		String templateLine = template.readLine();
