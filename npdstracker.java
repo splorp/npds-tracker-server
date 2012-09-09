@@ -1136,15 +1136,16 @@ public class npdstracker extends Thread
 
 		// Define SHAREd server list as hyperlinks
 		String serverSharesStr;
-		serverSharesStr = "|&nbsp;&nbsp;";
+		serverSharesStr = "<ul class=\"servers\">";
 		for (int foo = 0; foo < mSharingInfoVector.size(); foo++)
-		{
-			TServerInfo theServerInfo = (TServerInfo) mSharingInfoVector.elementAt(foo);
-			serverSharesStr += "<a href=\"http://" + theServerInfo.mHost
-			+ ":" + theServerInfo.mPort
-			+ "\">" + theServerInfo.mHost
-			+ "</a>&nbsp;&nbsp;|&nbsp;&nbsp;";
-		}
+			{
+				TServerInfo theServerInfo = (TServerInfo) mSharingInfoVector.elementAt(foo);
+				serverSharesStr += "<li><a href=\"http://" + theServerInfo.mHost
+				+ ":" + theServerInfo.mPort
+				+ "\">" + theServerInfo.mHost
+				+ "</a></li>";
+			}
+		serverSharesStr += "</ul><br style=\"clear:both\" />\r\n"
 
 		BufferedReader template = new BufferedReader (new FileReader(templateFile));
 		String templateLine = template.readLine();
