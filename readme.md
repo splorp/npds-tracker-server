@@ -191,7 +191,69 @@ java npdstracker [-h] [-c cmdfile] [-o optionsfile]
 
 ## Remote Administration
 
-Coming soon.
+To access the remote administration interface, you’ll need the following:
+
++ A terminal program or standalone Telnet client
++ The hostname and port of the tracker you wish to administer
++ The password of the tracker you wish to administer
+
+Any changes made using the administration interface are applied immediately to the tracker, but are not saved to the ```npdstracker.ini``` file. Changes are lost once the tracker is restarted.
+
+### Getting Started
+
+This example assumes that the tracker is configured to use the default port number.
+
+In your terminal program, open the Telnet connection to the tracker.
+
+```sh
+telnet tracker.example.com 3680
+```
+
+Hit ‘Enter’
+
+After you connect to the tracker, you have five seconds to enter the following:
+
+```sh
+ADMIN <password>
+```
+
+Hit ‘Enter’
+
+You will be presented with the following text:
+
+```sh
+Welcome to the NPDS Tracker Server administration interface!
+```
+
+Next, type:
+
+> HELP
+
+Hit ‘Enter’
+
+This will display a list of available commands.
+
+### Commands
+
+```ABOUT``` — Display the current tracker settings
+
+```HALT``` — Stop the tracker (with confirmation)
+
+```HELP``` — Displays this list of commands
+
+```LOGS``` — Dumps the tracker log
+
+```SHARE``` — Change the tracker share settings
+
+```SLIST``` — View or modify the list of trackers to obtain shared records from
+
+```VTEST``` — Trigger a tracker validation
+
+```STATS``` — Display the tracker statistics (describe)
+
+```VERIFY``` — Change the tracker verification settings
+
+```QUIT``` — Exit the administration interface and close the connection
 
 
 ## Page Template Tag Syntax
