@@ -15,11 +15,11 @@ Looking for support? Join the [NPDS mailing list](http://npds.free.fr/list/).
 
 ### Java 1.3 or later
 
-The NPDS Tracker Server will also work with Java 1.1 and 1.2, but this is not recommended due to DNS caching bugs in these versions of the runtime. If you must use a version of Java earlier than version 1.3, add the parameter ```-Dsun.net.inetaddr.ttl=0``` to the command line when starting the server. See the [Basic Configuration](#basic-configuration) section for more information.
+The NPDS Tracker Server will also work with Java 1.1 and 1.2, but this is not recommended due to DNS caching bugs in these versions of the runtime. If you must use a version of Java earlier than version 1.3, add the parameter ```-Dsun.net.inetaddr.ttl=0``` to the command line when starting the tracker. See the [Basic Configuration](#basic-configuration) section for more information.
 
-The current release of the NPDS Tracker Server has been tested with Java SE versions 1.4, 1.5, and 1.6.
+The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6.
 
-The Java SE (Standard Edition) runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
+The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
 
 ### An internet connection
 
@@ -31,25 +31,29 @@ Trackers may also be configured to also listen on port 80 or 8080.
 
 For editing the various configuration and template files.
 
+### A terminal program
+
+For compiling the Java source, installing the compiled .jar file, and configuring the related files and components. A terminal program can also be used to remote administer the NPDS Tracker Server using Telnet. See the [Remote Administration](#remote-administration) section for more information.
+
 
 ## Files
 
 ```readme.md``` — You’re soaking in it
 
-```npdstracker.java``` — Tracker server Java source code
+```npdstracker.java``` — Java source code for the tracker
 
-```npdstracker.ini``` — Tracker server settings and configuration
+```npdstracker.ini``` — Settings and configuration for the tracker
 
-```template.html``` — Tracker server page template
+```template.html``` — HTML page template used by the tracker
 
-```template.css``` — Tracker server page stylesheet
+```template.css``` — Stylesheet used in conjunction with the HTML template by the tracker
 
-```npdscmd.txt``` — Initial tracker server commands. Registered servers are written to this file upon shutdown
+```npdscmd.txt``` — Initial tracker commands. Registered servers are written to this file upon shutdown
 
 ```startnpds.sh``` — An example shell script for *NIX-like operating systems
-	
+
 ```manifest.mf``` — Information specific to the Java source code
-	
+
 
 ## Basic Configuration
 
@@ -61,7 +65,7 @@ javac npdstracker.java
 
 Edit ```npdstracker.ini``` and change any settings you see fit.
 
-Pay attention to the log settings - NPDS Tracker Server logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
+Pay attention to the log settings - tracker logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
 
 Start the server at the command line:
 
@@ -75,18 +79,18 @@ For Java 1.1 and 1.2 installations, start the server using this additional param
 java -Dsun.net.inetaddr.ttl=0 npdstracker
 ```
 
-Test the connection to the server by launching your web browser using the following URL:
+Test the connection to the tracker by launching your web browser using the following URL:
 
 ```sh
 http://<ip_address/hostname>:3680/
 ```
 
-Configure an NPDS client to point at the tracker server, making sure it can register properly.
+Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) to point at the tracker, confirming that it registers properly.
 
 
 ## Advanced Configuration
 
-The basic configuration is great for development, testing, and Windows deployment, but for those running Linux or Mac OS X, it’s preferable to install the NPDS Tracker Server more permanently and appropriately.
+The basic configuration is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a more permanent version of the tracker.
 
 For a cleaner installation, create a JAR file at the command line:
 
@@ -129,7 +133,7 @@ cssTemplate = /usr/local/share/npdstracker/template.css
 logfile = /var/log/npdstracker.log
 ```
 
-You can now manually start the NPDS Tracker Server at the command line.
+You can now manually start the tracker at the command line.
 
 ```sh
 java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
@@ -137,7 +141,7 @@ java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc
 
 See [Command Line Usage](#command-line-usage) for further details.
 
-On Darwin or Mac OS X, you can create a launch daemon to automatically start the NPDS Tracker Server on boot by creating and editing ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` and pasting in the following (this is assuming following the above Advanced Configuration steps):
+On Darwin or Mac OS X, you can create a launch daemon to automatically start the tracker on boot. Create a ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Configuration](#advanced-configuration).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -167,13 +171,13 @@ On Darwin or Mac OS X, you can create a launch daemon to automatically start the
 </plist>
 ```
 
-It can be loaded immediately by running the following at the command line, or you can wait until the next reboot:
+The launch daemon may be loaded immediately by running the following at the command line, or you can wait until the next boot cycle:
 
 ```sh
 sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
 ```
 
-On Linux or BSD systems, you can create ```init.d``` or ```rc.d``` scripts, respectively, to automatically start the NPDS Tracker Server on boot.
+On Linux or BSD systems, you can create ```init.d``` or ```rc.d``` scripts, respectively, to automatically start the tracker on boot.
 
 
 ## Command Line Usage
@@ -260,7 +264,7 @@ This will display a list of available commands.
 
 The HTML template (```template.html```) can be customized using the following pseudo-SGML tags to insert information into the page.
 
-```<hit-counter/>``` — The number of hits since last restart
+```<hit-counter/>``` — The number of hits since the tracker was restarted
 
 ```<http-doc/>``` — What comes after the GET (usually “/”)
 
@@ -268,19 +272,19 @@ The HTML template (```template.html```) can be customized using the following ps
 
 ```<meta-refresh/>``` — The meta element containing the http-equiv="refresh" value
 
-```<servers/>``` — The list of NPDS servers formatted as a table
+```<servers/>``` — The list of registered NPDS clients formatted as a table
 
-```<server-counter/>``` — The number of registered NPDS servers
+```<server-counter/>``` — The number of registered NPDS clients
 
-```<server-shares/>``` — A linked list of SHARE’d tracker servers formatted as an unordered list
+```<server-shares/>``` — A linked list of SHARE’d trackers formatted as an unordered list
 
 ```<stylesheet/>``` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
 
-```<trackerHost/>``` — The URL of the host site or server as specified in npdstracker.ini
+```<trackerHost/>``` — The URL of the host site or tracker as specified in npdstracker.ini
 
-```<trackerName/>``` — The name of the host site or server as specified in npdstracker.ini
+```<trackerName/>``` — The name of the host site or tracker as specified in npdstracker.ini
 
-```<url/>``` - The URL of this server, obtained by reading the HTTP header
+```<url/>``` - The URL of this tracker, obtained by reading the HTTP header
 
 ```<validate-time/>``` — The time (in minutes) between validations
 
@@ -298,7 +302,7 @@ Coming soon.
 
 ### 0.1.37 [TBD]
 
-+ [RP] New ```<server-shares/>``` template tag inserts a list of shared tracker servers
++ [RP] New ```<server-shares/>``` template tag inserts a list of shared trackers
 + [GH] Added command list usage information
 
 ### 0.1.36 [28 August 2012]
@@ -331,7 +335,7 @@ Coming soon.
 
 ### 0.1.33 [22 February 2004]
 
-+ [MP] Added SSI tag for displaying the number of registered servers in the template
++ [MP] Added SSI tag for displaying the number of registered clients in the template
 + [MP] Made the ```<meta-refresh/>``` SSI XHTML-compatible
 + [MP] Changed the default port number to 3680
 + [MP] Refined the listing table elements for extensive use of CSS
@@ -344,7 +348,7 @@ Coming soon.
 	
 ### 0.1.31 [30 July 2002]
 
-+ [PG] NPDS Tracker can now listen on several ports
++ [PG] The tracker can now listen on several ports
 
 ### 0.1.30 [28 April 2002]
 
@@ -356,18 +360,18 @@ Coming soon.
 + [PG] The console now says “server validation test started” before it finishes the validation
 + [PG] The tracker was waiting forever for an answer from fellow trackers, which was bad
 + [PG] Added style information to colorize the table
-+ [PG] The server performs a verification on startup
++ [PG] The tracker performs a verification on startup
 + [PG] Vector copy constructor is no longer called, so this should compile on Java < 1.2 (but it will have problems because of bugs in the JVM)
-+ [PG] The server now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private)
++ [PG] The tracker now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private)
 
 ### 0.1.28 [29 November 2001]
 
-+ [PG] No longer dumps the shared servers to npdscmd.txt
++ [PG] No longer dumps the shared trackers to npdscmd.txt
 + [PG] Fixed the ```shareEnabled``` .ini read process (```getBoolean``` is not what we want, it’s ```valueOf```)
 
 ### 0.1.27 [20 October 2001]
 
-+ [VR] Now saves registered server information for automatic reloading upon a crash or restart
++ [VR] Now saves registered client information for automatic reloading upon a crash or restart
 
 ### 0.1.26 [18 August 2001]
 
@@ -397,7 +401,7 @@ Coming soon.
 
 ### 0.1.21
 
-+ [PG] No longer uses the bugged URL interface to check if Newton servers are up. Instead, I use a socket
++ [PG] No longer uses the bugged URL interface to check if Newton clients are up. Instead, I use a socket
 + [PG] The REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn’t protocol-compliant)
 + [PG] Added several syntax checking with an appropriate status message
 
@@ -429,11 +433,11 @@ Coming soon.
 
 ### 0.1.16
 
-+ [PG] The server now only sleeps in the validator loop
++ [PG] The tracker now only sleeps in the validator loop
 
 ### 0.1.15
 
-+ [PG] Now the server always uses CRLF except for the log
++ [PG] Now the tracker always uses CRLF except for the log
 + [PG] Fixed a little bug in the validation date
 
 ### 0.1.14
@@ -442,11 +446,11 @@ Coming soon.
 
 ### 0.1.13
 
-+ [VR] Trying to fix intermittent bug in server validation code
++ [VR] Trying to fix intermittent bug in client validation code
 
 ### 0.1.12
 
-+ [VR] More bugs in server validation fixed
++ [VR] More bugs in client validation fixed
 
 ### 0.1.11
 
@@ -456,13 +460,13 @@ Coming soon.
 
 ### 0.1.10
 
-+ [VR] Fixed bug with exception passing and server socket code
++ [VR] Fixed bug with exception passing and tracker socket code
 + [VR] Rewrote GET code to return a nice HTML table (HTML 4.01 compliant)
 
 ### 0.1.9
 
 + [VR] Admin console is now complete save for the LOGS command
-+ [VR] Now retrieves, updates, and properly handles records from other servers via the SHARE command
++ [VR] Now retrieves, updates, and properly handles records from other trackers via the SHARE command
 
 ### 0.0.8
 
@@ -474,7 +478,7 @@ Coming soon.
 
 + [VR] Now accepts commands regardless of case
 + [VR] Checks for an existing host entry before processing a REGUP
-+ [VR] Started implementing the ADMIN command for live configuration of the server
++ [VR] Started implementing the ADMIN command for live configuration of the tracker
 
 ### 0.0.6
 
@@ -484,7 +488,7 @@ Coming soon.
 
 ### 0.0.5
 
-+ [VR] Server validation actually works! Woo hoo!
++ [VR] Client validation actually works! Woo hoo!
 + [VR] Implemented a socket timeout so that the loop doesn’t get stuck
 + [VR] Removed the QHTML extended command
 
@@ -496,7 +500,7 @@ Coming soon.
 
 + [VR] Fixed GET method - now returns DTD HTML 2.0 compliant pages
 + [VR] Rewrote internal storage of records - is now good and extensible
-+ [VR] Now we store time server last checked, and server status
++ [VR] Now we store time client last checked and its status
 + [VR] Implemented QueryMethod function for finding a record when we do a REGDN - could also use this method for an possible SRCH command later
 
 ### 0.0.2

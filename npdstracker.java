@@ -18,13 +18,13 @@ public class npdstracker extends Thread
 	// ======= Constants ======= //
 
 	// Version Information
-	public static final String serverdesc = "NPDSTracker for Java";
+	public static final String serverdesc = "NPDS Tracker Server for Java";
 	public static final int majorversion = 0;
 	public static final int minorversion = 1;
 	public static final int build = 37;
 	public static final int protocolversion = 1;
 	public static final String versionStr = majorversion + "." + minorversion + "." + build;
-	public static final String kServerStr = "Victor Rehorst's NPDS Tracker " + versionStr;
+	public static final String kServerStr = "Victor Rehorst’s NPDS Tracker Server " + versionStr;
 	public static final String kUserAgentStr = "Mozilla/5.0 (compatible; " + kServerStr + "; Java)";
 
 	// 200, 400, 403m 404 are HTTP codes - 202 is the "special" NPDS code
@@ -41,14 +41,14 @@ public class npdstracker extends Thread
 	public static final String defaultCmdFile = "npdscmd.txt";
 
 	// Messages
-	public static final String kRTFMStr = " Please check out the protocol before telnetting to the server (http://npds.free.fr/)";
+	public static final String kRTFMStr = " Please check out the protocol before telnetting to the tracker (http://npds.free.fr/)";
 	public static final String kAlreadyRegisteredStr = " host already exists in list";
 	public static final String kNotRegisteredStr = " host is unknown";
 	public static final String kInvalidHostStr = " host is invalid (doesn't resolve, check your client configuration)";
 	public static final String kPrivateHostStr = " host address is for private network (check your client configuration)";
 	public static final String kWeirdPortStr = " Weird port (not an integer)";
 	public static final String kWeirdPortValueStr = " Weird port (not within 1-65535)";
-	public static final String kUnsupportedVersionStr = " This version of the protocol is not supported by this server";
+	public static final String kUnsupportedVersionStr = " This version of the protocol is not supported by this tracker";
 	
 	/**
 	 * Default port we're listening on.
@@ -1153,17 +1153,17 @@ public class npdstracker extends Thread
 		{
 			// Replace the following pseudo-SGML tags in the HTML template
 			//
-			// <hit-counter/>		->	The number of hits since last restart
+			// <hit-counter/>		->	The number of hits since the tracker was restarted
 			// <http-doc/>			->	What comes after the GET (usually “/”)
 			// <last-validation/>	->	The date and time of the last validation or “Validation is in progress.”
 			// <meta-refresh/>		->	The meta element containing the http-equiv="refresh" value
-			// <server-counter/>	->	The number of registered NPDS servers
-			// <server-shares/>		->	A linked list of SHARE’d tracker servers formatted as an unordered list
-			// <servers/>			->	The list of NPDS servers formatted as a table
+			// <servers/>			->	The list of NPDS clients formatted as a table
+			// <server-counter/>	->	The number of registered NPDS clients
+			// <server-shares/>		->	A linked list of SHARE’d trackers formatted as an unordered list
 			// <stylesheet/>		->	The link element containing the stylesheet as specified in npdstracker.ini
-			// <trackerHost/>		->	The URL of the host site or server as specified in npdstracker.ini
-			// <trackerName/>		->	The name of the host site or server as specified in npdstracker.ini
-			// <url/> 				->	The URL of this server, obtained by reading the HTTP header
+			// <trackerHost/>		->	The URL of the host site or tracker as specified in npdstracker.ini
+			// <trackerName/>		->	The name of the host site or tracker as specified in npdstracker.ini
+			// <url/> 				->	The URL of this tracker, obtained by reading the HTTP header
 			// <validate-time/>		->	The time (in minutes) between validations
 			// <version/>			->	The current version of the tracker software
 			
@@ -1221,7 +1221,7 @@ public class npdstracker extends Thread
 	{
 		// Funky cool admin console
 		inSocket.setSoTimeout( 0 );
-		out.print("Welcome to the NPDS Tracker Server administration console! (Type HELP for command reference.)\r\n");
+		out.print("Welcome to the NPDS Tracker Server administration interface! (Type HELP for command reference.)\r\n");
 		out.flush();
 		String commandline = "";
 		while (!(commandline.startsWith("Q")) || !(commandline.startsWith("q")))
@@ -1233,15 +1233,16 @@ public class npdstracker extends Thread
 			{
 				out.print("Valid commands are:\r\n");
 				out.print("\r\n");
-				out.print("ABOUT     Display the current server settings\r\n");
-				out.print("HALT      Stop the server (with confirmation)\r\n");
-				out.print("LOGS      Dump the server logs\r\n");
-				out.print("SHARE     Change the server share settings\r\n");
-				out.print("SLIST     View or modify the list of servers to get SHARE records from\r\n");
-				out.print("VTEST     Trigger a server validation\r\n");
-				out.print("STATS     Display the server statistics\r\n");
-				out.print("VERIFY    Change the server verification settings\r\n");
-				out.print("QUIT      Exit the administration console and close the connection\r\n");
+				out.print("ABOUT     Display the current tracker settings\r\n");
+				out.print("HALT      Stop the tracker (with confirmation)\r\n");
+				out.print("HELP      Displays this list of commands\r\n");
+				out.print("LOGS      Dumps the tracker log\r\n");
+				out.print("SHARE     Change the tracker share settings\r\n");
+				out.print("SLIST     View or modify the list of trackers to obtain shared records from\r\n");
+				out.print("VTEST     Trigger a tracker validation\r\n");
+				out.print("STATS     Display the tracker statistics\r\n");
+				out.print("VERIFY    Change the tracker verification settings\r\n");
+				out.print("QUIT      Exit the administration interface and close the connection\r\n");
 				out.flush();
 			}
 			else if (commandline.equals("QUIT"))
@@ -1260,7 +1261,7 @@ public class npdstracker extends Thread
 				String confirm = in.readLine();
 				if (confirm.startsWith("y") || confirm.startsWith("Y"))
 				{
-					logMessage("Server shutting down via administration console.");
+					logMessage("Tracker shutting down via administration interface.");
 					System.gc();
 					System.exit(0);
 				}
@@ -1322,7 +1323,7 @@ public class npdstracker extends Thread
 			}
 			else if (commandline.equals("VTEST"))
 			{
-				out.print("Server validation test started\r\n");
+				out.print("Client validation test started\r\n");
 				out.flush();
 				npdstracker.validateServers();
 			}
@@ -1330,12 +1331,12 @@ public class npdstracker extends Thread
 			{
 				out.print("Pages served: " + hitcounter + "\r\n");
 				out.print("REGUP commands processed: " + regcounter + "\r\n");
-				out.print("NPDS servers currently registered: " + mHostInfoVector.size() + "\r\n");
+				out.print("NPDS clients currently registered: " + mHostInfoVector.size() + "\r\n");
 				out.flush();
 			}
 			else if (commandline.equals("VERIFY"))
 			{
-				out.print("Server verifies every " + validateTime + " minutes\r\n");
+				out.print("Tracker verifies every " + validateTime + " minutes\r\n");
 				out.print("Verification is attempted " + validateTries + " times\r\n");
 				out.print("Edit settings? ");
 				out.flush();
