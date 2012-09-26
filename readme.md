@@ -231,7 +231,9 @@ Welcome to the NPDS Tracker Server administration interface!
 
 Next, type:
 
-> HELP
+```sh
+HELP
+```
 
 Hit ‘Enter’
 
