@@ -302,12 +302,13 @@ Coming soon.
 
 ## Version History
 
-### 0.1.37 [TBD]
+### 0.1.37 — TBD
 
 + [RP] New ```<server-shares/>``` template tag inserts a list of shared trackers
-+ [GH] Added command list usage information
++ [GH] Added command line usage information
++ [GH] Added remote administration information
 
-### 0.1.36 [28 August 2012]
+### 0.1.36 — 28 August 2012
 
 + [MA] Split out display of HTML status into its own method
 + [MA] Updated HTTP GET processing to support rendering the HTML status page
@@ -322,7 +323,7 @@ Coming soon.
 + [GH] Minor formatting and nomenclature edits abound!
 + [GH] Converted read me to Markdown format
 
-### 0.1.35 [08 September 2010]
+### 0.1.35 — 08 September 2010
 
 + [GH] Moved source to GitHub
 + [GH] Added user definable stylesheet template
@@ -331,11 +332,11 @@ Coming soon.
 + [GH] Minor text formatting updates
 + [GH] Changed encoding to UTF-8
 
-### 0.1.34 [06 April 2006]
+### 0.1.34 — 06 April 2006
 
 + [VR] Added ```shouldIlog``` setting in INI file to disable all logging
 
-### 0.1.33 [22 February 2004]
+### 0.1.33 — 22 February 2004
 
 + [MP] Added SSI tag for displaying the number of registered clients in the template
 + [MP] Made the ```<meta-refresh/>``` SSI XHTML-compatible
@@ -343,20 +344,20 @@ Coming soon.
 + [MP] Refined the listing table elements for extensive use of CSS
 + [MP] Added code to allow one hostname with a private IP to register
 
-### 0.1.32 [02 May 2003]
+### 0.1.32 — 02 May 2003
 
 + [VR] Makes sure that the hostname isn’t empty on a REGUP command
 + [VR] Changed ```kRTFMStr``` to reflect new NPDS website address
 	
-### 0.1.31 [30 July 2002]
+### 0.1.31 — 30 July 2002
 
 + [PG] The tracker can now listen on several ports
 
-### 0.1.30 [28 April 2002]
+### 0.1.30 — 28 April 2002
 
 + [PG] Fixed the bug in 192.168.* address filtering
 
-### 0.1.29 [16 March 2002]
+### 0.1.29 — 16 March 2002
 
 + [PG] Fixed the bug in processing of console commands, so now lowercase commands work
 + [PG] The console now says “server validation test started” before it finishes the validation
@@ -366,20 +367,20 @@ Coming soon.
 + [PG] Vector copy constructor is no longer called, so this should compile on Java < 1.2 (but it will have problems because of bugs in the JVM)
 + [PG] The tracker now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private)
 
-### 0.1.28 [29 November 2001]
+### 0.1.28 — 29 November 2001
 
 + [PG] No longer dumps the shared trackers to npdscmd.txt
 + [PG] Fixed the ```shareEnabled``` .ini read process (```getBoolean``` is not what we want, it’s ```valueOf```)
 
-### 0.1.27 [20 October 2001]
+### 0.1.27 — 20 October 2001
 
 + [VR] Now saves registered client information for automatic reloading upon a crash or restart
 
-### 0.1.26 [18 August 2001]
+### 0.1.26 — 18 August 2001
 
 + [PG] Fixed the ```java.lang.ArrayIndexOutOfBoundsException``` bug introduced in version 0.1.24
 
-### 0.1.25 [06 June 2001]
+### 0.1.25 — 06 June 2001
 
 + [PG] Fixed the ```java.lang.IllegalArgumentException: timeout value is negative``` bug (well, I think)
 
