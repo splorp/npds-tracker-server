@@ -65,7 +65,7 @@ javac npdstracker.java
 
 Edit ```npdstracker.ini``` and change any settings you see fit.
 
-Pay attention to the log settings - tracker logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
+Pay attention to the log settings — tracker logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
 
 Start the server at the command line:
 
@@ -286,11 +286,11 @@ The HTML template (```template.html```) can be customized using the following ps
 
 ```<trackerName/>``` — The name of the host site or tracker as specified in npdstracker.ini
 
-```<url/>``` - The URL of this tracker, obtained by reading the HTTP header
+```<url/>``` — The URL of this tracker, obtained by reading the HTTP header
 
 ```<validate-time/>``` — The time (in minutes) between validations
 
-```<version/>``` - The current version of the tracker software
+```<version/>``` — The current version of the tracker software
 
 
 
@@ -501,10 +501,10 @@ Coming soon.
 
 ### 0.0.3
 
-+ [VR] Fixed GET method - now returns DTD HTML 2.0 compliant pages
-+ [VR] Rewrote internal storage of records - is now good and extensible
++ [VR] Fixed GET method so it returns DTD HTML 2.0 compliant pages
++ [VR] Rewrote internal storage of records for extensibility
 + [VR] Now we store time client last checked and its status
-+ [VR] Implemented QueryMethod function for finding a record when we do a REGDN - could also use this method for an possible SRCH command later
++ [VR] Implemented QueryMethod function for finding a record when we do a REGDN (could also use this method for an possible SRCH command later)
 
 ### 0.0.2
 
