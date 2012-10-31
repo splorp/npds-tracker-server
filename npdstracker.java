@@ -1,8 +1,8 @@
-// NPDSTracker for Java
-// Written by Victor Rehorst <http://www.chuma.org/> and Paul Guyot <http://kallisys.com/>
-// Contributions by Manuel Probsthain, Morgan Aldridge <http://makkintosshu.com/>, and Grant Hutchinson <http://splorp.com/>
-// Many thanks to Matt Vaughn <http://chromatin.cshl.edu/vaughn/> for NPDS
-// Last Modified: 16 August 2012
+// NPDS Tracker Server
+// Developed by Victor Rehorst and Paul Guyot
+// Additional contributions by Morgan Aldridge, Grant Hutchinson, Ron Parker, and Manuel Probsthain
+// Many thanks to Matt Vaughn for developing NPDS in the first place
+// Last Modified: 30 October 2012
 
 import java.io.*;
 import java.net.*;
@@ -27,16 +27,17 @@ public class npdstracker extends Thread
 	public static final String kServerStr = "Victor Rehorst’s NPDS Tracker Server " + versionStr;
 	public static final String kUserAgentStr = "Mozilla/5.0 (compatible; " + kServerStr + "; Java)";
 
-	// 200, 400, 403m 404 are HTTP codes - 202 is the "special" NPDS code
+	// 200, 400, 403, and 404 are standard HTTP codes
+	// 202 is a special NPDS code
 	public static final int HTTP_OK = 200;
 	public static final int NPDS_OK = 202;
 	public static final int HTTP_ERR = 400;
 	public static final int HTTP_FORBID = 403;
 	public static final int HTTP_NOTFOUND = 404;
 
-	public static final int kValidateTimeUnit = 60000;	// a minute in milliseconds
-	public static final int kRefreshTimeUnit = 1000;	// a second in milliseconds
-	public static final int kTimeout = 20000;			// 20 seconds.
+	public static final int kValidateTimeUnit = 60000;	// 60000 =  1 minute in milliseconds
+	public static final int kRefreshTimeUnit = 1000;	// 1000  =  1 second in milliseconds
+	public static final int kTimeout = 20000;			// 20000 = 20 seconds in milliseconds
 	public static final String defaultOptionsFile = "npdstracker.ini";
 	public static final String defaultCmdFile = "npdscmd.txt";
 
@@ -275,19 +276,18 @@ public class npdstracker extends Thread
 		// The Newton's hostname (including IP)
 		public String mName;	// The string as shown in the logs and in the table.
 		public String mHost;	// The host name only (used to check the server)
-		public int mPort;	// The port only (default is 80)
+		public int mPort;		// The port only (default is 80)
 		// Unique ID of the Newton (NOT CURRENTLY USED)
 		public String mHash;
 		// Plaintext description of the Newton
 		public String mDesc;
 		// Time this Newton was last validates (string in RFC format)
 		public String mLastValidation;
-		// Current status of this Newton: 0 is up, any other number is the number of unsuccessful 
-		// attempts made to validate, -1 is a SHAREd record
+		// Current status of this Newton: 0 is up, any other number is the number
+		// of unsuccessful attempts made to validate, -1 is a SHAREd record
 		public int mStatus;
-		
-		// Unused yet. Because if a tracker dies, I may need to warn the Newton and tell it that
-		// personally, I am up. (sounds cool, doesn't it?)
+		// Unused yet. Because if a tracker dies, I may need to warn the Newton and
+		// tell it that personally, I am up. (Sounds cool, doesn’t it?)
 		public TServerInfo mServer;
 	}
 
@@ -326,7 +326,7 @@ public class npdstracker extends Thread
 					outlogfile.write(theDate.toString() + "-> " + message + "\r\n");
 					outlogfile.flush();
 					outlogfile.close();
-				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can't write to logfile: " + logfile);}
+				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can’t write to logfile: " + logfile);}
 			}
 		}
 	}
@@ -425,11 +425,11 @@ public class npdstracker extends Thread
 
 	private static void printUsage()
 	{
-		System.out.println("Java NPDS Server Tracker version " + versionStr);
+		System.out.println("Java NPDS Server Tracker " + versionStr);
 		System.out.println("Usage: java npdstracker [-h] [-c cmdfile] [-o optionsfile]");
-		System.out.println("       -h : print this help");
-		System.out.println("       -c cmdfile : specify commands to run at start (defaults to none)");
-		System.out.println("       -o optionsfile : specify options file (defaults from compile time)");
+		System.out.println("       -h : Display this command usage information");
+		System.out.println("       -c cmdfile : Specifies the path of the npdscmd.txt file containing any commands to run at startup (defaults to none)");
+		System.out.println("       -o optionsfile : Specifies the path of the npdstracker.ini file containing configuration and option settings (defaults to settings at compile time)");
 	}
 
 	// ====================================================================	//
@@ -626,10 +626,10 @@ public class npdstracker extends Thread
 	public static void main(String[] args)
 	{
 		String tempoptionsfile = defaultOptionsFile;
-		// parse command line options here
-		// -l [logfile] -file to write logs to, will be created if it doesn't exists, otherwise appended to
-		// -c [cmdfile] -file to read initial commands from (REGUPs)
-		// -o [optionsfile] -file to read other options from
+		// Parse command line options here
+		// -l [logfile]     : The file to write logs to, will be created if it doesn’t exist, otherwise appended to (unused?)
+		// -c [cmdfile]     : The file to read initial commands from (REGUPs)
+		// -o [optionsfile] : The file to read other options from
 		for (int i = 0; i < args.length; i++)
 		{
 			if (args[i].equals("-c"))
@@ -1683,7 +1683,7 @@ public class npdstracker extends Thread
 			outcmdfile.flush();
 			outcmdfile.close();
 		} catch (IOException e) {
-			System.out.println("-> FATAL - can't write to logfile: " + cmdfile);
+			System.out.println("-> FATAL - can’t write to logfile: " + cmdfile);
 		}
 	}
 }
