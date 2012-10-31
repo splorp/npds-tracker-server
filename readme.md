@@ -50,7 +50,7 @@ For compiling the Java source, installing the compiled .jar file, and configurin
 
 ```npdscmd.txt``` — Initial tracker commands. Registered servers are written to this file upon shutdown
 
-```startnpds.sh``` — An example shell script for *NIX-like operating systems
+```startnpds.sh``` — An example shell script for Unix-like operating systems
 
 ```manifest.mf``` — Information specific to the Java source code
 
@@ -82,7 +82,7 @@ java -Dsun.net.inetaddr.ttl=0 npdstracker
 Test the connection to the tracker by launching your web browser using the following URL:
 
 ```sh
-http://<ip_address/hostname>:3680/
+http://<ip/hostname>:3680/
 ```
 
 Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) to point at the tracker, confirming that it registers properly.
@@ -92,7 +92,7 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 The basic configuration is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a more permanent version of the tracker.
 
-For a cleaner installation, create a JAR file at the command line:
+For a cleaner installation, create a Java archive (JAR) file at the command line:
 
 ```sh
 jar cvfm npdstracker.jar manifest.mf *.class
@@ -307,6 +307,7 @@ Coming soon.
 + [RP] New ```<server-shares/>``` template tag inserts a list of shared trackers
 + [GH] Added command line usage information
 + [GH] Added remote administration information
++ [GH] Reinstated classes on unordered lists so they can be styled independently
 
 ### 0.1.36 — 28 August 2012
 
@@ -330,7 +331,7 @@ Coming soon.
 + [GH] Moved stylesheet from template.html into its own file
 + [GH] Moved version history from Java source file into read me
 + [GH] Minor text formatting updates
-+ [GH] Changed encoding to UTF-8
++ [GH] Changed all document encoding to UTF-8
 
 ### 0.1.34 — 06 April 2006
 
@@ -464,7 +465,7 @@ Coming soon.
 ### 0.1.10
 
 + [VR] Fixed bug with exception passing and tracker socket code
-+ [VR] Rewrote GET code to return a nice HTML table (HTML 4.01 compliant)
++ [VR] Rewrote GET code to return a nice HTML 4.01 compliant table
 
 ### 0.1.9
 
@@ -504,7 +505,7 @@ Coming soon.
 + [VR] Fixed GET method so it returns DTD HTML 2.0 compliant pages
 + [VR] Rewrote internal storage of records for extensibility
 + [VR] Now we store time client last checked and its status
-+ [VR] Implemented QueryMethod function for finding a record when we do a REGDN (could also use this method for an possible SRCH command later)
++ [VR] Implemented ```QueryMethod``` function for finding a record when we do a REGDN (could also use this method for an possible SRCH command later)
 
 ### 0.0.2
 
