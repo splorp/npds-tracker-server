@@ -15,9 +15,7 @@ Looking for support? Join the [NPDS mailing list](http://npds.free.fr/list/).
 
 ### Java 1.3 or later
 
-The NPDS Tracker Server will also work with Java 1.1 and 1.2, but this is not recommended due to DNS caching bugs in these versions of the runtime. If you must use a version of Java earlier than version 1.3, add the parameter ```-Dsun.net.inetaddr.ttl=0``` to the command line when starting the tracker. See the [Basic Configuration](#basic-configuration) section for more information.
-
-The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6.
+The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6. It will also work with versions 1.1 and 1.2, but it is not recommended. See the [Basic Configuration](#basic-configuration) section for more information.
 
 The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
 
@@ -76,7 +74,7 @@ This command will return information about the current Java installation, includ
 
 ## Basic Configuration
 
-Assuming you already have Java 1.3 or later set up properly, open a command line and compile the server:
+Assuming that Java 1.3 or later has been correctly installed, open a command line and compile the server:
 
 ```sh
 javac npdstracker.java
@@ -92,7 +90,7 @@ Start the server at the command line:
 java npdstracker
 ```
 
-For Java 1.1 and 1.2 installations, start the server using this additional parameter:
+For Java 1.1 and 1.2 installations, the ```-Dsun.net.inetaddr.ttl=0``` parameter must be added to the command line. This additional parameter compensates for DNS caching bugs that exist in these versions of the Java runtime.
 
 ```sh
 java -Dsun.net.inetaddr.ttl=0 npdstracker
