@@ -15,7 +15,7 @@ Looking for support? Join the [NPDS mailing list](http://npds.free.fr/list/).
 
 ### Java 1.3 or later
 
-The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6. It will also work with versions 1.1 and 1.2, but it is not recommended. See the [Basic Configuration](#basic-configuration) section for more information.
+The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6. It will also work with versions earlier than 1.3, but it is not recommended. See the [Basic Configuration](#basic-configuration) section for more information.
 
 The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
 
@@ -324,7 +324,9 @@ Coming soon.
 + [RP] New ```<server-shares/>``` template tag inserts a list of shared trackers
 + [GH] Added command line usage information
 + [GH] Added remote administration information
++ [GH] Added getting started information
 + [GH] Reinstated classes on unordered lists so they can be styled independently
++ [GH] Wrapped link lists in ```<nav>``` elements
 
 ### 0.1.36 — 28 August 2012
 
