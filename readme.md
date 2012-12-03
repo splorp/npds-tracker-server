@@ -55,6 +55,25 @@ For compiling the Java source, installing the compiled .jar file, and configurin
 ```manifest.mf``` — Information specific to the Java source code
 
 
+## Getting Started
+
+First, determine whether Java is installed. Open a command line and type:
+
+```sh
+which java
+```
+
+This command will return the path where Java is installed on your system. For example: ```/usr/bin/java```
+
+To determine the version of Java installed, type the following:
+
+```sh
+java -version
+```
+
+This command will return information about the current Java installation, including the version number and related software details. For example: ```java version "1.6.0_30"```
+
+
 ## Basic Configuration
 
 Assuming you already have Java 1.3 or later set up properly, open a command line and compile the server:
