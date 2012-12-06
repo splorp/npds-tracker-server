@@ -2,7 +2,7 @@
 // Developed by Victor Rehorst and Paul Guyot
 // Additional contributions by Morgan Aldridge, Grant Hutchinson, Ron Parker, and Manuel Probsthain
 // Many thanks to Matt Vaughn for developing NPDS in the first place
-// Last Modified: 30 October 2012
+// Last Modified: 05 December 2012
 
 import java.io.*;
 import java.net.*;
@@ -45,22 +45,20 @@ public class npdstracker extends Thread
 	public static final String kRTFMStr = " Please check out the protocol before telnetting to the tracker (http://npds.free.fr/)";
 	public static final String kAlreadyRegisteredStr = " host already exists in list";
 	public static final String kNotRegisteredStr = " host is unknown";
-	public static final String kInvalidHostStr = " host is invalid (doesn't resolve, check your client configuration)";
+	public static final String kInvalidHostStr = " host is invalid (doesn’t resolve, check your client configuration)";
 	public static final String kPrivateHostStr = " host address is for private network (check your client configuration)";
 	public static final String kWeirdPortStr = " Weird port (not an integer)";
 	public static final String kWeirdPortValueStr = " Weird port (not within 1-65535)";
 	public static final String kUnsupportedVersionStr = " This version of the protocol is not supported by this tracker";
 	
-	/**
-	 * Default port we're listening on.
-	 */
+	// Default port
 	public static final int DEFAULT_PORT = 3680;
 	
 	// ======= Variables ======= //
 
 	// Server variables: time between validations, number of attempts to make before server is 
-	// dropped, whether or not to share with other Trackers, hit counter, admin password, logfile location
-	// all of these can be set at runtime using the -o switch
+	// dropped, whether or not to share with other Trackers, hit counter, admin password, logfile
+	// location all of these can be set at runtime using the -o switch
 	public static int validateTime = 20;
 	public static int validateTries = 3;
 	public static boolean shareEnabled = true;
@@ -92,9 +90,7 @@ public class npdstracker extends Thread
 	// (Victor uses a lot of public static variables, he surely has a good reason for that)
 	public static TValidator mValidator;
 	
-	/**
-	 * Vector with all the servers out there.
-	 */
+	// Vector with all the servers out there.
 	private Vector mServers;
 
 	private static DateFormat mRFCGMTFormatter;
@@ -108,10 +104,7 @@ public class npdstracker extends Thread
 	//	EMBEDDED CLASSES
 	//////////////////////////////////////////////////////////////////////////////
 	
-	// ============================================================	//
-	/**
-	 * A class to handle exceptions when parsing the query.
-	 */
+	// A class to handle exceptions when parsing the query
 	public static class TQueryException extends Exception
 	{
 	    public TQueryException(String s)
@@ -120,10 +113,7 @@ public class npdstracker extends Thread
 	    }
 	}
 	
-	// ============================================================	//
-	/**
-	 * A class to validate the Newton servers.
-	 */
+	// A class to validate the Newton servers
 	public static class TValidator extends Thread
 	{
 		public Date	mLastCheck;
@@ -134,7 +124,7 @@ public class npdstracker extends Thread
 			// Initialization of variables to know when to check the registered Newtons.
 			mNextCheck = new Date();
 
-			// I'm looping forever. (I will be killed by the application as it quits).
+			// I’m looping forever. (I will be killed by the application as it quits).
 			
 			try {
 				while (true)
@@ -153,7 +143,7 @@ public class npdstracker extends Thread
 						
 						now = new Date();	// Updates the now value.
 						
-						// Let's sleep until next check if we have to.
+						// Let’s sleep until next check if we have to
 						
 						long timeout = mNextCheck.getTime() - now.getTime();
 						if (timeout > 0)
@@ -171,9 +161,8 @@ public class npdstracker extends Thread
 	}
 
 	// ============================================================	//
-	/**
-	 * A class to handle a connection the Newton servers.
-	 */
+
+	// A class to handle a connection the Newton servers.
 	public static class TConnection extends Thread
 	{
 		// Variables
@@ -209,7 +198,7 @@ public class npdstracker extends Thread
 				}
 				catch (Exception e) 
 				{
-					System.err.println( "aah! some exception!" );
+					System.err.println( "Look! Some exception!" );
 					System.err.println( e );
 					
 					// Easier than calling System.getProperty("line.separator")
@@ -227,9 +216,8 @@ public class npdstracker extends Thread
 	}
 
 	// ============================================================	//
-	/**
-	 * A class for servers that listen to Newtons.
-	 */
+
+	// A class for servers that listen to Newtons.
 	public static class TServer extends Thread
 	{
 		// Variables
@@ -244,7 +232,7 @@ public class npdstracker extends Thread
 		// Thread entry point
 		public void run ()
 		{
-			// I'm looping waiting for connections.
+			// I’m looping waiting for connections.
 			while (true)
 			{
 				try 
@@ -273,7 +261,7 @@ public class npdstracker extends Thread
 
 	public static class THostInfo
 	{
-		// The Newton's hostname (including IP)
+		// The Newton’s hostname (including IP)
 		public String mName;	// The string as shown in the logs and in the table.
 		public String mHost;	// The host name only (used to check the server)
 		public int mPort;		// The port only (default is 80)
@@ -284,7 +272,7 @@ public class npdstracker extends Thread
 		// Time this Newton was last validates (string in RFC format)
 		public String mLastValidation;
 		// Current status of this Newton: 0 is up, any other number is the number
-		// of unsuccessful attempts made to validate, -1 is a SHAREd record
+		// of unsuccessful attempts made to validate, -1 is a SHARE record
 		public int mStatus;
 		// Unused yet. Because if a tracker dies, I may need to warn the Newton and
 		// tell it that personally, I am up. (Sounds cool, doesn’t it?)
@@ -455,7 +443,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("="))) {
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				} else {
 					kPort = new Vector();
 					
@@ -467,12 +455,12 @@ public class npdstracker extends Thread
 							garbage = st.nextToken();
 							int thePort = Integer.parseInt(garbage);
 							
-							// If we're here it's that we found one port at least.
+							// If we’re here it’s that we found one port at least.
 							foundOne = true;
 							
 							// Add that port to the list.
 							kPort.addElement(new Integer(thePort));
-							logMessage("port found: " + thePort);
+							logMessage("Port found: " + thePort);
 						} catch (NoSuchElementException aNSEE) {
 							break;
 						}
@@ -483,7 +471,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					adminpasswd = st.nextToken();
 			}
@@ -491,7 +479,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Eerror reading npdstracker.ini on line " + linenumber);
 				else
 					validateTime = Integer.parseInt(st.nextToken());
 			}
@@ -499,7 +487,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					validateTries = Integer.parseInt(st.nextToken());
 			}
@@ -507,7 +495,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					shareEnabled = Boolean.valueOf(st.nextToken()).booleanValue();
 			}
@@ -515,7 +503,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 				{
 					TServerInfo theServerInfo = new TServerInfo();
@@ -528,7 +516,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					logfile = st.nextToken();
 			}
@@ -536,7 +524,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					shouldIlog = Boolean.valueOf(st.nextToken()).booleanValue();
 			}
@@ -544,7 +532,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					templateFile = st.nextToken();
 			}
@@ -552,7 +540,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					stylesheetFile = st.nextToken();
 			}
@@ -560,7 +548,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					hostName = st.nextToken();
 			}
@@ -568,7 +556,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					hostLink = st.nextToken();
 			}			
@@ -576,7 +564,7 @@ public class npdstracker extends Thread
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
-					logMessage("error reading optionsfile, line " + linenumber);
+					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
 					acceptPrivateHost = st.nextToken();
 			}
@@ -584,7 +572,7 @@ public class npdstracker extends Thread
 			{
 				// do nothing
 			}
-			} catch (NoSuchElementException e) { System.err.print("error in options parsing " + optionsfile + " line " + linenumber + "\r\n");}
+			} catch (NoSuchElementException e) { System.err.print("Error in options parsing " + optionsfile + " line " + linenumber + "\r\n");}
 			tempoption = optionsreader.readLine();
 			linenumber++;
 		}
@@ -644,7 +632,7 @@ public class npdstracker extends Thread
 			}
 			else
 			{
-				System.out.println("invalid arguments");
+				System.out.println("Invalid arguments");
 				printUsage();
 				System.exit(0);
 			}
@@ -684,7 +672,7 @@ public class npdstracker extends Thread
 				cmdreader.close();
 			}
 
-			// Let's create the validation thread.
+			// Let’s create the validation thread.
 			mValidator = new TValidator();
 			mValidator.start();
 					
@@ -709,7 +697,7 @@ public class npdstracker extends Thread
 				mServers.addElement(theServer);				
 			}
 
-			// ServerSocket timeout: I'll wait forever until a connection arrives.
+			// ServerSocket timeout: I’ll wait forever until a connection arrives.
 			// mServer.setSoTimeout( 0 ); // (this is default)
 		} catch(Exception e)
 		{
@@ -720,11 +708,8 @@ public class npdstracker extends Thread
 		logMessage(serverdesc + " version " + versionStr + " started");
 	}
 	
-	/**
-	 * Thread entry point.
-	 *
-	 * Wait forever.
-	 */	
+	// Thread entry point
+	// Wait forever
 	public void run ()
 	{
 		try {
@@ -759,8 +744,8 @@ public class npdstracker extends Thread
 			StringTokenizer st = new StringTokenizer( query );
 				// We now accept any standard delimiter, hence HT
 				// (the protocol says we should)
-				// We also accept the other delimiters, but anyway, there shouldn't be any other delimiter
-				// in the host name or the REGUP command, so we don't mind.
+				// We also accept the other delimiters, but anyway, there shouldn’t be any other delimiter
+				// in the host name or the REGUP command, so we don’t mind.
 			String theCommand = st.nextToken().toUpperCase();
 
 			// I do handle several commands.
@@ -773,18 +758,18 @@ public class npdstracker extends Thread
 			{
 				logMessage("Processing REGUP command");
 
-				// throw out the first token
+				// Throw out the first token
 				String hname = st.nextToken();
-				String hdesc = query.substring(hname.length() + 7);	// "REGUP hname ". Note: this isn't really protocol 1.1 compliant.
+				String hdesc = query.substring(hname.length() + 7);	// REGUP hname. Note: this isn’t really protocol 1.1 compliant.
 
 				if (hname.equals("NPDS/TP"))
 				{
-					logMessage("v2 command recieved - not yet supported");
+					logMessage("v2 command received - not yet supported");
 					throw new TQueryException ( kUnsupportedVersionStr );
 				}
 				else if ((QueryRecord(hname) == -1))
 				{
-					// Host is not in our list. Let's add it.
+					// Host is not in our list. Let’s add it.
 
 					THostInfo theInfo = new THostInfo();
 					theInfo.mName = hname;
@@ -792,7 +777,7 @@ public class npdstracker extends Thread
 					StringTokenizer host_st = new StringTokenizer(hname, ":");
 					theInfo.mHost = host_st.nextToken();
 
-					// First, check the host. We won't accept hosts that don't resolve or that are for private networks.
+					// First, check the host. We won’t accept hosts that don’t resolve or that are for private networks.
 					byte theHostAddressAsBytes[];
 					try {
 						InetAddress theHostAddress = InetAddress.getByName( theInfo.mHost );
@@ -808,8 +793,8 @@ public class npdstracker extends Thread
 						// Accept host and write that to log 
 						logMessage("Private IP host " + theInfo.mHost + " has now registered");
 					} else {
-						// Don't accept host and check that it's not any other private network address.
-						// Don't know for IPv6, so I only work with 4 bytes addies.
+						// Don’t accept host and check that it’s not any other private network address.
+						// Don’t know for IPv6, so I only work with 4 bytes addies.
 						if (theHostAddressAsBytes.length == 4)
 						{
 							// 10.0.0.0/8
@@ -841,13 +826,13 @@ public class npdstracker extends Thread
 							theInfo.mPort = Integer.parseInt(host_st.nextToken());
 						} catch (NumberFormatException theException)
 						{
-							logMessage("Server \"" + hname + " " + hdesc + "\" wasn't inserted into the list because its port isn't correct (not an integer)");
+							logMessage("Server \"" + hname + " " + hdesc + "\" wasn’t inserted into the list because its port isn’t correct (not an integer)");
 							throw new TQueryException ( kWeirdPortStr );
 						}
 						
 						if ((theInfo.mPort < 1) || (theInfo.mPort > 65535))
 						{
-							logMessage("Server \"" + hname + " " + hdesc + "\" wasn't inserted into the list because its port isn't correct (not within 1-65535)");
+							logMessage("Server \"" + hname + " " + hdesc + "\" wasn’t inserted into the list because its port isn’t correct (not between 1 - 65535)");
 							throw new TQueryException ( kWeirdPortValueStr );
 						}
 					} else {
@@ -885,7 +870,7 @@ public class npdstracker extends Thread
 				// throw out the first token
 				host = st.nextToken();
 					
-				// Check there is no token left (there shouldn't be).
+				// Check there is no token left (there shouldn’t be).
 				if (st.hasMoreTokens())
 				{
 					logMessage("Bad syntax: the tokenizer found more than two elements");
@@ -895,7 +880,7 @@ public class npdstracker extends Thread
 				int tempindex;
 				
 				// I need the tempindex, nobody should change the list before I do remove this element
-				// But, because I don't want to lock the other connections, I'd better do only removal
+				// But, because I don’t want to lock the other connections, I’d better do only removal
 				// in the synchronized statement
 				synchronized (mHostInfoVector)
 				{
@@ -922,7 +907,7 @@ public class npdstracker extends Thread
 			{
 				logMessage("Processing QUERY command");
 				ReturnCode(NPDS_OK, "", out);
-				// print out all of the Newtons registered
+				// Print out all of the Newtons registered
 				synchronized (mHostInfoVector)
 				{
 					for (int index_i = 0; index_i < mHostInfoVector.size(); index_i++)
@@ -936,7 +921,7 @@ public class npdstracker extends Thread
 			}
 			else if (theCommand.equals("SHARE"))
 			{
-				// return list of entries in SHARE format
+				// Return list of entries in SHARE format
 				logMessage("Processing SHARE command");
 				if (shareEnabled == true)
 				{
@@ -1134,7 +1119,7 @@ public class npdstracker extends Thread
 		// Define count of servers as string
 		String serverCounterStr = Integer.toString( mHostInfoVector.size() );
 
-		// Define SHAREd server list as hyperlinks
+		// Define SHARE server list as hyperlinks
 		String serverSharesStr;
 		serverSharesStr = "<ul class=\"servers\">\r\n";
 		for (int foo = 0; foo < mSharingInfoVector.size(); foo++)
@@ -1424,7 +1409,7 @@ public class npdstracker extends Thread
 			String checkResult = null;
 			InputStream in = null;
 			OutputStream out = null;
-			// don't validate SHAREd records
+			// Don’t validate SHARE records
 			if (!(theInfo.mStatus == -1))
 			{
 				try
@@ -1465,13 +1450,13 @@ public class npdstracker extends Thread
 					// CRLF CRLF
 					// npds-status: SERVER_ALIVE_WELL
 
-					// This last element isn't in the protocol. So I accept anybody without it.
+					// This last element isn’t in the protocol. So I accept anybody without it.
 					// I only check the 202.
-					// (maybe one day, I'll check the content-type and the npds-status)
-					// In fact, I'm pretty laxist (please don't repeat that) and I allow test pages served by some webserver).
+					// (maybe one day, I’ll check the content-type and the npds-status)
+					// In fact, I’m pretty laxist (please don’t repeat that) and I allow test pages served by some webserver).
 					// I look for a 202 anywhere in the first 512 bytes.
 
-					// if there was a zero-length result recieved, we assume the server is down
+					// if there was a zero-length result received, we assume the server is down
 					if (checkResult.startsWith("\u0000") || (checkResult.length() == 0))
 					{
 						logMessage(theInfo.mName + " is down (timeout / host not found)");
@@ -1497,7 +1482,7 @@ public class npdstracker extends Thread
 								}
 							}
 								
-							// If I haven't found it, it's that it has been removed while we were checking it.
+							// If I haven’t found it, it’s that it has been removed while we were checking it.
 						}
 					}
 					else
@@ -1544,11 +1529,11 @@ public class npdstracker extends Thread
 			}
 		} // for (int foo = 0; foo < theHosts.size(); foo++)
 		
-		// check for servers which we haven't been able to reach in a while and toast them
+		// check for servers which we haven’t been able to reach in a while and toast them
 		synchronized (mHostInfoVector)
 		{
 			// for (int foo = 0; foo < mHostInfoVector.size(); foo++)
-			// This should lead to a problem. I'd better start from the end.
+			// This should lead to a problem. I’d better start from the end.
 			int theLastIndex = mHostInfoVector.size() - 1;
 			for (int foo = theLastIndex; foo >= 0; foo--)
 			{
@@ -1556,8 +1541,8 @@ public class npdstracker extends Thread
 				if ((theInfo.mStatus > validateTries)
 					|| (theInfo.mStatus == -1))
 				// Remove both down Newtons and shared Newton (as shared Newton will be got later)
-				// (notice: this isn't a good idea later, we should first check that the other tracker servers
-				// are still running, but as nobody does share, it isn't really a problem)
+				// (notice: this isn’t a good idea later, we should first check that the other tracker servers
+				// are still running, but as nobody does share, it isn’t really a problem)
 				{
 					logMessage(theInfo.mName + " removed - too many failed connections");
 					mHostInfoVector.removeElementAt( foo );
@@ -1575,9 +1560,9 @@ public class npdstracker extends Thread
 				try
 				{
 					Socket theSocket = new Socket(theServerInfo.mHost, Integer.parseInt(theServerInfo.mPort));
-					theSocket.setSoTimeout( kTimeout );	// Won't wait forever, it would break the server.
+					theSocket.setSoTimeout( kTimeout );	// Won’t wait forever, it would break the server.
 					
-					logMessage("setting up input and output streams");
+					logMessage("Setting up input and output streams");
 					BufferedReader inshare = new BufferedReader(new InputStreamReader( theSocket.getInputStream()) );
 					PrintWriter outshare = new PrintWriter(new OutputStreamWriter( theSocket.getOutputStream()) );
 					logMessage("Sending SHARE command");
@@ -1593,10 +1578,10 @@ public class npdstracker extends Thread
 						templine = inshare.readLine();
 					}
 
-					logMessage("recieved: " + returncode);
+					logMessage("Received: " + returncode);
 					if (returncode.startsWith("200 OK"))
 					{
-						logMessage("Return code is good - parsing records");
+						logMessage("Return code is good. Parsing records");
 
 						StringTokenizer lines = new StringTokenizer(returncode, "\n");
 						while (lines.hasMoreTokens() == true)
@@ -1648,7 +1633,7 @@ public class npdstracker extends Thread
 		mLastValidation = ReturnRFCTime(new Date());
 		saveServers();
 		mValidationInProgress -= 1;
-		logMessage("ending validation of records");
+		logMessage("Ending validation of records");
 	}
 
 	// ====================================================================	//
@@ -1666,7 +1651,7 @@ public class npdstracker extends Thread
 				for (int foo = 0; foo < mHostInfoVector.size(); foo++)
 				{
 					THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(foo);
-					// Don't save SHAREd records.
+					// Don’t save SHARE records
 					if (theInfo.mStatus != -1)
 					{
 						String templine = "REGUP " + theInfo.mHost;
