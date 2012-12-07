@@ -55,6 +55,8 @@ For compiling the Java source, installing the compiled .jar file, and configurin
 
 ## Getting Started
 
+### Got Java?
+
 First, determine whether Java is installed. Open a command line and type:
 
 ```sh
@@ -62,6 +64,8 @@ which java
 ```
 
 This command will return the path where Java is installed on your system. For example: ```/usr/bin/java```
+
+If a path is not displayed after running this command, then Java is not currently installed on your system. You will need to download and install the [Java SE](http://www.oracle.com/technetwork/java/javase/) software before proceeding.
 
 To determine the version of Java installed, type the following:
 
@@ -71,18 +75,30 @@ java -version
 
 This command will return information about the current Java installation, including the version number and related software details. For example: ```java version "1.6.0_30"```
 
+### Grab the source
 
-## Basic Configuration
+Download the [latest version](https://github.com/splorp/npds-tracker-server/archive/master.zip) of the NPDS Tracker Server source. Decompress the archive and move the files to a logical location on your system.
 
-Assuming that Java 1.3 or later has been correctly installed, open a command line and compile the server:
+
+## Basic Set Up
+
+### Compile the source
+
+Assuming that Java 1.3 or later has been correctly installed, open a command line and compile the server source:
 
 ```sh
 javac npdstracker.java
 ```
 
+### Configure the server
+
 Edit ```npdstracker.ini``` and change any settings you see fit.
 
+If you keep all of the source files together in the same directory, you will not need to change the defaults for the ```pageTemplate```, ```cssTemplate```, or ```logfile``` path settings.
+
 Pay attention to the log settings — tracker logs are rather verbose and can become quite large over time. You can turn off the logging once you are sure that your server is configured properly. You can also add any tracker servers that you want to share records with.
+
+### Start the server
 
 Start the server at the command line:
 
@@ -105,7 +121,7 @@ http://<ip/hostname>:3680/
 Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) to point at the tracker, confirming that it registers properly.
 
 
-## Advanced Configuration
+## Advanced Set Up
 
 The basic configuration is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a more permanent version of the tracker.
 
