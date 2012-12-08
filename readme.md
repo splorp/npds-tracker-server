@@ -63,7 +63,9 @@ First, determine whether Java is installed. Open a command line and type:
 which java
 ```
 
-This command will return the path where Java is installed on your system. For example: ```/usr/bin/java```
+This command will return the path where Java is installed on your system.
+
+For example: ```/usr/bin/java```
 
 If a path is not displayed after running this command, then Java is not currently installed on your system. You will need to download and install the [Java SE](http://www.oracle.com/technetwork/java/javase/) software before proceeding.
 
@@ -73,7 +75,9 @@ To determine the version of Java installed, type the following:
 java -version
 ```
 
-This command will return information about the current Java installation, including the version number and related software details. For example: ```java version "1.6.0_30"```
+This command will return information about the current Java installation, including the version number and related software details.
+
+For example: ```java version "1.6.0_30"```
 
 ### Grab the source
 
@@ -133,7 +137,7 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 ## Advanced Set Up
 
-The basic configuration is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a more permanent version of the tracker.
+The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker.
 
 For a cleaner installation, create a Java archive (JAR) file at the command line:
 
@@ -246,7 +250,7 @@ To access the remote administration interface, you’ll need the following:
 
 Any changes made using the administration interface are applied immediately to the tracker, but are not saved to the ```npdstracker.ini``` file. Changes are lost once the tracker is restarted.
 
-### Getting Started
+### Connection
 
 This example assumes that the tracker is configured to use the default port number.
 
