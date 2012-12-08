@@ -230,14 +230,14 @@ On Linux or BSD systems, you can create ```init.d``` or ```rc.d``` scripts, resp
 ## Command Line Usage
 
 ```sh
-java npdstracker [-h] [-c cmdfile] [-o optionsfile]
+java npdstracker [-h] [-c <cmdfile>] [-o <optionsfile>]
 ```
 
 ```-h``` — Display help
 
-```-c cmdfile```  — Specifies the path of the ```npdscmd.txt``` file containing any commands to run at startup (defaults to none)
+```-c <cmdfile>```  — Specifies the path of the ```npdscmd.txt``` file containing any commands to run at startup (defaults to none)
 
-```-o optionsfile``` — Specifies the path of the ```npdstracker.ini``` file containing configuration and option settings (defaults to settings at compile time)
+```-o <optionsfile>``` — Specifies the path of the ```npdstracker.ini``` file containing configuration and option settings (defaults to settings at compile time)
 
 
 ## Remote Administration
