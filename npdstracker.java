@@ -57,15 +57,15 @@ public class npdstracker extends Thread
 	// ======= Variables ======= //
 
 	// Server variables: time between validations, number of attempts to make before server is 
-	// dropped, whether or not to share with other Trackers, hit counter, admin password, logfile
+	// dropped, whether or not to share with other trackers, hit counter, admin password, log file
 	// location all of these can be set at runtime using the -o switch
 	public static int validateTime = 20;
 	public static int validateTries = 3;
 	public static boolean shareEnabled = true;
-	public static String adminpasswd = "qwerty";
+	public static String adminPass = "qwerty";
 	public static Vector kPort;
-	public static String logfile = "";
-	public static boolean shouldIlog = true;
+	public static String logFile = "";
+	public static boolean logVerbose = true;
 	public static String templateFile = "";
 	public static String stylesheetFile = "";
 	public static String cmdfile = defaultCmdFile;
@@ -298,23 +298,23 @@ public class npdstracker extends Thread
 	// ====================================================================	//
 	// * void logMessage( String ) [static]
 	// ====================================================================	//
-	// Sends a message to the System.out or the logfile, if specified
+	// Sends a message to the System.out or the log file, if specified
 		
 	public static void logMessage(String message)
 	{
-		if (shouldIlog)
+		if (logVerbose)
 		{
 			Date theDate = new Date();
-			if (logfile.equals(""))
+			if (logFile.equals(""))
 				System.out.println(theDate.toString() + "-> " + message);
 			else
 			{
 				try {
-					FileWriter outlogfile = new FileWriter(logfile, true);
-					outlogfile.write(theDate.toString() + "-> " + message + "\r\n");
-					outlogfile.flush();
-					outlogfile.close();
-				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can’t write to logfile: " + logfile);}
+					FileWriter outlogFile = new FileWriter(logFile, true);
+					outlogFile.write(theDate.toString() + "-> " + message + "\r\n");
+					outlogFile.flush();
+					outlogFile.close();
+				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can’t write to log file: " + logfile);}
 			}
 		}
 	}
@@ -467,13 +467,13 @@ public class npdstracker extends Thread
 					}
 				}
 			}
-			else if (tempoption.startsWith("adminpasswd"))
+			else if (tempoption.startsWith("adminPass"))
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
 					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
-					adminpasswd = st.nextToken();
+					adminPass = st.nextToken();
 			}
 			else if (tempoption.startsWith("validateTime"))
 			{
@@ -512,21 +512,21 @@ public class npdstracker extends Thread
 					mSharingInfoVector.addElement(theServerInfo);
 				}
 			}
-			else if (tempoption.startsWith("logfile"))
+			else if (tempoption.startsWith("logFile"))
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
 					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
-					logfile = st.nextToken();
+					logFile = st.nextToken();
 			}
-			else if (tempoption.startsWith("shouldIlog"))
+			else if (tempoption.startsWith("logVerbose"))
 			{
 				garbage = st.nextToken();
 				if (!(garbage.equals("=")))
 					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
-					shouldIlog = Boolean.valueOf(st.nextToken()).booleanValue();
+					logVerbose = Boolean.valueOf(st.nextToken()).booleanValue();
 			}
 			else if (tempoption.startsWith("pageTemplate"))
 			{
@@ -978,7 +978,7 @@ public class npdstracker extends Thread
 				logMessage("processing ADMIN command");
 				try {
 					String password = st.nextToken();
-					if (password.equals(adminpasswd))
+					if (password.equals(adminPass))
 						adminConsole(in, out, socket);
 					else
 						throw new TQueryException( " Incorrect admin password" );
@@ -1253,7 +1253,7 @@ public class npdstracker extends Thread
 			}
 			else if (commandline.equals("LOGS"))
 			{
-				if (logfile.equals(""))
+				if (logFile.equals(""))
 				{
 					out.print("Sorry, logs can only be read remotely if they are being written to a file. (They aren’t.)\r\n");
 					out.flush();
@@ -1263,7 +1263,7 @@ public class npdstracker extends Thread
 					out.print("Start your terminal capture feature, then hit enter.\r\n");
 					out.flush();
 					String foo = in.readLine();
-					BufferedReader dumplogs = new BufferedReader (new FileReader(logfile));
+					BufferedReader dumplogs = new BufferedReader (new FileReader(logFile));
 					foo = dumplogs.readLine();
 					while (foo != null)
 					{
@@ -1668,7 +1668,7 @@ public class npdstracker extends Thread
 			outcmdfile.flush();
 			outcmdfile.close();
 		} catch (IOException e) {
-			System.out.println("-> FATAL - can’t write to logfile: " + cmdfile);
+			System.out.println("-> FATAL - can’t write to log file: " + cmdfile);
 		}
 	}
 }
