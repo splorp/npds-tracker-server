@@ -93,6 +93,12 @@ javac npdstracker.java
 ### Configure the server
 
 Edit ```npdstracker.ini``` and change any settings you see fit.
+Please note the following syntax rules when editing the ```npdstracker.ini``` file:
+
++ Do not enclosed values in quotation marks
++ Values can not contain spaces (with the exception of ```shareServer```)
++ Spaces must appear on either side of the equal sign
++ Parameter names are case sensitive
 
 If you keep all of the source files together in the same directory, you will not need to change the defaults for the ```pageTemplate```, ```cssTemplate```, or ```logfile``` path settings.
 
