@@ -2,7 +2,6 @@
 // Developed by Victor Rehorst and Paul Guyot
 // Additional contributions by Morgan Aldridge, Grant Hutchinson, Ron Parker, and Manuel Probsthain
 // Many thanks to Matt Vaughn for developing NPDS in the first place
-// Last Modified: 05 December 2012
 
 import java.io.*;
 import java.net.*;
