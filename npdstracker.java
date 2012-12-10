@@ -1135,22 +1135,7 @@ public class npdstracker extends Thread
 		String templateLine = template.readLine();
 		while (templateLine != null)
 		{
-			// Replace the following pseudo-SGML tags in the HTML template
-			//
-			// <hit-counter/>		->	The number of hits since the tracker was restarted
-			// <http-doc/>			->	What comes after the GET (usually “/”)
-			// <last-validation/>	->	The date and time of the last validation or “Validation is in progress.”
-			// <meta-refresh/>		->	The meta element containing the http-equiv="refresh" value
-			// <servers/>			->	The list of NPDS clients formatted as a table
-			// <server-counter/>	->	The number of registered NPDS clients
-			// <server-shares/>		->	A linked list of SHARE’d trackers formatted as an unordered list
-			// <stylesheet/>		->	The link element containing the stylesheet as specified in npdstracker.ini
-			// <trackerHost/>		->	The URL of the host site or tracker as specified in npdstracker.ini
-			// <trackerName/>		->	The name of the host site or tracker as specified in npdstracker.ini
-			// <url/> 				->	The URL of this tracker, obtained by reading the HTTP header
-			// <validate-time/>		->	The time (in minutes) between validations
-			// <version/>			->	The current version of the tracker software
-			
+			// Replace tags in the HTML template
 			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
 			templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
 			templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
