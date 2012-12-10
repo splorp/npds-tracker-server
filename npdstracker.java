@@ -305,15 +305,15 @@ public class npdstracker extends Thread
 		{
 			Date theDate = new Date();
 			if (logFile.equals(""))
-				System.out.println(theDate.toString() + "-> " + message);
+				System.out.println(theDate.toString() + "   " + message);
 			else
 			{
 				try {
 					FileWriter outlogFile = new FileWriter(logFile, true);
-					outlogFile.write(theDate.toString() + "-> " + message + "\r\n");
+					outlogFile.write(theDate.toString() + "   " + message + "\r\n");
 					outlogFile.flush();
 					outlogFile.close();
-				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can’t write to log file: " + logFile);}
+				} catch (IOException e) {System.out.println(theDate.toString() + "   FATAL - can’t write to log file: " + logFile);}
 			}
 		}
 	}
@@ -932,14 +932,14 @@ public class npdstracker extends Thread
 							THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(index_i);
 							if (!(theInfo.mStatus == -1))
 							{
-								out.print("address: " + theInfo.mName + "\tlast-verified: "
+								out.print("Address: " + theInfo.mName + "\tLast Verified: "
 									+ theInfo.mLastValidation + "\t");
 								String statstring;
 								if (theInfo.mStatus == 0)
 									statstring = "UP";
 								else
 									statstring = "DOWN";
-								out.print("status: " + statstring + "\tdescription: " + theInfo.mDesc + "\r\n");
+								out.print("Status: " + statstring + "\tDescription: " + theInfo.mDesc + "\r\n");
 								out.flush();
 							}
 						}
@@ -1493,7 +1493,7 @@ public class npdstracker extends Thread
 				catch (Exception e) 
 				{
 					// if there was an exception, we assume the server is down
-					logMessage(theInfo.mName + " is down (timeout/connection refused/other exception) " + e);
+					logMessage(theInfo.mName + " is down (timeout / connection refused / other exception) " + e);
 					
 					int index_j;
 					
@@ -1528,7 +1528,7 @@ public class npdstracker extends Thread
 				// (notice: this isn’t a good idea later, we should first check that the other tracker servers
 				// are still running, but as nobody does share, it isn’t really a problem)
 				{
-					logMessage(theInfo.mName + " removed - too many failed connections");
+					logMessage(theInfo.mName + " removed. Too many failed connections.");
 					mHostInfoVector.removeElementAt( foo );
 				}
 			} // for (int foo = theLastIndex; foo >= 0; foo--)
@@ -1565,7 +1565,7 @@ public class npdstracker extends Thread
 					logMessage("Received: " + returncode);
 					if (returncode.startsWith("200 OK"))
 					{
-						logMessage("Return code is good. Parsing records");
+						logMessage("Return code is good. Parsing records.");
 
 						StringTokenizer lines = new StringTokenizer(returncode, "\n");
 						while (lines.hasMoreTokens() == true)
@@ -1574,7 +1574,7 @@ public class npdstracker extends Thread
 							String currenttoken = tabs.nextToken();
 							if (currenttoken.startsWith("no-entries"))
 							{
-								logMessage("remote server has no records");
+								logMessage("Remote server has no records.");
 								break;
 							}
 							else if (currenttoken.startsWith("200 OK"))
@@ -1590,7 +1590,7 @@ public class npdstracker extends Thread
 								String descpair = new String(tabs.nextToken());
 
 								logMessage(
-									"SHARE: " + addresspair
+									"[SHARE] " + addresspair
 									+ " " + timepair
 									+ " " + statuspair
 									+ " " + descpair );
@@ -1607,7 +1607,7 @@ public class npdstracker extends Thread
 						}
 					}
 					else
-						logMessage("Return code is bad - not getting any records from this server");
+						logMessage("Return code is bad. Not getting any records from this server.");
 
 					theSocket.close();
 				} catch (IOException e) {;}
@@ -1638,7 +1638,7 @@ public class npdstracker extends Thread
 					// Don’t save SHARE records
 					if (theInfo.mStatus != -1)
 					{
-						String templine = "REGUP " + theInfo.mHost;
+						String templine = "[REGUP] " + theInfo.mHost;
 						if (theInfo.mPort != 80)
 						{
 							templine = templine + ":" + theInfo.mPort;
@@ -1652,7 +1652,7 @@ public class npdstracker extends Thread
 			outcmdfile.flush();
 			outcmdfile.close();
 		} catch (IOException e) {
-			System.out.println("-> FATAL - can’t write to log file: " + cmdfile);
+			System.out.println("   [FATAL] Can’t write to log file: " + cmdfile);
 		}
 	}
 }
