@@ -286,6 +286,28 @@ Specifies whether other trackers may obtain SHARE’d records from this tracker.
 
 Set to ‘true’ to allow sharing, set to anything else to disallow sharing.
 
+
+#### shareServer
+```sh
+shareServer = misato.chuma.org 3680
+shareServer = www.unna.org 3680
+shareServer = newtzilla.quadzilla.net 3680
+shareServer = newton.tek-ed.com 3680
+```
+Specifies servers to obtain SHARE’d records from.
+
+Each ```shareServer``` entry consists of a tracker hostname or address and a port number. To stop obtaining SHARE’d records from a tracker, comment out or delete the tracker’s ```shareServer``` entry.
+
+
+#### privateHostToAccept
+```sh
+privateHostToAccept =
+```
+Specifies a private hostname or address to register as a client.
+
+Must be a public DNS entry.
+
+
 #### pageTemplate
 ```sh
 pageTemplate = template.html
@@ -302,18 +324,6 @@ cssTemplate = template.css
 Specifies the path and name of the template stylesheet.
 
 Used in conjunction with ```pageTemplate```.
-
-
-#### shareServer
-```sh
-shareServer = misato.chuma.org 3680
-shareServer = www.unna.org 3680
-shareServer = newtzilla.quadzilla.net 3680
-shareServer = newton.tek-ed.com 3680
-```
-Specifies servers to obtain SHARE’d records from.
-
-Each ```shareServer``` entry consists of a tracker hostname or address and a port number. To stop obtaining SHARE’d records from a tracker, comment out or delete the tracker’s ```shareServer``` entry.
 
 
 #### logFile
@@ -336,15 +346,6 @@ Specifies whether messages should be written to the log file.
 If set to ‘false’, the tracker will only create a log entry if it encounters a serious problem.
 
 This parameter was named ```shouldIlog``` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the ```npdstracker.ini``` file.
-
-
-#### privateHostToAccept
-```sh
-privateHostToAccept =
-```
-Specifies a private hostname or address to register as a client.
-
-Must be a public DNS entry.
 
 
 ## Command Line Usage
