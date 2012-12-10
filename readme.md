@@ -223,7 +223,7 @@ Configuration settings for the tracker are located in the ```npdstracker.ini``` 
 
 ### Syntax
 
-The following syntax must be followed when editing the ```npdstracker.ini``` file:
+The following syntax must be followed when editing the configuration settings:
 
 + Setting values cannot be enclosed in quotation marks
 + Setting values cannot contain spaces (with the exception of ```shareServer``` values)
@@ -231,6 +231,8 @@ The following syntax must be followed when editing the ```npdstracker.ini``` fil
 + Setting parameter names are case sensitive
 
 ### Parameters
+
+Configuration setting parameters are shown listed below, along with with their default values. Note that some parameter names have changed in current versions of the tracker and are not backwards compatible.
 
 #### kPort
 ```sh
@@ -247,6 +249,8 @@ trackerName = Default
 ```
 Specifies the name of the site or tracker for use in the HTML template.
 
+Refer to the [Page Template Tag Syntax](#page-template-tag-syntax) section for usage.
+
 
 #### trackerHost
 ```sh
@@ -254,6 +258,7 @@ trackerHost = http://npds.free.fr/
 ```
 Specifies the URL of the site or server host for use in the HTML template.
 
+Refer to the [Page Template Tag Syntax](#page-template-tag-syntax) section for usage.
 
 #### adminPass
 ```sh
@@ -268,14 +273,14 @@ This parameter was named ```adminpasswd``` in NPDS Tracker Server 0.1.36 and ear
 ```sh
 validateTime = 30
 ```
-Specifies how often to validate clients.
+Specifies how often to validate clients in seconds.
 
 
 #### validateTries
 ```sh
 validateTries = 3
 ```
-Specifies how many validation attempts before clients are removed from the list.
+Specifies how many validation attempts will be made before clients are removed from the list.
 
 
 #### shareEnabled
@@ -314,7 +319,7 @@ pageTemplate = template.html
 ```
 Specifies the path and name of the HTML template.
 
-Refer to the [Page Template Tag Syntax](#page-template-tag-syntax) section for tag usage.
+Refer to the [Page Template Tag Syntax](#page-template-tag-syntax) section for usage.
 
 
 #### cssTemplate
@@ -432,7 +437,7 @@ This will display a list of available commands.
 
 ## Page Template Tag Syntax
 
-The HTML template (```template.html```) can be customized using the following pseudo-SGML tags to insert information into the page.
+The [HTML page template](#pagetemplate) can be customized using the following pseudo-SGML tags to insert information into the page.
 
 ```<hit-counter/>``` — The number of hits since the tracker was restarted
 
