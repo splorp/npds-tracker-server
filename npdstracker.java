@@ -313,7 +313,7 @@ public class npdstracker extends Thread
 					outlogFile.write(theDate.toString() + "-> " + message + "\r\n");
 					outlogFile.flush();
 					outlogFile.close();
-				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can’t write to log file: " + logfile);}
+				} catch (IOException e) {System.out.println(theDate.toString() + "-> FATAL - can’t write to log file: " + logFile);}
 			}
 		}
 	}
