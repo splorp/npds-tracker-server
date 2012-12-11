@@ -844,7 +844,7 @@ public class npdstracker extends Thread
 					theInfo.mStatus = 0;
 
 					// Synchronized is not required here because the addElement method is synchronized.
-					mHostInfoVector.addElement( theInfo );
+					mHostInfoVector.addElement(theInfo);
 					
 					ReturnCode(HTTP_OK, "", out);
 
@@ -1602,7 +1602,7 @@ public class npdstracker extends Thread
 								theNewInfo.mStatus = -1;
 								theNewInfo.mDesc = descpair.substring(13);
 								
-								mHostInfoVector.addElement( theNewInfo );
+								mHostInfoVector.addElement(theNewInfo);
 							}
 						}
 					}
