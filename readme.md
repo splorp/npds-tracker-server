@@ -23,7 +23,7 @@ The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/techne
 
 The NPDS Tracker Server uses TCP port 3680, as assigned by [IANA](http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml).
 
-Trackers may also be configured to also listen on port 80 or 8080.
+The tracker can be configured to listen on multiple ports. Refer to the ```kPort``` parameter in the [Settings](#settings) section for more information.
 
 ### A text editor
 
