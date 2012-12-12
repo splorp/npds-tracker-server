@@ -123,7 +123,7 @@ See the [Settings](#settings) section for setting descriptions and syntax.
 
 ### Start the server
 
-Start the server at the command line:
+Start the server from the command line:
 
 ```sh
 java npdstracker
@@ -168,9 +168,9 @@ npdstracker$TServerInfo.class
 npdstracker$TValidator.class
 ```
 
-### Create a .jar file
+### Create the .jar file
 
-Wrap all those ```.class``` files into a single ```.jar``` file at the command line:
+Wrap all those ```.class``` files into a single ```.jar``` file from the command line:
 
 ```sh
 jar cvfm npdstracker.jar manifest.mf *.class
@@ -183,28 +183,28 @@ rm *.class
 ```
 
 
-Install the ```.jar``` file to ```/usr/local/bin``` from at the command line:
+Install the ```.jar``` file to ```/usr/local/bin``` from the command line:
 
 ```sh
 mkdir -p /usr/local/bin
 install npdstracker.jar /usr/local/bin
 ```
 
-Install the ```npdstracker.ini``` and ```npdscmd.txt``` files in ```/etc``` at the command line:
+Install the ```npdstracker.ini``` and ```npdscmd.txt``` files in ```/etc``` from the command line:
 
 ```sh
 mkdir -p /etc/npdstracker
 install npdstracker.ini npdscmd.txt /etc/npdstracker
 ```
 
-Install the ```template.html``` and ```template.css``` files in ```/usr/local/share``` at the command line:
+Install the ```template.html``` and ```template.css``` files in ```/usr/local/share``` from the command line:
 
 ```sh
 mkdir -p /usr/local/share/npdstracker
 install template.html template.css /usr/local/share/npdstracker
 ```
 
-Create the log file at the command line:
+Create the log file from the command line:
 
 ```sh
 touch /var/log/npdstracker.log
@@ -218,7 +218,7 @@ cssTemplate = /usr/local/share/npdstracker/template.css
 logfile = /var/log/npdstracker.log
 ```
 
-You can now manually start the tracker at the command line.
+Start the server from the command line:
 
 ```sh
 java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc/npdstracker/npdstracker.ini
@@ -256,7 +256,7 @@ On Darwin or Mac OS X, you can create a launch daemon to automatically start the
 </plist>
 ```
 
-The launch daemon may be loaded immediately by running the following at the command line, or you can wait until the next boot cycle:
+The launch daemon may be loaded immediately by running the following from the command line, or you can wait until the next boot cycle:
 
 ```sh
 sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
