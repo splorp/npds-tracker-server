@@ -94,6 +94,25 @@ Assuming that Java 1.3 or later has been correctly installed, open a command lin
 javac npdstracker.java
 ```
 
+Depending on your system environment, you may see messages similar to the following. You can safely ignore them.
+
+```sh
+Note: npdstracker.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+```
+
+If compiling was successful, a series of ```.class``` files will now reside in the source directory.
+
+```sh
+npdstracker.class
+npdstracker$TConnection.class
+npdstracker$THostInfo.class
+npdstracker$TQueryException.class
+npdstracker$TServer.class
+npdstracker$TServerInfo.class
+npdstracker$TValidator.class
+```
+
 ### Configure the server
 
 Edit ```npdstracker.ini``` and change the settings specific to your installation.
@@ -127,15 +146,44 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 ## Advanced Set Up
 
-The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker.
+The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker. This involves creating a ```.jar``` (Java Archive) file, removal of the redundant ```.class``` files, and moving support files into their respective directories.
 
-For a cleaner installation, create a Java archive (JAR) file at the command line:
+### Compile the source
+
+Assuming that Java 1.3 or later has been correctly installed, open a command line and compile the server source:
+
+```sh
+javac npdstracker.java
+```
+
+If compiling was successful, a series of ```.class``` files will now reside in the source directory.
+
+```sh
+npdstracker.class
+npdstracker$TConnection.class
+npdstracker$THostInfo.class
+npdstracker$TQueryException.class
+npdstracker$TServer.class
+npdstracker$TServerInfo.class
+npdstracker$TValidator.class
+```
+
+### Create a .jar file
+
+Wrap all those ```.class``` files into a single ```.jar``` file at the command line:
 
 ```sh
 jar cvfm npdstracker.jar manifest.mf *.class
 ```
 
-Install the JAR file to ```/usr/local/bin``` from at the command line:
+After creating the ```.jar```, you can safely delete the now redundant ```.class``` files:
+
+```sh
+rm *.class
+```
+
+
+Install the ```.jar``` file to ```/usr/local/bin``` from at the command line:
 
 ```sh
 mkdir -p /usr/local/bin
