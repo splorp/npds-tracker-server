@@ -23,7 +23,7 @@ The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/techne
 
 The NPDS Tracker Server uses TCP port 3680, as assigned by [IANA](http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml).
 
-The tracker can be configured to listen on multiple ports. Refer to the ```kPort``` parameter in the [Settings](#settings) section for more information.
+The tracker can be configured to listen on multiple ports. See the [Settings](#settings) section for more information.
 
 ### A text editor
 
@@ -146,7 +146,7 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 ## Advanced Set Up
 
-The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker. This involves creating a ```.jar``` (Java Archive) file, removal of the redundant ```.class``` files, and moving support files into their respective directories.
+The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker. This involves creating a ```.jar``` (Java Archive) file, removing the post-compile ```.class``` files, and moving the various support files into their respective (and arguably more appropriate) directories.
 
 ### Compile the source
 
@@ -182,41 +182,49 @@ After creating the ```.jar```, you can safely delete the now redundant ```.class
 rm *.class
 ```
 
+### Put everything in its place
 
 Install the ```.jar``` file to ```/usr/local/bin``` from the command line:
 
 ```sh
-mkdir -p /usr/local/bin
-install npdstracker.jar /usr/local/bin
+[sudo] mkdir -p /usr/local/bin
+[sudo] install npdstracker.jar /usr/local/bin
 ```
 
 Install the ```npdstracker.ini``` and ```npdscmd.txt``` files in ```/etc``` from the command line:
 
 ```sh
-mkdir -p /etc/npdstracker
-install npdstracker.ini npdscmd.txt /etc/npdstracker
+[sudo] mkdir -p /etc/npdstracker
+[sudo] install npdstracker.ini npdscmd.txt /etc/npdstracker
 ```
 
 Install the ```template.html``` and ```template.css``` files in ```/usr/local/share``` from the command line:
 
 ```sh
-mkdir -p /usr/local/share/npdstracker
-install template.html template.css /usr/local/share/npdstracker
+[sudo] mkdir -p /usr/local/share/npdstracker
+[sudo] install template.html template.css /usr/local/share/npdstracker
 ```
 
 Create the log file from the command line:
 
 ```sh
-touch /var/log/npdstracker.log
+[sudo] touch /var/log/npdstracker.log
 ```
 
-Edit ```/etc/npdstracker/npdstracker.ini``` to point to the new paths for all the aforementioned files, especially:
+### Configure the server
+
+Edit ```/etc/npdstracker/npdstracker.ini``` from the command line (or using an external text editor). Change the ```pageTemplate```, ```cssTemplate```, and ```logfile``` paths as per the installation commands.
 
 ```sh
 pageTemplate = /usr/local/share/npdstracker/template.html
 cssTemplate = /usr/local/share/npdstracker/template.css
 logfile = /var/log/npdstracker.log
 ```
+
+See the [Settings](#settings) section for more information on setting parameters and syntax.
+
+
+### Start the server
 
 Start the server from the command line:
 
@@ -226,7 +234,18 @@ java -jar /usr/local/bin/npdstracker.jar -c /etc/npdstracker/npdscmd.txt -o /etc
 
 See [Command Line Usage](#command-line-usage) for further details.
 
-On Darwin or Mac OS X, you can create a launch daemon to automatically start the tracker on boot. Create a ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Configuration](#advanced-configuration).
+Test the connection to the tracker by launching your web browser using the following URL:
+
+```sh
+http://<ip/hostname>:3680/
+```
+
+Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) to point at the tracker, confirming that it registers properly.
+
+
+### Configure a launch daemon
+
+On Darwin or Mac OS X, you can create a launch daemon to automatically launch the tracker on start up. Create a ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Configuration](#advanced-configuration).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
