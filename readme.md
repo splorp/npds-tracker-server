@@ -15,7 +15,7 @@ Looking for support? Join the [NPDS mailing list](http://npds.free.fr/list/).
 
 ### Java 1.3 or later
 
-The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6. It will also work with versions earlier than 1.3, but it is not recommended. See the [Basic Configuration](#basic-configuration) section for more information.
+The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 1.5, and 1.6. It will also work with versions earlier than 1.3, but it is not recommended. See the [Basic Configuration](#basic-set-up) section for more information.
 
 The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
 
@@ -245,7 +245,7 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 ### Configure a launch daemon
 
-On Darwin or Mac OS X, you can create a launch daemon to automatically launch the tracker on start up. Create a ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Configuration](#advanced-configuration).
+On Darwin or Mac OS X, you can create a launch daemon to automatically launch the tracker on start up. Create a ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Configuration](#advanced-set-up).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
