@@ -21,17 +21,15 @@ The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/techne
 
 ### An internet connection
 
-The NPDS Tracker Server uses TCP port 3680, as assigned by [IANA](http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml).
-
-The tracker can be configured to listen on multiple ports. See the [Settings](#settings) section for more information.
+The NPDS Tracker Server listens for clients on TCP port 3680, as assigned by [IANA](http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml). The tracker can also be configured to listen on multiple ports. See the [Settings](#settings) section for more information.
 
 ### A text editor
 
-For editing the various configuration and template files.
+Required to edit the various configuration and template files.
 
 ### A terminal program
 
-For compiling the Java source, installing the compiled .jar file, and configuring the related files and components. A terminal program can also be used to remote administer the NPDS Tracker Server using Telnet. See the [Remote Administration](#remote-administration) section for more information.
+Required to compile the Java source, install the compiled .jar file, and configuring the related files and components. A terminal program can also be used to remote administer the NPDS Tracker Server using Telnet. See the [Remote Administration](#remote-administration) section for more information.
 
 
 ## Files
