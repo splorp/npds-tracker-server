@@ -34,21 +34,21 @@ Required to compile the Java source, install the compiled .jar file, and configu
 
 ## Files
 
-```readme.md``` — You’re soaking in it
+`readme.md` — You’re soaking in it
 
-```npdstracker.java``` — Java source code for the tracker
+`npdstracker.java` — Java source code for the tracker
 
-```npdstracker.ini``` — Settings and configuration for the tracker
+`npdstracker.ini` — Settings and configuration for the tracker
 
-```template.html``` — HTML page template used by the tracker
+`template.html` — HTML page template used by the tracker
 
-```template.css``` — Stylesheet used in conjunction with the HTML template by the tracker
+`template.css` — Stylesheet used in conjunction with the HTML template by the tracker
 
-```npdscmd.txt``` — Initial tracker commands. Registered servers are written to this file upon shutdown
+`npdscmd.txt` — Initial tracker commands. Registered servers are written to this file upon shutdown
 
-```startnpds.sh``` — An example shell script for Unix-like operating systems
+`startnpds.sh` — An example shell script for Unix-like operating systems
 
-```manifest.mf``` — Information specific to the Java source code
+`manifest.mf` — Information specific to the Java source code
 
 
 ## Getting Started
@@ -63,7 +63,7 @@ which java
 
 This command will return the path where Java is installed on your system.
 
-For example: ```/usr/bin/java```
+For example: `/usr/bin/java`
 
 If a path is not displayed after running this command, then Java is not currently installed on your system. You will need to download and install the [Java SE](http://www.oracle.com/technetwork/java/javase/) software before proceeding.
 
@@ -75,11 +75,11 @@ java -version
 
 This command will return information about the current Java installation, including the version number and related software details.
 
-For example: ```java version "1.6.0_30"```
+For example: `java version "1.6.0_30"`
 
 ### Grab the source
 
-Download the [latest version](https://github.com/splorp/npds-tracker-server/archive/master.zip) of the NPDS Tracker Server source. Decompress the archive and move the files to a logical location on your system.
+Download the [latest version](https://github.com/splorp/npds-tracker-server/archive/master.zip) of the NPDS Tracker Server source. Decompress the archive and move the entire directory to an appropriate location on your system. Technically, you can install and run the tracker software anywhere on your system (providing you have adequate file permissions), with all of the components residing in the same directory. The [Basic Set Up](#basic-set-up) section describes this type of installation.
 
 
 ## Basic Set Up
@@ -99,7 +99,7 @@ Note: npdstracker.java uses unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 ```
 
-If compiling was successful, a series of ```.class``` files will now reside in the source directory.
+If compiling was successful, a series of `.class` files will now reside in the source directory.
 
 ```sh
 npdstracker.class
@@ -113,9 +113,9 @@ npdstracker$TValidator.class
 
 ### Configure the server
 
-Edit ```npdstracker.ini``` and change the settings specific to your installation.
+Edit `npdstracker.ini` and change the settings specific to your installation.
 
-If all of the source files remain in the same directory, you will not need to change the defaults for the ```pageTemplate```, ```cssTemplate```, or ```logfile``` path settings.
+If all of the source files remain in the same directory, you will not need to change the defaults for the `pageTemplate`, `cssTemplate`, or `logfile` path settings.
 
 See the [Settings](#settings) section for setting descriptions and syntax.
 
@@ -127,7 +127,7 @@ Start the server from the command line:
 java npdstracker
 ```
 
-For Java 1.1 and 1.2 installations, the ```-Dsun.net.inetaddr.ttl=0``` parameter must be added to the command line. This additional parameter compensates for DNS caching bugs that exist in these versions of the Java runtime.
+For Java 1.1 and 1.2 installations, the `-Dsun.net.inetaddr.ttl=0` parameter must be added to the command line. This additional parameter compensates for DNS caching bugs that exist in these versions of the Java runtime.
 
 ```sh
 java -Dsun.net.inetaddr.ttl=0 npdstracker
@@ -144,7 +144,7 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 ## Advanced Set Up
 
-The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker. This involves creating a ```.jar``` (Java Archive) file, removing the post-compile ```.class``` files, and moving the various support files into their respective (and arguably more appropriate) directories.
+The basic set up is great for development, testing, and Windows deployment. However, for those running Linux or Mac OS X, it may be preferable to install a tidier and more permanent version of the tracker. This involves creating a `.jar` (Java Archive) file, removing the post-compile `.class` files, and moving the various support files into their respective (and arguably more appropriate) directories.
 
 ### Compile the source
 
@@ -154,7 +154,7 @@ Assuming that Java 1.3 or later has been correctly installed, open a command lin
 javac npdstracker.java
 ```
 
-If compiling was successful, a series of ```.class``` files will now reside in the source directory.
+If compiling was successful, a series of `.class` files will now reside in the source directory.
 
 ```sh
 npdstracker.class
@@ -168,13 +168,13 @@ npdstracker$TValidator.class
 
 ### Create the .jar file
 
-Wrap all those ```.class``` files into a single ```.jar``` file from the command line:
+Wrap all those `.class` files into a single `.jar` file from the command line:
 
 ```sh
 jar cvfm npdstracker.jar manifest.mf *.class
 ```
 
-After creating the ```.jar```, you can safely delete the now redundant ```.class``` files:
+After creating the `.jar`, you can safely delete the now redundant `.class` files:
 
 ```sh
 rm *.class
@@ -182,21 +182,21 @@ rm *.class
 
 ### Put everything in its place
 
-Install the ```.jar``` file to ```/usr/local/bin``` from the command line:
+Install the `.jar` file to `/usr/local/bin` from the command line:
 
 ```sh
 [sudo] mkdir -p /usr/local/bin
 [sudo] install npdstracker.jar /usr/local/bin
 ```
 
-Install the ```npdstracker.ini``` and ```npdscmd.txt``` files in ```/etc``` from the command line:
+Install the `npdstracker.ini` and `npdscmd.txt` files in `/etc` from the command line:
 
 ```sh
 [sudo] mkdir -p /etc/npdstracker
 [sudo] install npdstracker.ini npdscmd.txt /etc/npdstracker
 ```
 
-Install the ```template.html``` and ```template.css``` files in ```/usr/local/share``` from the command line:
+Install the `template.html` and `template.css` files in `/usr/local/share` from the command line:
 
 ```sh
 [sudo] mkdir -p /usr/local/share/npdstracker
@@ -211,7 +211,7 @@ Create the log file from the command line:
 
 ### Configure the server
 
-Edit ```/etc/npdstracker/npdstracker.ini``` from the command line (or using an external text editor). Change the ```pageTemplate```, ```cssTemplate```, and ```logfile``` paths as per the installation commands.
+Edit `/etc/npdstracker/npdstracker.ini` from the command line (or using an external text editor). Change the `pageTemplate`, `cssTemplate`, and `logfile` paths as per the installation commands.
 
 ```sh
 pageTemplate = /usr/local/share/npdstracker/template.html
@@ -243,7 +243,7 @@ Configure an [NPDS Tracker Client](http://npds.free.fr/modules/#trackerclient) t
 
 ### Configure a launch daemon
 
-On Darwin or Mac OS X, you can create a launch daemon to automatically launch the tracker on start up. Create a ```/Library/LaunchDaemons/fr.free.npds.npdstracker.plist``` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Set Up](#advanced-set-up).
+On Darwin or Mac OS X, you can create a launch daemon to automatically launch the tracker on start up. Create a `/Library/LaunchDaemons/fr.free.npds.npdstracker.plist` file and paste in the following XML. This assumes that you have followed the steps for [Advanced Set Up](#advanced-set-up).
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -279,19 +279,19 @@ The launch daemon may be loaded immediately by running the following from the co
 sudo launchctl load /Library/LaunchDaemons/fr.free.npds.npdstracker.plist
 ```
 
-On Linux or BSD systems, you can create ```init.d``` or ```rc.d``` scripts, respectively, to automatically start the tracker on boot.
+On Linux or BSD systems, you can create `init.d` or `rc.d` scripts, respectively, to automatically start the tracker on boot.
 
 
 ## Settings
 
-Configuration settings for the tracker are located in the ```npdstracker.ini``` file.
+Configuration settings for the tracker are located in the `npdstracker.ini` file.
 
 ### Syntax
 
 The following syntax must be followed when editing the configuration settings:
 
 + Setting values cannot be enclosed in quotation marks
-+ Setting values cannot contain spaces (with the exception of ```shareServer``` values)
++ Setting values cannot contain spaces (with the exception of `shareServer` values)
 + Spaces must appear on either side of the equal sign
 + Setting parameter names are case sensitive
 
@@ -335,7 +335,7 @@ adminPass = qwerty
 
 Specifies the password for the remote administration interface.
 
-This parameter was named ```adminpasswd``` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the ```npdstracker.ini``` file.
+This parameter was named `adminpasswd` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the `npdstracker.ini` file.
 
 
 #### validateTime
@@ -374,7 +374,7 @@ shareServer = newton.tek-ed.com 3680
 
 Specifies servers to obtain SHARE’d records from.
 
-Each ```shareServer``` entry consists of a tracker hostname or address and a port number. To stop obtaining SHARE’d records from a tracker, comment out or delete the tracker’s ```shareServer``` entry.
+Each `shareServer` entry consists of a tracker hostname or address and a port number. To stop obtaining SHARE’d records from a tracker, comment out or delete the tracker’s `shareServer` entry.
 
 
 #### privateHostToAccept
@@ -404,7 +404,7 @@ cssTemplate = template.css
 
 Specifies the path and name of the template stylesheet.
 
-Used in conjunction with ```pageTemplate```.
+Used in conjunction with `pageTemplate`.
 
 
 #### logFile
@@ -414,9 +414,9 @@ logFile = npdstracker.log
 
 Specifies the path and name of the log file.
 
-Log entries generated by the tracker are rather verbose and the log file can grow quite large over time. You can turn off logging altogether (redirecting to stdout) by commenting out the ```logFile``` setting once you are sure that the server is configured properly.
+Log entries generated by the tracker are rather verbose and the log file can grow quite large over time. You can turn off logging altogether (redirecting to stdout) by commenting out the `logFile` setting once you are sure that the server is configured properly.
 
-This parameter was named ```logfile``` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the ```npdstracker.ini``` file.
+This parameter was named `logfile` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the `npdstracker.ini` file.
 
 
 #### logVerbose
@@ -428,7 +428,7 @@ Specifies whether messages should be written to the log file.
 
 If set to ‘false’, the tracker will only create a log entry if it encounters a serious problem.
 
-This parameter was named ```shouldIlog``` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the ```npdstracker.ini``` file.
+This parameter was named `shouldIlog` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the `npdstracker.ini` file.
 
 
 ## Command Line Usage
@@ -437,11 +437,11 @@ This parameter was named ```shouldIlog``` in NPDS Tracker Server 0.1.36 and earl
 java npdstracker [-h] [-c <cmdfile>] [-o <optionsfile>]
 ```
 
-```-h``` — Display help
+`-h` — Display help
 
-```-c <cmdfile>```  — Specifies the path of the ```npdscmd.txt``` file containing any commands to run at startup (defaults to none)
+`-c <cmdfile>`  — Specifies the path of the `npdscmd.txt` file containing any commands to run at startup (defaults to none)
 
-```-o <optionsfile>``` — Specifies the path of the ```npdstracker.ini``` file containing configuration and option settings (defaults to settings at compile time)
+`-o <optionsfile>` — Specifies the path of the `npdstracker.ini` file containing configuration and option settings (defaults to settings at compile time)
 
 
 ## Remote Administration
@@ -452,7 +452,7 @@ To access the remote administration interface, you’ll need the following:
 + The hostname and port of the tracker you wish to administer
 + The password of the tracker you wish to administer
 
-Any changes made using the administration interface are applied immediately to the tracker, but are not saved to the ```npdstracker.ini``` file. Changes are lost once the tracker is restarted.
+Any changes made using the administration interface are applied immediately to the tracker, but are not saved to the `npdstracker.ini` file. Changes are lost once the tracker is restarted.
 
 ### Connection
 
@@ -492,56 +492,56 @@ This will display a list of available commands.
 
 ### Commands
 
-```ABOUT``` — Display the current tracker settings
+`ABOUT` — Display the current tracker settings
 
-```HALT``` — Stop the tracker (with confirmation)
+`HALT` — Stop the tracker (with confirmation)
 
-```HELP``` — Displays this list of commands
+`HELP` — Displays this list of commands
 
-```LOGS``` — Dumps the tracker log
+`LOGS` — Dumps the tracker log
 
-```SHARE``` — Change the tracker share settings
+`SHARE` — Change the tracker share settings
 
-```SLIST``` — View or modify the list of trackers to obtain shared records from
+`SLIST` — View or modify the list of trackers to obtain shared records from
 
-```VTEST``` — Trigger a tracker validation
+`VTEST` — Trigger a tracker validation
 
-```STATS``` — Display the tracker statistics (describe)
+`STATS` — Display the tracker statistics (describe)
 
-```VERIFY``` — Change the tracker verification settings
+`VERIFY` — Change the tracker verification settings
 
-```QUIT``` — Exit the administration interface and close the connection
+`QUIT` — Exit the administration interface and close the connection
 
 
 ## Page Template Tag Syntax
 
 The [HTML page template](#pagetemplate) can be customized using the following pseudo-SGML tags to insert information into the page.
 
-```<hit-counter/>``` — The number of hits since the tracker was restarted
+`<hit-counter/>` — The number of hits since the tracker was restarted
 
-```<http-doc/>``` — What comes after the GET (usually “/”)
+`<http-doc/>` — What comes after the GET (usually “/”)
 
-```<last-validation/>``` — The date and time of the last validation or “Validation is in progress.”
+`<last-validation/>` — The date and time of the last validation or “Validation is in progress.”
 
-```<meta-refresh/>``` — The meta element containing the http-equiv="refresh" value
+`<meta-refresh/>` — The meta element containing the http-equiv="refresh" value
 
-```<servers/>``` — The list of registered NPDS clients formatted as a table
+`<servers/>` — The list of registered NPDS clients formatted as a table
 
-```<server-counter/>``` — The number of registered NPDS clients
+`<server-counter/>` — The number of registered NPDS clients
 
-```<server-shares/>``` — A linked list of SHARE’d trackers formatted as an unordered list
+`<server-shares/>` — A linked list of SHARE’d trackers formatted as an unordered list
 
-```<stylesheet/>``` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
+`<stylesheet/>` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
 
-```<trackerHost/>``` — The URL of the host site or tracker as specified in npdstracker.ini
+`<trackerHost/>` — The URL of the host site or tracker as specified in npdstracker.ini
 
-```<trackerName/>``` — The name of the host site or tracker as specified in npdstracker.ini
+`<trackerName/>` — The name of the host site or tracker as specified in npdstracker.ini
 
-```<url/>``` — The URL of this tracker, obtained by reading the HTTP header
+`<url/>` — The URL of this tracker, obtained by reading the HTTP header
 
-```<validate-time/>``` — The time (in minutes) between validations
+`<validate-time/>` — The time (in minutes) between validations
 
-```<version/>``` — The current version of the tracker software
+`<version/>` — The current version of the tracker software
 
 
 
@@ -555,16 +555,16 @@ Coming soon.
 
 ### 0.1.37 — TBD
 
-+ [RP] New ```<server-shares/>``` template tag inserts a list of shared trackers
++ [RP] New `<server-shares/>` template tag inserts a list of shared trackers
 + [GH] Added command line usage information
 + [GH] Added remote administration documentation
 + [GH] Added getting started documentation
 + [GH] Added configuration settings documentation
-+ [GH] Removed a bunch of configuration comments from the ```npdstracker.ini``` file for cleanliness
++ [GH] Removed a bunch of configuration comments from the `npdstracker.ini` file for cleanliness
 + [GH] Reinstated classes on unordered lists so they can be styled independently
-+ [GH] Wrapped link lists in ```<nav>``` elements
++ [GH] Wrapped link lists in `<nav>` elements
 + [GH] Renamed several configuration parameters
-+ [GH] Previous ```npdstracker.ini``` files are no longer compatible with this version of the tracker
++ [GH] Previous `npdstracker.ini` files are no longer compatible with this version of the tracker
 
 ### 0.1.36 — 28 August 2012
 
@@ -572,7 +572,7 @@ Coming soon.
 + [MA] Updated HTTP GET processing to support rendering the HTML status page
 + [MA] Fixed stylesheet configuration and template insertion
 + [RP] Added host name and link to the header and page title
-+ [MA] Removed rogue slash in ```npdstracker.java```
++ [MA] Removed rogue slash in `npdstracker.java`
 + [MA] Added manifest file
 + [MA] Added advanced set up documentation
 + [GH] Added Java compatibility documentation
@@ -592,12 +592,12 @@ Coming soon.
 
 ### 0.1.34 — 06 April 2006
 
-+ [VR] Added ```shouldIlog``` setting in INI file to disable all logging
++ [VR] Added `shouldIlog` setting in INI file to disable all logging
 
 ### 0.1.33 — 22 February 2004
 
 + [MP] Added SSI tag for displaying the number of registered clients in the template
-+ [MP] Made the ```<meta-refresh/>``` SSI XHTML-compatible
++ [MP] Made the `<meta-refresh/>` SSI XHTML-compatible
 + [MP] Changed the default port number to 3680
 + [MP] Refined the listing table elements for extensive use of CSS
 + [MP] Added code to allow one hostname with a private IP to register
@@ -605,7 +605,7 @@ Coming soon.
 ### 0.1.32 — 02 May 2003
 
 + [VR] Makes sure that the hostname isn’t empty on a REGUP command
-+ [VR] Changed ```kRTFMStr``` to reflect new NPDS website address
++ [VR] Changed `kRTFMStr` to reflect new NPDS website address
 	
 ### 0.1.31 — 30 July 2002
 
@@ -628,7 +628,7 @@ Coming soon.
 ### 0.1.28 — 29 November 2001
 
 + [PG] No longer dumps the shared trackers to npdscmd.txt
-+ [PG] Fixed the ```shareEnabled``` .ini read process (```getBoolean``` is not what we want, it’s ```valueOf```)
++ [PG] Fixed the `shareEnabled` .ini read process (`getBoolean` is not what we want, it’s `valueOf`)
 
 ### 0.1.27 — 20 October 2001
 
@@ -636,11 +636,11 @@ Coming soon.
 
 ### 0.1.26 — 18 August 2001
 
-+ [PG] Fixed the ```java.lang.ArrayIndexOutOfBoundsException``` bug introduced in version 0.1.24
++ [PG] Fixed the `java.lang.ArrayIndexOutOfBoundsException` bug introduced in version 0.1.24
 
 ### 0.1.25 — 06 June 2001
 
-+ [PG] Fixed the ```java.lang.IllegalArgumentException: timeout value is negative``` bug (well, I think)
++ [PG] Fixed the `java.lang.IllegalArgumentException: timeout value is negative` bug (well, I think)
 
 ### 0.1.24
 
@@ -651,12 +651,12 @@ Coming soon.
 
 ### 0.1.23
 
-+ [VR] No actual code changes, but to workaround a bug in JDK < 1.1 you must use Java 1.2 or better and set the ```sun.net.inetaddr.ttl``` property to 0 on the command line, like this: ```java -Dsun.net.inetaddr.ttl=0 npdstracker```
++ [VR] No actual code changes, but to workaround a bug in JDK < 1.1 you must use Java 1.2 or better and set the `sun.net.inetaddr.ttl` property to 0 on the command line, like this: `java -Dsun.net.inetaddr.ttl=0 npdstracker`
 
 ### 0.1.22
 
 + [PG] Implemented the template stuff
-+ [PG] Reorganized the ```ProcessQuery``` method
++ [PG] Reorganized the `ProcessQuery` method
 + [PG] There is now a single class with embedded sub classes (so we’ll have a single .java binary)
 + [PG] Improved answer to the GET request (with many headers now)
 
@@ -672,24 +672,24 @@ Coming soon.
 
 ### 0.1.19
 
-+ [VR] Will now read ```optionsfile``` and ```cmdfile``` from default location
++ [VR] Will now read `optionsfile` and `cmdfile` from default location
 + [VR] Fixed up options file parsing
-+ [VR] HTML now easily customizable using ```npdstracker.ini```, ```header.html```, ```footer.html```
++ [VR] HTML now easily customizable using `npdstracker.ini`, `header.html`, `footer.html`
 
 ### 0.1.18
 
 + [VR] Minor admin console fixes
-+ [VR] Implemented command-line arguments for ```logfile```, ```cmdfile```, ```optionsfile```
++ [VR] Implemented command-line arguments for `logfile`, `cmdfile`, `optionsfile`
 + [VR] Now can specify files to log to, read options from, or read initial commands from
 + [VR] Finally implemented LOGS command in admin console
 + [VR] Code and syntax cleanups
-+ [PG] Use ```SimpleDateFormat``` in the ```ReturnRFCTime``` function. (this also fixes the GMT bug)
++ [PG] Use `SimpleDateFormat` in the `ReturnRFCTime` function. (this also fixes the GMT bug)
 + [PG] Fixed a little HTML bug
 
 ### 0.1.17
 
 + [VR] VTEST command added to the admin console
-+ [VR] SHARE command is now actually sent (forgot to flush ```PrintWriter```)
++ [VR] SHARE command is now actually sent (forgot to flush `PrintWriter`)
 + [VR] Changed return code of SHARE command if sharing is disabled
 
 ### 0.1.16
@@ -762,7 +762,7 @@ Coming soon.
 + [VR] Fixed GET method so it returns DTD HTML 2.0 compliant pages
 + [VR] Rewrote internal storage of records for extensibility
 + [VR] Now we store time client last checked and its status
-+ [VR] Implemented ```QueryMethod``` function for finding a record when we do a REGDN (could also use this method for an possible SRCH command later)
++ [VR] Implemented `QueryMethod` function for finding a record when we do a REGDN (could also use this method for an possible SRCH command later)
 
 ### 0.0.2
 
