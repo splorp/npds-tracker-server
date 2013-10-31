@@ -553,7 +553,7 @@ Coming soon.
 
 ## Version History
 
-### 0.1.37 — TBD
+### 0.1.37 — 18 December 2012
 
 + [RP] New `<server-shares/>` template tag inserts a list of shared trackers
 + [GH] Added command line usage information
