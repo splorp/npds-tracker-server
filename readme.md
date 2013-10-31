@@ -537,9 +537,9 @@ The [HTML page template](#pagetemplate) can be customized using the following ps
 
 `<stylesheet/>` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
 
-`<trackerHost/>` — The URL of the host site or tracker as specified in npdstracker.ini
+`<tracker-host/>` — The URL of the host site or tracker as specified in npdstracker.ini
 
-`<trackerName/>` — The name of the host site or tracker as specified in npdstracker.ini
+`<tracker-name/>` — The name of the host site or tracker as specified in npdstracker.ini
 
 `<url/>` — The URL of this tracker, obtained by reading the HTTP header
 

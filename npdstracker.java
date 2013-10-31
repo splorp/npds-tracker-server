@@ -1158,8 +1158,8 @@ public class npdstracker extends Thread
 			templateLine = StrReplace( templateLine, "<server-shares/>", serverSharesStr );
 			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
 			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
-			templateLine = StrReplace( templateLine, "<trackerHost/>", hostLink);
-			templateLine = StrReplace( templateLine, "<trackerName/>", hostName);
+			templateLine = StrReplace( templateLine, "<tracker-host/>", hostLink);
+			templateLine = StrReplace( templateLine, "<tracker-name/>", hostName);
 			templateLine = StrReplace( templateLine, "<url/>", urlStr );
 			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
 			templateLine = StrReplace( templateLine, "<version/>", versionStr );
