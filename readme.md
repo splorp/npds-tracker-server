@@ -182,7 +182,7 @@ rm *.class
 
 ### Put everything in its place
 
-Install the `.jar` file to `/usr/local/bin` from the command line:
+Install the `.jar` file in `/usr/local/bin` from the command line:
 
 ```sh
 [sudo] mkdir -p /usr/local/bin
@@ -560,7 +560,7 @@ Coming soon.
 + [GH] Added remote administration documentation
 + [GH] Added getting started documentation
 + [GH] Added configuration settings documentation
-+ [GH] Removed a bunch of configuration comments from the `npdstracker.ini` file for cleanliness
++ [GH] Removed redundant configuration comments from the `npdstracker.ini` file
 + [GH] Reinstated classes on unordered lists so they can be styled independently
 + [GH] Wrapped link lists in `<nav>` elements
 + [GH] Renamed several configuration parameters
