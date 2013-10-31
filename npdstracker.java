@@ -1084,7 +1084,7 @@ public class npdstracker extends Thread
 		} // synchronized (mHostInfoVector)
 		if (index_i == 0)
 		{
-			tableStr += "<tr>\r\n<td colspan=\"3\"><em>No devices are registered with this tracker server.</em></td>\r\n</tr>\r\n";
+			tableStr += "<tr>\r\n<td colspan=\"3\"><em>No devices registered.</em></td>\r\n</tr>\r\n";
 		}
 		tableStr += "</table>\r\n";	
 

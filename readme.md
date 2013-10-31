@@ -517,7 +517,7 @@ This will display a list of available commands.
 
 The [HTML page template](#pagetemplate) can be customized using the following pseudo-SGML tags to insert information into the page.
 
-`<hit-counter/>` — The number of hits since the tracker was restarted
+`<hit-counter/>` — The number of page views since the tracker was restarted
 
 `<http-doc/>` — What comes after the GET (usually “/”)
 
@@ -658,7 +658,7 @@ Coming soon.
 
 ### 0.1.23
 
-+ [VR] No actual code changes, but to workaround a bug in JDK < 1.1 you must use Java 1.2 or better and set the `sun.net.inetaddr.ttl` property to 0 on the command line, like this: `java -Dsun.net.inetaddr.ttl=0 npdstracker`
++ [VR] No actual code changes, but documented workaround for the JDK 1.1 bug
 
 ### 0.1.22
 
