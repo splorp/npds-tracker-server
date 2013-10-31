@@ -529,6 +529,10 @@ The [HTML page template](#pagetemplate) can be customized using the following ps
 
 `<server-counter/>` — The number of registered NPDS clients
 
+`<server-noun/>` — Singular or plural noun based on number of registered NPDS clients (“server” vs “servers”)
+
+`<server-verb/>` — Singular or plural verb based on number of registered NPDS clients (“is” vs “are”)
+
 `<server-shares/>` — A linked list of SHARE’d trackers formatted as an unordered list
 
 `<stylesheet/>` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
@@ -552,6 +556,9 @@ Coming soon.
 
 
 ## Version History
+
+### 0.1.38 — TBD
++ [GH] New `<server-noun/>` and `<server-verb/>` template tags because grammar
 
 ### 0.1.37 — 18 December 2012
 

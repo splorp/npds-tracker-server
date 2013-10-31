@@ -1118,6 +1118,18 @@ public class npdstracker extends Thread
 		// Define count of servers as string
 		String serverCounterStr = Integer.toString( mHostInfoVector.size() );
 
+		// Define contextual nouns and verbs as strings
+		String serverNounStr;
+		String serverVerbStr;
+		if (serverCounterStr.equals("1"))
+		{
+			serverNounStr = "server";
+			serverVerbStr = "is";
+		} else {
+			serverNounStr = "servers";
+			serverVerbStr = "are";
+		}		
+
 		// Define SHARE server list as hyperlinks
 		String serverSharesStr;
 		serverSharesStr = "<ul class=\"servers\">\r\n";
@@ -1141,6 +1153,8 @@ public class npdstracker extends Thread
 			templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
 			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
 			templateLine = StrReplace( templateLine, "<server-counter/>", serverCounterStr );
+			templateLine = StrReplace( templateLine, "<server-noun/>", serverNounStr );
+			templateLine = StrReplace( templateLine, "<server-verb/>", serverVerbStr );
 			templateLine = StrReplace( templateLine, "<server-shares/>", serverSharesStr );
 			templateLine = StrReplace( templateLine, "<servers/>", tableStr );
 			templateLine = StrReplace( templateLine, "<stylesheet/>", stylesheetStr );
