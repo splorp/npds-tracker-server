@@ -1121,6 +1121,9 @@ public class npdstracker extends Thread
 		// Define contextual nouns and verbs as strings
 		String serverNounStr;
 		String serverVerbStr;
+		String hitCounterNounStr;
+		String validateTimeNounStr;
+
 		if (serverCounterStr.equals("1"))
 		{
 			serverNounStr = "server";
@@ -1129,6 +1132,24 @@ public class npdstracker extends Thread
 			serverNounStr = "servers";
 			serverVerbStr = "are";
 		}		
+
+		if (hitCounterStr.equals("1"))
+		{
+			hitCounterNounStr = "time";
+		} else {
+			hitCounterNounStr = "times";
+		}		
+
+		if (validateTimeStr.equals("1"))
+		{
+			validateTimeNounStr = "minute";
+		} else {
+			validateTimeNounStr = "minutes";
+		}		
+		// Contextual modification of string for template display
+		{
+			validateTimeStr = "";
+		}
 
 		// Define SHARE server list as hyperlinks
 		String serverSharesStr;
@@ -1149,6 +1170,7 @@ public class npdstracker extends Thread
 		{
 			// Replace tags in the HTML template
 			templateLine = StrReplace( templateLine, "<hit-counter/>", hitCounterStr );
+			templateLine = StrReplace( templateLine, "<hit-counter-noun/>", hitCounterNounStr );
 			templateLine = StrReplace( templateLine, "<http-doc/>", HTTPDocStr );
 			templateLine = StrReplace( templateLine, "<last-validation/>", lastValidationStr );
 			templateLine = StrReplace( templateLine, "<meta-refresh/>", metaRefreshStr );
@@ -1162,6 +1184,7 @@ public class npdstracker extends Thread
 			templateLine = StrReplace( templateLine, "<tracker-name/>", hostName);
 			templateLine = StrReplace( templateLine, "<url/>", urlStr );
 			templateLine = StrReplace( templateLine, "<validate-time/>", validateTimeStr );
+			templateLine = StrReplace( templateLine, "<validate-time-noun/>", validateTimeNounStr );
 			templateLine = StrReplace( templateLine, "<version/>", versionStr );
 
 			out.print(templateLine + "\r\n");

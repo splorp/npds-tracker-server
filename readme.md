@@ -519,6 +519,8 @@ The [HTML page template](#pagetemplate) can be customized using the following ps
 
 `<hit-counter/>` — The number of page views since the tracker was restarted
 
+`<hit-counter-noun/>` — Singular or plural noun based on the page views (“time” vs “times”)
+
 `<http-doc/>` — What comes after the GET (usually “/”)
 
 `<last-validation/>` — The date and time of the last validation or “Validation is in progress.”
@@ -544,6 +546,8 @@ The [HTML page template](#pagetemplate) can be customized using the following ps
 `<url/>` — The URL of this tracker, obtained by reading the HTTP header
 
 `<validate-time/>` — The time (in minutes) between validations
+
+`<validate-time-noun/>` — Singular or plural noun based on the time period (“minute” vs “minutes”)
 
 `<version/>` — The current version of the tracker software
 
