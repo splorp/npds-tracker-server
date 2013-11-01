@@ -531,9 +531,9 @@ The [HTML page template](#pagetemplate) can be customized using the following ps
 
 `<server-counter/>` — The number of registered NPDS clients
 
-`<server-noun/>` — Singular or plural noun based on number of registered NPDS clients (“server” vs “servers”)
+`<server-noun/>` — Singular or plural noun based on number of clients (“server” vs “servers”)
 
-`<server-verb/>` — Singular or plural verb based on number of registered NPDS clients (“is” vs “are”)
+`<server-verb/>` — Singular or plural verb based on number of clients (“is” vs “are”)
 
 `<server-shares/>` — A linked list of SHARE’d trackers formatted as an unordered list
 

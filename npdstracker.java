@@ -1117,6 +1117,12 @@ public class npdstracker extends Thread
 
 		// Define count of servers as string
 		String serverCounterStr = Integer.toString( mHostInfoVector.size() );
+		
+		// Contextual modification of string for template display
+		if (serverCounterStr.equals("0"))
+		{
+			serverCounterStr = "no";
+		}
 
 		// Define contextual nouns and verbs as strings
 		String serverNounStr;
@@ -1126,10 +1132,10 @@ public class npdstracker extends Thread
 
 		if (serverCounterStr.equals("1"))
 		{
-			serverNounStr = "server";
+			serverNounStr = "web server";
 			serverVerbStr = "is";
 		} else {
-			serverNounStr = "servers";
+			serverNounStr = "web servers";
 			serverVerbStr = "are";
 		}		
 
@@ -1146,7 +1152,9 @@ public class npdstracker extends Thread
 		} else {
 			validateTimeNounStr = "minutes";
 		}		
+
 		// Contextual modification of string for template display
+		if (validateTimeStr.equals("1"))
 		{
 			validateTimeStr = "";
 		}
