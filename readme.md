@@ -563,6 +563,8 @@ Coming soon.
 
 ### 0.1.38 — TBD
 + [GH] New `<server-noun/>` and `<server-verb/>` template tags because grammar
++ [GH] New `<hit-counter-noun/>` and `<validate-time-noun/>` template tags because grammar
++ [GH] Standardized template tag naming for `<tracker-host/>` and `<tracker-name/>`
 
 ### 0.1.37 — 18 December 2012
 
