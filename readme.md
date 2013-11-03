@@ -297,7 +297,7 @@ The following syntax must be followed when editing the configuration settings:
 
 ### Parameters
 
-Configuration setting parameters are shown listed below, along with with their default values. Note that some parameter names have changed in current versions of the tracker and are not backwards compatible.
+Configuration setting parameters are shown listed below, along with with their default values. Note that some parameter names have changed in current releases of the tracker and are not backwards compatible.
 
 #### kPort
 ```sh
@@ -515,7 +515,7 @@ This will display a list of available commands.
 
 ## Page Template Tag Syntax
 
-The [HTML page template](#pagetemplate) can be customized using the following pseudo-SGML tags to insert information into the page.
+The [HTML page template](#pagetemplate) can be customized using the following pseudo-SGML tags to insert information into the page. Note that some tag names have changed in current releases of the tracker and are not backwards compatible.
 
 `<hit-counter/>` — The number of page views since the tracker was restarted
 
