@@ -95,7 +95,7 @@ public class npdstracker extends Thread
 	private static DateFormat mRFCGMTFormatter;
 	static
 	{
-		mRFCGMTFormatter = new SimpleDateFormat("EEE',' d-MMM-yyyy HH:mm:ss 'GMT'", Locale.US);
+		mRFCGMTFormatter = new SimpleDateFormat("EEEE',' dd-MMMM-yyyy HH:mm:ss 'GMT'", Locale.US);
 		mRFCGMTFormatter.setTimeZone(TimeZone.getTimeZone("Africa/Casablanca"));
 	}
 
