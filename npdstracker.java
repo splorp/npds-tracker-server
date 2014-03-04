@@ -1112,7 +1112,7 @@ public class npdstracker extends Thread
 		{
 			lastValidationStr = "Validation is in progress.";
 		} else {
-			lastValidationStr = "<strong>Last validation:</strong> " + mLastValidation + ".";
+			lastValidationStr = "Last validation: " + mLastValidation;
 		}
 
 		// Define count of servers as string
