@@ -60,3 +60,40 @@ ul li:last-child:after {
 .up-sharing td:first-child {
 	color: #353;
 	}
+
+/*
+	iPad Styles
+*/
+
+@media screen and (max-device-width: 1024px), screen and (max-width: 1024px) {
+
+	body {
+		-webkit-text-size-adjust: 100%;
+		}
+	
+	header,
+	footer,
+	section {
+		width: auto;
+		}
+
+	}
+	
+	
+/*
+	Small Screen Styles
+*/
+
+@media handheld and (max-width: 480px), screen and (max-device-width: 480px), screen and (max-width: 800px) {
+
+	body {
+		-webkit-text-size-adjust: 100%;
+		}
+	
+	header,
+	footer,
+	section {
+		width: auto;
+		}
+			
+	}
