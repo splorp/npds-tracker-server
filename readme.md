@@ -42,13 +42,13 @@ Required to compile the Java source, install the compiled .jar file, and configu
 
 `template.html` — HTML page template used by the tracker
 
-`template.css` — Stylesheet used in conjunction with the HTML template by the tracker
+`template.css` — Stylesheet used in conjunction with the HTML page template
 
 `npdscmd.txt` — Initial tracker commands. Registered servers are written to this file upon shutdown
 
 `startnpds.sh` — An example shell script for Unix-like operating systems
 
-`manifest.mf` — Information specific to the Java source code
+`manifest.mf` — Information specific to the creation of the `.jar` file
 
 
 ## Getting Started
@@ -63,7 +63,11 @@ which java
 
 This command will return the path where Java is installed on your system.
 
-For example: `/usr/bin/java`
+For example:
+
+```sh
+/usr/bin/java`
+```
 
 If a path is not displayed after running this command, then Java is not currently installed on your system. You will need to download and install the [Java SE](http://www.oracle.com/technetwork/java/javase/) software before proceeding.
 
@@ -75,7 +79,11 @@ java -version
 
 This command will return information about the current Java installation, including the version number and related software details.
 
-For example: `java version "1.6.0_30"`
+For example:
+
+```sh
+java version "1.6.0_30"`
+```
 
 ### Grab the source
 
@@ -565,6 +573,7 @@ Coming soon.
 + [GH] New `<server-noun/>` and `<server-verb/>` template tags because grammar
 + [GH] New `<hit-counter-noun/>` and `<validate-time-noun/>` template tags because grammar
 + [GH] Standardized template tag naming for `<tracker-host/>` and `<tracker-name/>`
++ [GH] Changed date formatting to use full day and month names
 
 ### 0.1.37 — 18 December 2012
 
