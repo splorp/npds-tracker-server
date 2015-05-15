@@ -3,12 +3,21 @@
 // Additional contributions by Morgan Aldridge, Grant Hutchinson, Ron Parker, and Manuel Probsthain
 // Many thanks to Matt Vaughn for developing NPDS in the first place
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.text.*;
 
-public class npdstracker extends Thread
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
+
+
+public class npdstracker
 {
 	//////////////////////////////////////////////////////////////////////////////
 	//	VARIABLES AND CONSTANTS
@@ -20,9 +29,9 @@ public class npdstracker extends Thread
 	public static final String serverdesc = "NPDS Tracker Server for Java";
 	public static final int majorversion = 0;
 	public static final int minorversion = 1;
-	public static final int build = 38;
+	public static final int build = 39;
 	public static final int protocolversion = 1;
-	public static final String versionStr = majorversion + "." + minorversion + "." + build;
+	public static final String versionStr = majorversion + "." + minorversion + "." + build + " beta";
 	public static final String kServerStr = "Victor Rehorst’s NPDS Tracker Server " + versionStr;
 	public static final String kUserAgentStr = "Mozilla/5.0 (compatible; " + kServerStr + "; Java)";
 
@@ -62,7 +71,7 @@ public class npdstracker extends Thread
 	public static int validateTries = 3;
 	public static boolean shareEnabled = true;
 	public static String adminPass = "qwerty";
-	public static Vector kPort;
+	public static Vector<Integer> kPort;
 	public static String logFile = "";
 	public static boolean logVerbose = true;
 	public static String templateFile = "";
@@ -75,9 +84,9 @@ public class npdstracker extends Thread
 
 	// Runtime variables: these are the data structures and other values used by the server while it is running
 	// I put all Newton info in a single Vector because I have a semaphore for accessing it and it is easier like this.
-	public static Vector mHostInfoVector = new Vector();
+	public static Vector<THostInfo> mHostInfoVector = new Vector<THostInfo>();
 	// Identically, I put all server info in a single Vector.
-	public static Vector mSharingInfoVector = new Vector();
+	public static Vector<TServerInfo> mSharingInfoVector = new Vector<TServerInfo>();
 	public static int hitcounter = 0;
 	public static int regcounter = 0;
 	// Non 0 if a validation is in progress, 0 otherwise.
@@ -90,8 +99,10 @@ public class npdstracker extends Thread
 	public static TValidator mValidator;
 	
 	// Vector with all the servers out there.
-	private Vector mServers;
+	private Vector <TServer>mServers;
 
+	private static ExecutorService mExecutorService;
+	
 	private static DateFormat mRFCGMTFormatter;
 	static
 	{
@@ -106,7 +117,9 @@ public class npdstracker extends Thread
 	// A class to handle exceptions when parsing the query
 	public static class TQueryException extends Exception
 	{
-	    public TQueryException(String s)
+		private static final long serialVersionUID = -5454365483023069659L;
+
+		public TQueryException(String s)
 	    {
 			super(s);
 	    }
@@ -155,6 +168,7 @@ public class npdstracker extends Thread
 			{
 				// Oops, some exception occured.
 				npdstracker.logMessage("TValidator: Exception " + e + " occurred");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -199,7 +213,6 @@ public class npdstracker extends Thread
 				{
 					System.err.println( "Look! Some exception!" );
 					System.err.println( e );
-					
 					// Easier than calling System.getProperty("line.separator")
 				}
 			
@@ -241,7 +254,7 @@ public class npdstracker extends Thread
 				
 					// Let a connection object handle the socket
 					TConnection thisConnection = new TConnection( s );
-					thisConnection.start();
+					npdstracker.mExecutorService.execute(thisConnection);
 
 				} catch (Exception e)
 				{
@@ -444,19 +457,13 @@ public class npdstracker extends Thread
 				if (!(garbage.equals("="))) {
 					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				} else {
-					kPort = new Vector();
-					
-					// Read every port in the line.
-					boolean foundOne = false;
+					kPort = new Vector<Integer>();
 					
 					while (true) {
 						try {
 							garbage = st.nextToken();
 							int thePort = Integer.parseInt(garbage);
-							
-							// If we’re here it’s that we found one port at least.
-							foundOne = true;
-							
+
 							// Add that port to the list.
 							kPort.addElement(new Integer(thePort));
 							logMessage("Port found: " + thePort);
@@ -575,12 +582,13 @@ public class npdstracker extends Thread
 			tempoption = optionsreader.readLine();
 			linenumber++;
 		}
+		optionsreader.close();
 	}
 
 	// ====================================================================	//
 	// String StrReplace( String, String, String ) [static, public]
 	// ====================================================================	//
-	// Replaces every occurences of a string by another string in a string.
+	// Replaces every occurrence of a string by another string in a string.
 	
 	public static String StrReplace( String inString, String inPattern, String inReplacement )
 	{
@@ -637,8 +645,7 @@ public class npdstracker extends Thread
 			}
 		}
 		// start the tracker server
-		npdstracker dathinghere = new npdstracker(cmdfile, tempoptionsfile);
-		dathinghere.run();
+        new npdstracker(cmdfile, tempoptionsfile);
 	}
 
 	// ====================================================================	//
@@ -648,11 +655,12 @@ public class npdstracker extends Thread
 	
 	private npdstracker(String tempcmdfile, String tempoptionsfile)
 	{
+		mExecutorService = Executors.newCachedThreadPool();
 		String tempcmd = "";
 		try
 		{
 			// Default values for options.
-			kPort = new Vector();
+			kPort = new Vector<Integer>();
 			kPort.addElement(new Integer(DEFAULT_PORT));
 			
 			if (!(tempoptionsfile.equals("")))
@@ -673,9 +681,9 @@ public class npdstracker extends Thread
 
 			// Let’s create the validation thread.
 			mValidator = new TValidator();
-			mValidator.start();
+			mExecutorService.execute(mValidator);
 					
-			mServers = new Vector();
+			mServers = new Vector<TServer>();
 			
 			// For each port, create a server.
 			int nbServers = kPort.size();
@@ -692,7 +700,7 @@ public class npdstracker extends Thread
 					logMessage("npdstracker: Cannot start server on port " + thePort + " (" + theIOE + ")");
 					continue;
 				}
-				theServer.start();
+				mExecutorService.execute(theServer);
 				mServers.addElement(theServer);				
 			}
 
@@ -707,26 +715,6 @@ public class npdstracker extends Thread
 		logMessage(serverdesc + " version " + versionStr + " started");
 	}
 	
-	// Thread entry point
-	// Wait forever
-	public void run ()
-	{
-		try {
-			while (true)
-			{
-				try 
-				{
-					wait();
-				} catch (InterruptedException e) {
-					// Ignore any interrupt.
-				}
-			}	// while (true)
-		} catch (Exception e)
-		{
-			// Oops, some exception occured.
-			logMessage("npdstracker: Exception " + e + " occurred");
-		}
-	}
 
 	// ====================================================================	//
 	// void ProcessQuery( String, BufferedReader, PrintWriter, Socket ) [static]
@@ -930,7 +918,7 @@ public class npdstracker extends Thread
 						for (int index_i = 0; index_i < mHostInfoVector.size(); index_i++)
 						{
 							THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(index_i);
-							if (!(theInfo.mStatus == -1))
+							if (!(theInfo.mStatus == -1 || theInfo.mStatus == -2))
 							{
 								out.print("Address: " + theInfo.mName + "\tLast Verified: "
 									+ theInfo.mLastValidation + "\t");
@@ -967,7 +955,16 @@ public class npdstracker extends Thread
 				{
 					stylesheetPage(stylesheet, in, out, socket);
 				}
-				else {
+				else if ( HTTPDocStr.endsWith(".gif") == true )
+				{
+					Path path = Paths.get( HTTPDocStr );
+					File image = new File( "images" + "/" + path.getFileName() );
+					logMessage("path = " + path.getFileName());
+					if ( image.exists() == true )  logMessage( "Filename " + path.getFileName() +  " exists");
+					imageFile( image, in, out, socket );		
+				}
+				else 
+				{
 					logMessage("File '" + HTTPDocStr + "' not found");
 					ReturnCode(HTTP_NOTFOUND, "", out);
 				}
@@ -1031,13 +1028,7 @@ public class npdstracker extends Thread
 		}
 		
 		int thePort;
-		if (socket == null) {
-			// Take the first port
-			thePort = ((Integer) kPort.get(0)).intValue();
-		} else {
-			// Take the socket port
-			thePort = socket.getLocalPort();
-		}
+		thePort = socket.getLocalPort();
 
 		if (thePort != 80) {
 			urlStr += ":" + thePort;
@@ -1061,6 +1052,11 @@ public class npdstracker extends Thread
 					case -1:
 						classStr = "up-sharing";
 						labelStr = "Up (Sharing)";
+						break;
+						
+					case -2:
+						classStr = "down";
+						labelStr = "Down (Sharing)";
 						break;
 					
 					case 0:
@@ -1201,6 +1197,7 @@ public class npdstracker extends Thread
 
 		out.print( "\r\n\r\n" );
 		out.flush();
+		template.close();
 	}
 	
 	// ==================================================================== //
@@ -1224,8 +1221,22 @@ public class npdstracker extends Thread
 			cssLine = css.readLine();
 		}
 		out.flush();
+		css.close();
 	}
 	
+	// ==================================================================== //
+	private static void imageFile( File image, BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
+	{
+		ImageInputStream imgStream1 = ImageIO.createImageInputStream(image);
+		BufferedImage bufferedImage1 = ImageIO.read(image);
+		OutputStream os = inSocket.getOutputStream();
+		ImageIO.write(bufferedImage1,"gif",os);
+		os.flush();
+		out.flush();
+		imgStream1.close();
+		os.close();
+	}
+
 	// ====================================================================	//
 	// void adminConsole( BufferedReader, PrintWriter, Socket ) [static, private]
 	// ====================================================================	//
@@ -1300,6 +1311,7 @@ public class npdstracker extends Thread
 						out.flush();
 						foo = dumplogs.readLine();
 					}
+					dumplogs.close();
 				}
 			}
 			else if (commandline.equals("SHARE"))
@@ -1428,7 +1440,8 @@ public class npdstracker extends Thread
 		
 		mValidationInProgress += 1;
 		
-		Vector theHosts = (Vector) mHostInfoVector.clone();
+		// Use copy constructor
+		Vector<THostInfo> theHosts = new Vector<THostInfo>(mHostInfoVector);
 		
 		for (int foo = 0; foo < theHosts.size(); foo++)
 		{
@@ -1436,10 +1449,8 @@ public class npdstracker extends Thread
 			System.gc();
 			// try to retrieve /traq/confirm.ns
 			String checkResult = null;
-			InputStream in = null;
-			OutputStream out = null;
 			// Don’t validate SHARE records
-			if (!(theInfo.mStatus == -1))
+			if (!(theInfo.mStatus == -1 || theInfo.mStatus == -2))
 			{
 				try
 				{
@@ -1466,8 +1477,7 @@ public class npdstracker extends Thread
 					logMessage("Waiting for reply");
 
 					char[] buffer = new char[512];
-					int bytes_read = 0;
-					while((bytes_read = inshare.read(buffer)) != -1);
+					while(inshare.read(buffer) != -1);
 
 					checkResult = new String(buffer);
 
@@ -1567,13 +1577,13 @@ public class npdstracker extends Thread
 			for (int foo = theLastIndex; foo >= 0; foo--)
 			{
 				THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(foo);
-				if ((theInfo.mStatus > validateTries)
-					|| (theInfo.mStatus == -1))
+				if ( (theInfo.mStatus > validateTries) || (theInfo.mStatus == -1) || (theInfo.mStatus == -2) )
 				// Remove both down Newtons and shared Newton (as shared Newton will be got later)
 				// (notice: this isn’t a good idea later, we should first check that the other tracker servers
 				// are still running, but as nobody does share, it isn’t really a problem)
 				{
-					logMessage(theInfo.mName + " removed. Too many failed connections.");
+					if ( theInfo.mStatus > validateTries )
+					    logMessage(theInfo.mName + " removed. Too many failed connections.");
 					mHostInfoVector.removeElementAt( foo );
 				}
 			} // for (int foo = theLastIndex; foo >= 0; foo--)
@@ -1607,10 +1617,10 @@ public class npdstracker extends Thread
 						templine = inshare.readLine();
 					}
 
-					logMessage("Received: " + returncode);
+					logMessage("Received Data");
 					if (returncode.startsWith("200 OK"))
 					{
-						logMessage("Return code is good. Parsing records.");
+						logMessage("200 OK : Return code is good. Parsing records.");
 
 						StringTokenizer lines = new StringTokenizer(returncode, "\n");
 						while (lines.hasMoreTokens() == true)
@@ -1644,7 +1654,16 @@ public class npdstracker extends Thread
 								
 								theNewInfo.mName = addresspair.substring(9);
 								theNewInfo.mLastValidation = timepair.substring(15);
-								theNewInfo.mStatus = -1;
+								if ( statuspair.substring(8).compareTo("DOWN") == 0 )
+								{
+									// Reflect sharing status of DOWN
+								    theNewInfo.mStatus = -2;
+								}
+								else
+								{
+									// Reflect sharing status of UP
+									theNewInfo.mStatus = -1;
+								}
 								theNewInfo.mDesc = descpair.substring(13);
 								
 								mHostInfoVector.addElement(theNewInfo);
@@ -1681,9 +1700,9 @@ public class npdstracker extends Thread
 				{
 					THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(foo);
 					// Don’t save SHARE records
-					if (theInfo.mStatus != -1)
+					if ( !(theInfo.mStatus == -1 || theInfo.mStatus == -2 ) )
 					{
-						String templine = "[REGUP] " + theInfo.mHost;
+						String templine = "REGUP " + theInfo.mHost;
 						if (theInfo.mPort != 80)
 						{
 							templine = templine + ":" + theInfo.mPort;

@@ -1,14 +1,65 @@
 body {
 	font-family: helvetica, arial, verdana, sans-serif;
 	font-size: 12px;
-	margin: 10px;
+	margin-right : auto;
+	margin-left : auto;
+	BACKGROUND-COLOR: gray;
+	FONT-FAMILY: Arial, sans-serif;
+	width: 862px;
+	background-image: url(images/bg-tracker-serv.gif);
+	background-repeat: no-repeat;
+	background-position: center top;
+	margin-top: 72;
+}
+
+.page {
+	margin-right: auto;
+	margin-left: auto;
+	width: 820px;
+	top: 50px;
+	position: relative;
+}
+
+footer {
+	background-color: 2e2e2e;
+	margin-right: auto;
+	margin-left: auto;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 62px;
+	width: 862px;
+	background-image: url(images/bg-footer.gif);
+	background-repeat: no-repeat;	
+        background-position: center top;	
+	}
+
+.copy1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #AAAAAA;
+	text-align: center;
+	}
+
+.right {
+       text-align: right;
+	}
+
+h1	{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
 	}
 
 table {
-	background-color: #CCC;
+	background-color: #5C1;
 	border-collapse: collapse;
 	border: 1px solid #666;
 	width: 100%;
+        background-image: url(images/npds-uptitle.gif);
+        background-repeat: no-repeat;
+	background-position: right top;
 	}
 
 td, th {
@@ -16,12 +67,12 @@ td, th {
 	padding: 5px 10px;
 	text-align: left;
 	}
-	
-ul {
+
+ul 	{
 	padding: 0;
 	}
 
-ul li {
+ul li 	{
 	display: inline;
 	}
 	
@@ -41,22 +92,35 @@ ul li:last-child:after {
 	background-color: #ECC;
 	}
 
-.down td:first-child {
-	color: #533;
+.down td:last-child {
+	background-color: #ECC;
+        background-image: url(images/npds-down.gif);
+        background-repeat: no-repeat;
+        background-position: right top;
 	}
 
 .up {
 	background-color: #CCE;
-	}
+        }
 
-.up td:first-child {
-	color: #335;
-	}
+.up td:last-child {
+	background-color: #CCE;
+        background-image: url(images/npds-up.gif);
+        background-repeat: no-repeat;
+        background-position: right top;
+        }
 
-.up-sharing {
+.up-sharing td {
 	background-color: #CEC;
 	}
 
-.up-sharing td:first-child {
-	color: #353;
+.up-sharing td:last-child {
+	background-color: #CEC;
+        background-image: url(images/npds-upshare.gif);
+        background-repeat: no-repeat;
+        background-position: right top;
 	}
+
+tr {
+        height: 28px;
+        }
