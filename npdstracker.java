@@ -960,8 +960,15 @@ public class npdstracker
 					Path path = Paths.get( HTTPDocStr );
 					File image = new File( "images" + "/" + path.getFileName() );
 					logMessage("path = " + path.getFileName());
-					if ( image.exists() == true )  logMessage( "Filename " + path.getFileName() +  " exists");
-					imageFile( image, in, out, socket );		
+					if ( image.exists() == true ) 
+					{
+					    imageFile( image, in, out, socket );
+					}
+					else
+					{
+						logMessage("File '" + HTTPDocStr + "' not found");
+						ReturnCode(HTTP_NOTFOUND, "", out);
+					}
 				}
 				else 
 				{
@@ -1645,28 +1652,35 @@ public class npdstracker
 								String descpair = new String(tabs.nextToken());
 
 								logMessage(
-									"[SHARE] " + addresspair
-									+ " " + timepair
-									+ " " + statuspair
-									+ " " + descpair );
-
-								THostInfo theNewInfo = new THostInfo();
+										"[SHARE] " + addresspair
+										+ " " + timepair
+										+ " " + statuspair
+										+ " " + descpair );
 								
-								theNewInfo.mName = addresspair.substring(9);
-								theNewInfo.mLastValidation = timepair.substring(15);
-								if ( statuspair.substring(8).compareTo("DOWN") == 0 )
+								if ( QueryRecord(addresspair.substring(9)) == -1 )
 								{
-									// Reflect sharing status of DOWN
-								    theNewInfo.mStatus = -2;
+									THostInfo theNewInfo = new THostInfo();
+
+									theNewInfo.mName = addresspair.substring(9);
+									theNewInfo.mLastValidation = timepair.substring(15);
+									if ( statuspair.substring(8).compareTo("DOWN") == 0 )
+									{
+										// Reflect sharing status of DOWN
+										theNewInfo.mStatus = -2;
+									}
+									else
+									{
+										// Reflect sharing status of UP
+										theNewInfo.mStatus = -1;
+									}
+									theNewInfo.mDesc = descpair.substring(13);
+
+									mHostInfoVector.addElement(theNewInfo);
 								}
 								else
 								{
-									// Reflect sharing status of UP
-									theNewInfo.mStatus = -1;
+									logMessage( "Duplicate Share Record.  Not adding: " + addresspair );
 								}
-								theNewInfo.mDesc = descpair.substring(13);
-								
-								mHostInfoVector.addElement(theNewInfo);
 							}
 						}
 					}
