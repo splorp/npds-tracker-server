@@ -959,7 +959,6 @@ public class npdstracker
 				{
 					Path path = Paths.get( HTTPDocStr );
 					File image = new File( "images" + "/" + path.getFileName() );
-					logMessage("path = " + path.getFileName());
 					if ( image.exists() == true ) 
 					{
 					    imageFile( image, in, out, socket );
