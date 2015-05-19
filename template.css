@@ -21,7 +21,7 @@ body {
 }
 
 footer {
-	background-color: 2e2e2e;
+	background-color: 2E2E2E;
 	margin-right: auto;
 	margin-left: auto;
 	position: fixed;
@@ -32,13 +32,13 @@ footer {
 	width: 862px;
 	background-image: url(images/bg-footer.gif);
 	background-repeat: no-repeat;	
-        background-position: center top;	
+    background-position: center top;	
 	}
 
 .copy1 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
-	color: #AAAAAA;
+	color: #AAA;
 	text-align: center;
 	}
 
@@ -53,12 +53,12 @@ h1	{
 	}
 
 table {
-	background-color: #9C6;
+	background-color: #BBE;
 	border-collapse: collapse;
 	border: 1px solid #666;
 	width: 100%;
-        background-image: url(images/npds-uptitle.gif);
-        background-repeat: no-repeat;
+    background-image: url(images/npds-uptitle.gif);
+    background-repeat: no-repeat;
 	background-position: right top;
 	}
 
@@ -94,33 +94,33 @@ ul li:last-child:after {
 
 .down td:last-child {
 	background-color: #ECC;
-        background-image: url(images/npds-down.gif);
-        background-repeat: no-repeat;
-        background-position: right top;
+    background-image: url(images/npds-down.gif);
+    background-repeat: no-repeat;
+    background-position: right top;
 	}
 
 .up {
-	background-color: #CCE;
-        }
+	background-color: #CFC;
+    }
 
 .up td:last-child {
-	background-color: #CCE;
-        background-image: url(images/npds-up.gif);
-        background-repeat: no-repeat;
-        background-position: right top;
-        }
+	background-color: #CFC;
+    background-image: url(images/npds-up.gif);
+    background-repeat: no-repeat;
+    background-position: right top;
+    }
 
 .up-sharing td {
-	background-color: #CEC;
+	background-color: #BDB;
 	}
 
 .up-sharing td:last-child {
-	background-color: #CEC;
-        background-image: url(images/npds-upshare.gif);
-        background-repeat: no-repeat;
-        background-position: right top;
+	background-color: #BDB;
+    background-image: url(images/npds-upshare.gif);
+    background-repeat: no-repeat;
+    background-position: right top;
 	}
 
 tr {
-        height: 28px;
-        }
+    height: 28px;
+    }
