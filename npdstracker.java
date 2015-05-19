@@ -982,7 +982,21 @@ public class npdstracker
 					}
 					else
 					{
-						logMessage("File '" + HTTPDocStr + "' not found");
+						logMessage("Image File '" + HTTPDocStr + "' not found");
+						ReturnCode(HTTP_NOTFOUND, "", out);
+					}
+				}
+				else if ( HTTPDocStr.endsWith(".ico") == true )
+				{
+					Path path = Paths.get( HTTPDocStr );
+					File image = new File( imageDir + "/" + path.getFileName() );
+					if ( image.exists() == true ) 
+					{
+					    icoFile( image, in, out, socket );
+					}
+					else
+					{
+						logMessage("ICO File '" + HTTPDocStr + "' not found");
 						ReturnCode(HTTP_NOTFOUND, "", out);
 					}
 				}
@@ -1250,14 +1264,43 @@ public class npdstracker
 	// ==================================================================== //
 	private static void imageFile( File image, BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
 	{
-		ImageInputStream imgStream1 = ImageIO.createImageInputStream(image);
-		BufferedImage bufferedImage1 = ImageIO.read(image);
-		OutputStream os = inSocket.getOutputStream();
-		ImageIO.write(bufferedImage1,"gif",os);
-		os.flush();
-		out.flush();
-		imgStream1.close();
-		os.close();
+	    FileInputStream fis = null;
+	    BufferedInputStream bis = null;
+	    OutputStream os = null;
+		out.println("HTTP/1.0 " + 200 + " OK");
+		out.println("Content-type: image/gif");
+		out.println("Content-Length: " + image.length());
+		out.print("\r\n");
+        byte [] mybytearray  = new byte [(int)image.length()];
+        fis = new FileInputStream(image);
+        bis = new BufferedInputStream(fis);
+        bis.read(mybytearray,0,mybytearray.length);
+        os = inSocket.getOutputStream();
+        os.write(mybytearray,0,mybytearray.length);
+        os.flush();
+        bis.close();
+        os.close();
+	}
+	
+	// ==================================================================== //
+	private static void icoFile( File image, BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
+	{
+	    FileInputStream fis = null;
+	    BufferedInputStream bis = null;
+	    OutputStream os = null;
+		out.println("HTTP/1.0 " + 200 + " OK");
+		out.println("Content-type: image/x-icon");
+		out.println("Content-Length: " + image.length());
+		out.print("\r\n");
+        byte [] mybytearray  = new byte [(int)image.length()];
+        fis = new FileInputStream(image);
+        bis = new BufferedInputStream(fis);
+        bis.read(mybytearray,0,mybytearray.length);
+        os = inSocket.getOutputStream();
+        os.write(mybytearray,0,mybytearray.length);
+        os.flush();
+        bis.close();
+        os.close();
 	}
 
 	// ====================================================================	//
