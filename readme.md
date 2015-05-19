@@ -218,8 +218,8 @@ Edit `/etc/npdstracker/npdstracker.ini` from the command line (or using an exter
 ```sh
 pageTemplate = /usr/local/share/npdstracker/template.html
 cssTemplate = /usr/local/share/npdstracker/template.css
-images = /usr/local/share/npdstracker/images/   
-+ Note:  You must copy all images from distribution into the images directory.
+images = /usr/local/share/npdstracker/images   
+    **Note:  You must copy all images from distribution into the images directory.
 logfile = /var/log/npdstracker.log
 ```
 
