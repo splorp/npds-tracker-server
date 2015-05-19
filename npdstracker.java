@@ -847,7 +847,9 @@ public class npdstracker
 					Date tempDate = new Date();
 					theInfo.mLastValidation = ReturnRFCTime(tempDate);
 					theInfo.mStatus = 0;
-
+					
+					//TODO We might want to check to see if this is REALLY a Newton and not add if it is not.
+					
 					// Synchronized is not required here because the addElement method is synchronized.
 					mHostInfoVector.addElement(theInfo);
 					
