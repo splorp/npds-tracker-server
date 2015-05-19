@@ -557,7 +557,15 @@ public class npdstracker
 				if (!(garbage.equals("=")))
 					logMessage("Error reading npdstracker.ini on line " + linenumber);
 				else
+				{
 					imageDir = st.nextToken();
+					File imageDirFile = new File(imageDir);
+					if ( imageDirFile.exists() == false )
+					{
+						logMessage( "Error image directory " + imageDir + " does not exist.  Defaulting to images in working directory.");
+						imageDir = "images";
+					}
+				}
 			}
 			else if (tempoption.startsWith("trackerName"))
 			{
