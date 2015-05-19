@@ -381,6 +381,7 @@ shareServer = www.unna.org 3680
 shareServer = newtzilla.quadzilla.net 3680
 shareServer = newton.tek-ed.com 3680
 shareServer = tracker.geremia.me 3680
+shareServer = message-pad.no-ip.org:3680
 ```
 
 Specifies servers to obtain SHARE'd records from.
