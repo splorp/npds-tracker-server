@@ -205,6 +205,13 @@ Install the `template.html` and `template.css` files in `/usr/local/share` from 
 [sudo] install template.html template.css /usr/local/share/npdstracker
 ```
 
+Install the images files in `/usr/local/share/npdstracker` from the command line:
+
+```sh
+[sudo] mkdir -p /usr/local/share/npdstracker/images
+[sudo] install images/*.* /usr/local/share/npdstracker/images
+```
+
 Create the log file from the command line:
 
 ```sh
