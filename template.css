@@ -55,7 +55,7 @@ h1	{
 table {
 	background-color: #BBE;
 	border-collapse: collapse;
-	border: 1px solid #666;
+	border: 1px solid #666; 
 	width: 100%;
     background-image: url(images/npds-uptitle.gif);
     background-repeat: no-repeat;
@@ -66,6 +66,7 @@ td, th {
 	border: 1px solid #666;
 	padding: 5px 10px;
 	text-align: left;
+	    height: 10px;
 	}
 
 ul 	{
@@ -92,26 +93,47 @@ ul li:last-child:after {
 	background-color: #ECC;
 	}
 
+.down td:first-child {
+	background-color: #ECC;
+	background-image: url(images/offline-icon.gif);
+	background-repeat: no-repeat;
+	background-position: left;
+	}
+
 .down td:last-child {
 	background-color: #ECC;
     background-image: url(images/npds-down.gif);
     background-repeat: no-repeat;
-    background-position: right top;
+	background-position: right top;
 	}
 
 .up {
 	background-color: #CFC;
     }
 
+.up td:first-child {
+	background-color: #CFC;
+	background-image: url(images/online-icon.gif);
+	background-repeat: no-repeat;
+	background-position: left;
+	}
+
 .up td:last-child {
 	background-color: #CFC;
     background-image: url(images/npds-up.gif);
     background-repeat: no-repeat;
-    background-position: right top;
+    background-position: right;
     }
 
 .up-sharing td {
 	background-color: #BDB;
+	}
+
+.up-sharing td:first-child {
+	background-color: #BDB;
+    background-image: url(images/onlineS-icon.gif);
+    background-repeat: no-repeat;
+    background-position: left;
 	}
 
 .up-sharing td:last-child {
@@ -122,5 +144,5 @@ ul li:last-child:after {
 	}
 
 tr {
-    height: 28px;
+    height: 29px;
     }
