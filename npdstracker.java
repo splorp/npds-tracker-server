@@ -1271,6 +1271,7 @@ public class npdstracker
 		out.println("Content-type: image/gif");
 		out.println("Content-Length: " + image.length());
 		out.print("\r\n");
+		out.flush();
         byte [] mybytearray  = new byte [(int)image.length()];
         fis = new FileInputStream(image);
         bis = new BufferedInputStream(fis);
@@ -1292,6 +1293,7 @@ public class npdstracker
 		out.println("Content-type: image/x-icon");
 		out.println("Content-Length: " + image.length());
 		out.print("\r\n");
+		out.flush();
         byte [] mybytearray  = new byte [(int)image.length()];
         fis = new FileInputStream(image);
         bis = new BufferedInputStream(fis);
