@@ -377,8 +377,8 @@ Set to 'true' to allow sharing, set to anything else to disallow sharing.
 #### shareServer
 ```sh
 shareServer = unna.org 3680
-shareServer = message-pad.no-ip.org 3680
-shareServer = tracker.geremia.me 3680
+shareServer = messagepad.no-ip.org 3680
+shareServer = tracker.newtonrulez.com 3680
 ```
 
 Specifies servers to obtain SHARE'd records from.
