@@ -1,1 +1,9 @@
 .DS_Store
+npdstracker.log
+/npdstracker$TConnection.class
+/npdstracker$THostInfo.class
+/npdstracker$TQueryException.class
+/npdstracker$TServer.class
+/npdstracker$TServerInfo.class
+/npdstracker$TValidator.class
+/npdstracker.class
