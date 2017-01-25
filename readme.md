@@ -4,7 +4,7 @@ A Java based server for tracking and listing [Newton Personal Data Sharing](http
 
 The [NPDS Tracker Server](http://npds.free.fr/trackers/) was originally developed by [Victor Rehorst](http://www.chuma.org/) and [Paul Guyot](http://kallisys.com/).
 
-Additional contributions and updates have been by generously provided and applied by [Morgan Aldridge](http://makkintosshu.com/), [Grant Hutchinson](http://splorp.com/), [Ron Parker](http://quadzilla.net/), and Manuel Probsthain.
+Additional contributions and updates have been by generously provided and applied by [Morgan Aldridge](http://makkintosshu.com/), [Grant Hutchinson](http://splorp.com/), [Ron Parker](http://quadzilla.net/), Manuel Probsthain, Peter Geremia, and [Sylvain Pilet](http://message-pad.net/).
 
 Many thanks to [Matt Vaughn](http://chromatin.cshl.edu/vaughn/) for developing NPDS in the first place.
 
