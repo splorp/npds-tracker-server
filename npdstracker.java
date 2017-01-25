@@ -95,7 +95,7 @@ public class npdstracker extends Thread
 	private static DateFormat mRFCGMTFormatter;
 	static
 	{
-		mRFCGMTFormatter = new SimpleDateFormat("EEE',' d-MMM-yyyy HH:mm:ss 'GMT'", Locale.US);
+		mRFCGMTFormatter = new SimpleDateFormat("EEEE',' dd-MMMM-yyyy HH:mm:ss 'GMT'", Locale.US);
 		mRFCGMTFormatter.setTimeZone(TimeZone.getTimeZone("Africa/Casablanca"));
 	}
 
@@ -260,13 +260,13 @@ public class npdstracker extends Thread
 
 	public static class THostInfo
 	{
-		// The Newton’s hostname (including IP)
+		// The Newton’s host name (including IP)
 		public String mName;	// The string as shown in the logs and in the table.
 		public String mHost;	// The host name only (used to check the server)
 		public int mPort;		// The port only (default is 80)
-		// Unique ID of the Newton (NOT CURRENTLY USED)
+		// Unique ID of the Newton (not currently used)
 		public String mHash;
-		// Plaintext description of the Newton
+		// Plain text description of the Newton
 		public String mDesc;
 		// Time this Newton was last validates (string in RFC format)
 		public String mLastValidation;
@@ -786,7 +786,7 @@ public class npdstracker extends Thread
 						throw new TQueryException ( kInvalidHostStr );
 					}
 					
-					// Check if the explicitely allowed hostname with a private IP is registering
+					// Check if the explicitely allowed host name with a private IP is registering
 					if (acceptPrivateHost.equals(theInfo.mHost))
 					{
 						// Accept host and write that to log 
@@ -1112,7 +1112,7 @@ public class npdstracker extends Thread
 		{
 			lastValidationStr = "Validation is in progress.";
 		} else {
-			lastValidationStr = "<strong>Last validation:</strong> " + mLastValidation + ".";
+			lastValidationStr = "Last validation: " + mLastValidation;
 		}
 
 		// Define count of servers as string
