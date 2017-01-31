@@ -560,22 +560,26 @@ The [HTML page template](#pagetemplate) can be customized using the following ps
 `<version/>` — The current version of the tracker software
 
 
-
 ## Licensing
 
-Coming soon.
+Copyright © 2001–2017 Grant Hutchinson, Victor Rehorst, Paul Guyot, et al
 
+This project is licensed under the short and sweet [MIT License](http://opensource.org/licenses/MIT). This license allows you to do anything pretty much anything you want with the contents of the repository, as long as you provide proper attribution and don’t hold anyone liable.
+
+See the [license.txt](https://raw.githubusercontent.com/splorp/npds-tracker-server/master/license.txt) file included in this repository for further details.
 
 
 ## Version History
 
-### 0.1.38 — TBD
+### 0.1.38 — 31 January 2017
+
 + [GH] New `<server-noun/>` and `<server-verb/>` template tags because grammar
 + [GH] New `<hit-counter-noun/>` and `<validate-time-noun/>` template tags because grammar
 + [GH] Standardized template tag naming for `<tracker-host/>` and `<tracker-name/>`
 + [GH] Changed date formatting to use full day and month names
 + [GH] Added initial media queries and responsive layout styles
 + [GH] Simplified template and validation string markup
++ [GH] Added MIT license
 
 ### 0.1.37 — 18 December 2012
 
