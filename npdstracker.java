@@ -32,7 +32,7 @@ public class npdstracker
 	public static final int build = 39;
 	public static final int protocolversion = 1;
 	public static final String versionStr = majorversion + "." + minorversion + "." + build + " beta";
-	public static final String kServerStr = "Victor Rehorst's NPDS Tracker Server " + versionStr;
+	public static final String kServerStr = "Victor Rehorst’s NPDS Tracker Server " + versionStr;
 	public static final String kUserAgentStr = "Mozilla/5.0 (compatible; " + kServerStr + "; Java)";
 
 	// 200, 400, 403, and 404 are standard HTTP codes
@@ -53,7 +53,7 @@ public class npdstracker
 	public static final String kRTFMStr = " Please check out the protocol before telnetting to the tracker (http://npds.free.fr/)";
 	public static final String kAlreadyRegisteredStr = " host already exists in list";
 	public static final String kNotRegisteredStr = " host is unknown";
-	public static final String kInvalidHostStr = " host is invalid (doesn't resolve, check your client configuration)";
+	public static final String kInvalidHostStr = " host is invalid (doesn’t resolve, check your client configuration)";
 	public static final String kPrivateHostStr = " host address is for private network (check your client configuration)";
 	public static final String kWeirdPortStr = " Weird port (not an integer)";
 	public static final String kWeirdPortValueStr = " Weird port (not within 1-65535)";
@@ -121,9 +121,9 @@ public class npdstracker
 		private static final long serialVersionUID = -5454365483023069659L;
 
 		public TQueryException(String s)
-	    {
+			{
 			super(s);
-	    }
+			}
 	}
 	
 	// A class to validate the Newton servers
@@ -137,7 +137,7 @@ public class npdstracker
 			// Initialization of variables to know when to check the registered Newtons.
 			mNextCheck = new Date();
 
-			// I'm looping forever. (I will be killed by the application as it quits).
+			// I’m looping forever. (I will be killed by the application as it quits).
 			
 			try {
 				while (true)
@@ -156,7 +156,7 @@ public class npdstracker
 						
 						now = new Date();	// Updates the now value.
 						
-						// Let's sleep until next check if we have to
+						// Let’s sleep until next check if we have to
 						
 						long timeout = mNextCheck.getTime() - now.getTime();
 						if (timeout > 0)
@@ -245,7 +245,7 @@ public class npdstracker
 		// Thread entry point
 		public void run ()
 		{
-			// I'm looping waiting for connections.
+			// I’m looping waiting for connections.
 			while (true)
 			{
 				try 
@@ -288,7 +288,7 @@ public class npdstracker
 		// of unsuccessful attempts made to validate, -1 is a SHARE record
 		public int mStatus;
 		// Unused yet. Because if a tracker dies, I may need to warn the Newton and
-		// tell it that personally, I am up. (Sounds cool, doesn't it?)
+		// tell it that personally, I am up. (Sounds cool, doesn’t it?)
 		public TServerInfo mServer;
 	}
 
@@ -327,7 +327,7 @@ public class npdstracker
 					outlogFile.write(theDate.toString() + "   " + message + "\r\n");
 					outlogFile.flush();
 					outlogFile.close();
-				} catch (IOException e) {System.out.println(theDate.toString() + "   FATAL - can't write to log file: " + logFile);}
+				} catch (IOException e) {System.out.println(theDate.toString() + "   FATAL - can’t write to log file: " + logFile);}
 			}
 		}
 	}
@@ -396,9 +396,8 @@ public class npdstracker
 	{
 		synchronized (mRFCGMTFormatter)
 		{
-	            return mRFCGMTFormatter.format(thisdate);
-        	}
-
+			return mRFCGMTFormatter.format(thisdate);
+		}
 	}
 
 	// ====================================================================	//
@@ -562,7 +561,7 @@ public class npdstracker
 					File imageDirFile = new File(imageDir);
 					if ( imageDirFile.exists() == false )
 					{
-						logMessage( "Error image directory " + imageDir + " does not exist.  Defaulting to images in working directory.");
+						logMessage( "Error image directory " + imageDir + " does not exist. Defaulting to images in working directory.");
 						imageDir = "images";
 					}
 				}
@@ -639,7 +638,7 @@ public class npdstracker
 	{
 		String tempoptionsfile = defaultOptionsFile;
 		// Parse command line options here
-		// -l [logfile]     : The file to write logs to, will be created if it doesn't exist, otherwise appended to (unused?)
+		// -l [logfile]     : The file to write logs to, will be created if it doesn’t exist, otherwise appended to (unused?)
 		// -c [cmdfile]     : The file to read initial commands from (REGUPs)
 		// -o [optionsfile] : The file to read other options from
 		for (int i = 0; i < args.length; i++)
@@ -662,7 +661,7 @@ public class npdstracker
 			}
 		}
 		// start the tracker server
-        new npdstracker(cmdfile, tempoptionsfile);
+		new npdstracker(cmdfile, tempoptionsfile);
 	}
 
 	// ====================================================================	//
@@ -696,7 +695,7 @@ public class npdstracker
 				cmdreader.close();
 			}
 
-			// Let's create the validation thread.
+			// Let’s create the validation thread.
 			mValidator = new TValidator();
 			mExecutorService.execute(mValidator);
 					
@@ -721,7 +720,7 @@ public class npdstracker
 				mServers.addElement(theServer);				
 			}
 
-			// ServerSocket timeout: I'll wait forever until a connection arrives.
+			// ServerSocket timeout: I’ll wait forever until a connection arrives.
 			// mServer.setSoTimeout( 0 ); // (this is default)
 		} catch(Exception e)
 		{
@@ -748,8 +747,8 @@ public class npdstracker
 			StringTokenizer st = new StringTokenizer( query );
 				// We now accept any standard delimiter, hence HT
 				// (the protocol says we should)
-				// We also accept the other delimiters, but anyway, there shouldn't be any other delimiter
-				// in the host name or the REGUP command, so we don't mind.
+				// We also accept the other delimiters, but anyway, there shouldn’t be any other delimiter
+				// in the host name or the REGUP command, so we don’t mind.
 			String theCommand = st.nextToken().toUpperCase();
 
 			// I do handle several commands.
@@ -764,7 +763,7 @@ public class npdstracker
 
 				// Throw out the first token
 				String hname = st.nextToken();
-				String hdesc = query.substring(hname.length() + 7);	// REGUP hname. Note: this isn't really protocol 1.1 compliant.
+				String hdesc = query.substring(hname.length() + 7);	// REGUP hname. Note: this isn’t really protocol 1.1 compliant.
 
 				if (hname.equals("NPDS/TP"))
 				{
@@ -773,7 +772,7 @@ public class npdstracker
 				}
 				else if ((QueryRecord(hname) == -1))
 				{
-					// Host is not in our list. Let's add it.
+					// Host is not in our list. Let’s add it.
 
 					THostInfo theInfo = new THostInfo();
 					theInfo.mName = hname;
@@ -781,7 +780,7 @@ public class npdstracker
 					StringTokenizer host_st = new StringTokenizer(hname, ":");
 					theInfo.mHost = host_st.nextToken();
 
-					// First, check the host. We won't accept hosts that don't resolve or that are for private networks.
+					// First, check the host. We won’t accept hosts that don’t resolve or that are for private networks.
 					byte theHostAddressAsBytes[];
 					try {
 						InetAddress theHostAddress = InetAddress.getByName( theInfo.mHost );
@@ -797,8 +796,8 @@ public class npdstracker
 						// Accept host and write that to log 
 						logMessage("Private IP host " + theInfo.mHost + " has now registered");
 					} else {
-						// Don't accept host and check that it's not any other private network address.
-						// Don't know for IPv6, so I only work with 4 bytes addies.
+						// Don’t accept host and check that it’s not any other private network address.
+						// Don’t know for IPv6, so I only work with 4 bytes addies.
 						if (theHostAddressAsBytes.length == 4)
 						{
 							// 10.0.0.0/8
@@ -830,13 +829,13 @@ public class npdstracker
 							theInfo.mPort = Integer.parseInt(host_st.nextToken());
 						} catch (NumberFormatException theException)
 						{
-							logMessage("Server \"" + hname + " " + hdesc + "\" wasn't inserted into the list because its port isn't correct (not an integer)");
+							logMessage("Server \"" + hname + " " + hdesc + "\" wasn’t inserted into the list because its port isn’t correct (not an integer)");
 							throw new TQueryException ( kWeirdPortStr );
 						}
 						
 						if ((theInfo.mPort < 1) || (theInfo.mPort > 65535))
 						{
-							logMessage("Server \"" + hname + " " + hdesc + "\" wasn't inserted into the list because its port isn't correct (not between 1 - 65535)");
+							logMessage("Server \"" + hname + " " + hdesc + "\" wasn’t inserted into the list because its port isn’t correct (not between 1 - 65535)");
 							throw new TQueryException ( kWeirdPortValueStr );
 						}
 					} else {
@@ -876,7 +875,7 @@ public class npdstracker
 				// throw out the first token
 				host = st.nextToken();
 					
-				// Check there is no token left (there shouldn't be).
+				// Check there is no token left (there shouldn’t be).
 				if (st.hasMoreTokens())
 				{
 					logMessage("Bad syntax: the tokenizer found more than two elements");
@@ -886,7 +885,7 @@ public class npdstracker
 				int tempindex;
 				
 				// I need the tempindex, nobody should change the list before I do remove this element
-				// But, because I don't want to lock the other connections, I'd better do only removal
+				// But, because I don’t want to lock the other connections, I’d better do only removal
 				// in the synchronized statement
 				synchronized (mHostInfoVector)
 				{
@@ -980,11 +979,11 @@ public class npdstracker
 					File image = new File( imageDir + "/" + path.getFileName() );
 					if ( image.exists() == true ) 
 					{
-					    imageFile( image, in, out, socket );
+						imageFile( image, in, out, socket );
 					}
 					else
 					{
-						logMessage("Image File '" + HTTPDocStr + "' not found");
+						logMessage("Image File ‘" + HTTPDocStr + "’ not found");
 						ReturnCode(HTTP_NOTFOUND, "", out);
 					}
 				}
@@ -994,17 +993,17 @@ public class npdstracker
 					File image = new File( imageDir + "/" + path.getFileName() );
 					if ( image.exists() == true ) 
 					{
-					    icoFile( image, in, out, socket );
+						icoFile( image, in, out, socket );
 					}
 					else
 					{
-						logMessage("ICO File '" + HTTPDocStr + "' not found");
+						logMessage("ICO File ‘" + HTTPDocStr + "’ not found");
 						ReturnCode(HTTP_NOTFOUND, "", out);
 					}
 				}
 				else 
 				{
-					logMessage("File '" + HTTPDocStr + "' not found");
+					logMessage("File ‘" + HTTPDocStr + "’ not found");
 					ReturnCode(HTTP_NOTFOUND, "", out);
 				}
 			}
@@ -1266,45 +1265,45 @@ public class npdstracker
 	// ==================================================================== //
 	private static void imageFile( File image, BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
 	{
-	    FileInputStream fis = null;
-	    BufferedInputStream bis = null;
-	    OutputStream os = null;
+		FileInputStream fis = null;
+		BufferedInputStream bis = null;
+		OutputStream os = null;
 		out.println("HTTP/1.0 " + 200 + " OK");
 		out.println("Content-type: image/gif");
 		out.println("Content-Length: " + image.length());
 		out.print("\r\n");
 		out.flush();
-        byte [] mybytearray  = new byte [(int)image.length()];
-        fis = new FileInputStream(image);
-        bis = new BufferedInputStream(fis);
-        bis.read(mybytearray,0,mybytearray.length);
-        os = inSocket.getOutputStream();
-        os.write(mybytearray,0,mybytearray.length);
-        os.flush();
-        bis.close();
-        os.close();
+		byte [] mybytearray = new byte [(int)image.length()];
+		fis = new FileInputStream(image);
+		bis = new BufferedInputStream(fis);
+		bis.read(mybytearray,0,mybytearray.length);
+		os = inSocket.getOutputStream();
+		os.write(mybytearray,0,mybytearray.length);
+		os.flush();
+		bis.close();
+		os.close();
 	}
 	
 	// ==================================================================== //
 	private static void icoFile( File image, BufferedReader in, PrintWriter out, Socket inSocket ) throws SocketException, IOException
 	{
-	    FileInputStream fis = null;
-	    BufferedInputStream bis = null;
-	    OutputStream os = null;
+		FileInputStream fis = null;
+		BufferedInputStream bis = null;
+		OutputStream os = null;
 		out.println("HTTP/1.0 " + 200 + " OK");
 		out.println("Content-type: image/x-icon");
 		out.println("Content-Length: " + image.length());
 		out.print("\r\n");
 		out.flush();
-        byte [] mybytearray  = new byte [(int)image.length()];
-        fis = new FileInputStream(image);
-        bis = new BufferedInputStream(fis);
-        bis.read(mybytearray,0,mybytearray.length);
-        os = inSocket.getOutputStream();
-        os.write(mybytearray,0,mybytearray.length);
-        os.flush();
-        bis.close();
-        os.close();
+		byte [] mybytearray = new byte [(int)image.length()];
+		fis = new FileInputStream(image);
+		bis = new BufferedInputStream(fis);
+		bis.read(mybytearray,0,mybytearray.length);
+		os = inSocket.getOutputStream();
+		os.write(mybytearray,0,mybytearray.length);
+		os.flush();
+		bis.close();
+		os.close();
 	}
 
 	// ====================================================================	//
@@ -1365,7 +1364,7 @@ public class npdstracker
 			{
 				if (logFile.equals(""))
 				{
-					out.print("Sorry, logs can only be read remotely if they are being written to a file. (They aren't.)\r\n");
+					out.print("Sorry, logs can only be read remotely if they are being written to a file. (They aren’t.)\r\n");
 					out.flush();
 				}
 				else
@@ -1519,7 +1518,7 @@ public class npdstracker
 			System.gc();
 			// try to retrieve /traq/confirm.ns
 			String checkResult = null;
-			// Don't validate SHARE records
+			// Don’t validate SHARE records
 			if (!(theInfo.mStatus == -1 || theInfo.mStatus == -2))
 			{
 				try
@@ -1559,10 +1558,10 @@ public class npdstracker
 					// CRLF CRLF
 					// npds-status: SERVER_ALIVE_WELL
 
-					// This last element isn't in the protocol. So I accept anybody without it.
+					// This last element isn’t in the protocol. So I accept anybody without it.
 					// I only check the 202.
-					// (maybe one day, I'll check the content-type and the npds-status)
-					// In fact, I'm pretty laxist (please don't repeat that) and I allow test pages served by some webserver).
+					// (maybe one day, I’ll check the content-type and the npds-status)
+					// In fact, I’m pretty laxist (please don’t repeat that) and I allow test pages served by some webserver).
 					// I look for a 202 anywhere in the first 512 bytes.
 
 					// if there was a zero-length result received, we assume the server is down
@@ -1591,7 +1590,7 @@ public class npdstracker
 								}
 							}
 								
-							// If I haven't found it, it's that it has been removed while we were checking it.
+							// If I haven’t found it, it’s that it has been removed while we were checking it.
 						}
 					}
 					else
@@ -1638,23 +1637,23 @@ public class npdstracker
 			}
 		} // for (int foo = 0; foo < theHosts.size(); foo++)
 		
-		// check for servers which we haven't been able to reach in a while and toast them
+		// check for servers which we haven’t been able to reach in a while and toast them
 		synchronized (mHostInfoVector)
 		{
 			// for (int foo = 0; foo < mHostInfoVector.size(); foo++)
-			// This should lead to a problem. I'd better start from the end.
+			// This should lead to a problem. I’d better start from the end.
 			int theLastIndex = mHostInfoVector.size() - 1;
 			for (int foo = theLastIndex; foo >= 0; foo--)
 			{
 				THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(foo);
 				if ( (theInfo.mStatus > validateTries) || (theInfo.mStatus == -1) || (theInfo.mStatus == -2) )
 				// Remove both down Newtons and shared Newton (as shared Newton will be got later)
-				// (notice: this isn't a good idea later, we should first check that the other tracker servers
-				// are still running, but as nobody does share, it isn't really a problem)
+				// (notice: this isn’t a good idea later, we should first check that the other tracker servers
+				// are still running, but as nobody does share, it isn’t really a problem)
 				{
 					if ( theInfo.mStatus > validateTries )
-					    logMessage(theInfo.mName + " removed. Too many failed connections.");
-					mHostInfoVector.removeElementAt( foo );
+						logMessage(theInfo.mName + " removed. Too many failed connections.");
+						mHostInfoVector.removeElementAt( foo );
 				}
 			} // for (int foo = theLastIndex; foo >= 0; foo--)
 		} // synchronized (mHostInfoVector)
@@ -1669,7 +1668,7 @@ public class npdstracker
 				try
 				{
 					Socket theSocket = new Socket(theServerInfo.mHost, Integer.parseInt(theServerInfo.mPort));
-					theSocket.setSoTimeout( kTimeout );	// Won't wait forever, it would break the server.
+					theSocket.setSoTimeout( kTimeout );	// Won’t wait forever, it would break the server.
 					
 					logMessage("Setting up input and output streams");
 					BufferedReader inshare = new BufferedReader(new InputStreamReader( theSocket.getInputStream()) );
@@ -1742,7 +1741,7 @@ public class npdstracker
 								}
 								else
 								{
-									logMessage( "Duplicate Share Record.  Not adding: " + addresspair );
+									logMessage( "Duplicate Share Record. Not adding: " + addresspair );
 								}
 							}
 						}
@@ -1793,7 +1792,7 @@ public class npdstracker
 			outcmdfile.flush();
 			outcmdfile.close();
 		} catch (IOException e) {
-			System.out.println("   [FATAL] Can't write to log file: " + cmdfile);
+			System.out.println("   [FATAL] Can’t write to log file: " + cmdfile);
 		}
 	}
 }
