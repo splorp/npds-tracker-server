@@ -31,7 +31,7 @@ public class npdstracker
 	public static final int minorversion = 1;
 	public static final int build = 39;
 	public static final int protocolversion = 1;
-	public static final String versionStr = majorversion + "." + minorversion + "." + build + " beta";
+	public static final String versionStr = majorversion + "." + minorversion + "." + build;
 	public static final String kServerStr = "Victor Rehorst’s NPDS Tracker Server " + versionStr;
 	public static final String kUserAgentStr = "Mozilla/5.0 (compatible; " + kServerStr + "; Java)";
 
