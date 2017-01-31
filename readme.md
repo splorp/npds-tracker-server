@@ -19,7 +19,7 @@ The current release of the NPDS Tracker Server has been tested with Java SE (Sta
 
 The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
 
-### An Internet connection
+### An internet connection
 
 The NPDS Tracker Server listens for clients on TCP port 3680, as assigned by [IANA](http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xml). The tracker can also be configured to listen on multiple ports. See the [Settings](#settings) section for more information.
 
@@ -588,6 +588,9 @@ Coming soon.
 + [GH] New `<server-noun/>` and `<server-verb/>` template tags because grammar
 + [GH] New `<hit-counter-noun/>` and `<validate-time-noun/>` template tags because grammar
 + [GH] Standardized template tag naming for `<tracker-host/>` and `<tracker-name/>`
++ [GH] Changed date formatting to use full day and month names
++ [GH] Added initial media queries and responsive layout styles
++ [GH] Simplified template and validation string markup
 
 ### 0.1.37 — 18 December 2012
 
