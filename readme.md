@@ -15,7 +15,7 @@ Looking for support? Join the [NPDS mailing list](http://npds.free.fr/list/).
 
 ### Java 1.3 or later
 
-The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 5, 6 and 8. It will also work with versions earlier than 1.3, but it is not recommended. See the [Basic Set Up](#basic-set-up) section for more information.
+The current release of the NPDS Tracker Server has been tested with Java SE (Standard Edition) versions 1.4, 5 (1.5), 6 (1.6). and 8 (1.8). It will also work with versions earlier than 1.3, but it is not recommended. See the [Basic Set Up](#basic-set-up) section for more information.
 
 The Java SE runtime can be downloaded from [Oracle](http://www.oracle.com/technetwork/java/javase/).
 
@@ -34,23 +34,23 @@ Required to compile the Java source, install the compiled .jar file, and configu
 
 ## Files
 
-`readme.md` - You're soaking in it
+`readme.md` — You’re soaking in it
 
-`npdstracker.java` - Java source code for the tracker
+`npdstracker.java` — Java source code for the tracker
 
-`npdstracker.ini` - Settings and configuration for the tracker
+`npdstracker.ini` — Settings and configuration for the tracker
 
-`template.html` - HTML page template used by the tracker
+`template.html` — HTML page template used by the tracker
 
-`template.css` - Stylesheet used in conjunction with the HTML template by the tracker
+`template.css` — Stylesheet used in conjunction with the HTML template by the tracker
 
-`npdscmd.txt` - Initial tracker commands. Registered servers are written to this file upon shutdown
+`npdscmd.txt` — Initial tracker commands. Registered servers are written to this file upon shutdown
 
-`startnpds.sh` - An example shell script for Unix-like operating systems
+`startnpds.sh` — An example shell script for Unix-like operating systems
 
-`manifest.mf` - Information specific to the Java source code
+`manifest.mf` — Information specific to the Java source code
 
-`images` - New directory containing default tracker images.  
+`images` — New directory containing default tracker images.
 
 
 ## Getting Started
@@ -259,27 +259,27 @@ On Darwin or Mac OS X, you can create a launch daemon to automatically launch th
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-        <key>Label</key>
-        <string>fr.free.npds.npdstracker</string>
-        <key>ProgramArguments</key>
-        <array>
-            <string>java</string>
-            <string>-jar</string>
-            <string>/usr/local/bin/npdstracker.jar</string>
-            <string>-c</string>
-            <string>/etc/npdstracker/npdscmd.txt</string>
-            <string>-o</string>
-            <string>/etc/npdstracker/npdstracker.ini</string>
-        </array>
-        <key>KeepAlive</key>
-        <dict>
-            <key>NetworkState</key>
-            <true/>
-        </dict>
-        <key>RunAtLoad</key>
-        <true/>
-    </dict>
+	<dict>
+		<key>Label</key>
+		<string>fr.free.npds.npdstracker</string>
+		<key>ProgramArguments</key>
+		<array>
+			<string>java</string>
+			<string>-jar</string>
+			<string>/usr/local/bin/npdstracker.jar</string>
+			<string>-c</string>
+			<string>/etc/npdstracker/npdscmd.txt</string>
+			<string>-o</string>
+			<string>/etc/npdstracker/npdstracker.ini</string>
+		</array>
+		<key>KeepAlive</key>
+		<dict>
+			<key>NetworkState</key>
+			<true/>
+		</dict>
+		<key>RunAtLoad</key>
+		<true/>
+	</dict>
 </plist>
 ```
 
@@ -369,9 +369,9 @@ Specifies how many validation attempts will be made before clients are removed f
 shareEnabled = true
 ```
 
-Specifies whether other trackers may obtain SHARE'd records from this tracker.
+Specifies whether other trackers may obtain SHARE records from this tracker.
 
-Set to 'true' to allow sharing, set to anything else to disallow sharing.
+Set to ‘true’ to allow sharing, set to anything else to disallow sharing.
 
 
 #### shareServer
@@ -381,9 +381,9 @@ shareServer = messagepad.no-ip.org 3680
 shareServer = tracker.newtonrulez.com 3680
 ```
 
-Specifies servers to obtain SHARE'd records from.
+Specifies servers to obtain SHARE records from.
 
-Each `shareServer` entry consists of a tracker hostname or address and a port number. To stop obtaining SHARE'd records from a tracker, comment out or delete the tracker's `shareServer` entry.
+Each `shareServer` entry consists of a tracker hostname or address and a port number. To stop obtaining SHARE records from a tracker, comment out or delete the tracker’s `shareServer` entry.
 
 
 #### privateHostToAccept
@@ -415,18 +415,20 @@ Specifies the path and name of the template stylesheet.
 
 Used in conjunction with `pageTemplate`.
 
+
 #### imageDir
 ```sh
 imageDir = images
 ```
 
-Specifies the path and name of the image directory.  If you are using the default pageTemplate and cssTemplate files, please be sure to copy all image files within the images distribution into this directory.
+Specifies the path and name of the image directory. If you are using the default pageTemplate and cssTemplate files, please be sure to copy all image files within the images distribution into this directory.
 
 By default .gif and .ico images files are supported.
 
-All image files referenced from pageTemplate and cssTemplate will be retreived no matter what leading path you add to the image file from the imageDir directory.  For clarity it probably is a good idea to add references to these files using the images path:  
+All image files referenced from pageTemplate and cssTemplate will be retreived no matter what leading path you add to the image file from the imageDir directory. For clarity it probably is a good idea to add references to these files using the images path:
 
-ie:   src="images/bg-footer.gif"
+ie: src="images/bg-footer.gif"
+
 
 #### logFile
 ```sh
@@ -439,6 +441,7 @@ Log entries generated by the tracker are rather verbose and the log file can gro
 
 This parameter was named `logfile` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the `npdstracker.ini` file.
 
+
 #### logVerbose
 ```sh
 logVerbose = true
@@ -446,7 +449,7 @@ logVerbose = true
 
 Specifies whether messages should be written to the log file.
 
-If set to 'false', the tracker will only create a log entry if it encounters a serious problem.
+If set to ‘false’, the tracker will only create a log entry if it encounters a serious problem.
 
 This parameter was named `shouldIlog` in NPDS Tracker Server 0.1.36 and earlier. Make sure that this parameter name is correct in the `npdstracker.ini` file.
 
@@ -457,16 +460,16 @@ This parameter was named `shouldIlog` in NPDS Tracker Server 0.1.36 and earlier.
 java npdstracker [-h] [-c <cmdfile>] [-o <optionsfile>]
 ```
 
-`-h` - Display help
+`-h` — Display help
 
-`-c <cmdfile>`  - Specifies the path of the `npdscmd.txt` file containing any commands to run at startup (defaults to none)
+`-c <cmdfile>` — Specifies the path of the `npdscmd.txt` file containing any commands to run at startup (defaults to none)
 
-`-o <optionsfile>` - Specifies the path of the `npdstracker.ini` file containing configuration and option settings (defaults to settings at compile time)
+`-o <optionsfile>` — Specifies the path of the `npdstracker.ini` file containing configuration and option settings (defaults to settings at compile time)
 
 
 ## Remote Administration
 
-To access the remote administration interface, you'll need the following:
+To access the remote administration interface, you’ll need the following:
 
 + A terminal program or standalone Telnet client
 + The hostname and port of the tracker you wish to administer
@@ -484,7 +487,7 @@ In your terminal program, open the Telnet connection to the tracker.
 telnet tracker.example.com 3680
 ```
 
-Hit 'Enter'
+Hit ‘Enter’
 
 After you connect to the tracker, you have five seconds to enter the following:
 
@@ -492,7 +495,7 @@ After you connect to the tracker, you have five seconds to enter the following:
 ADMIN <password>
 ```
 
-Hit 'Enter'
+Hit ‘Enter’
 
 You will be presented with the following text:
 
@@ -506,70 +509,70 @@ Next, type:
 HELP
 ```
 
-Hit 'Enter'
+Hit ‘Enter’
 
 This will display a list of available commands.
 
 ### Commands
 
-`ABOUT` - Display the current tracker settings
+`ABOUT` — Display the current tracker settings
 
-`HALT` - Stop the tracker (with confirmation)
+`HALT` — Stop the tracker (with confirmation)
 
-`HELP` - Displays this list of commands
+`HELP` — Displays this list of commands
 
-`LOGS` - Dumps the tracker log
+`LOGS` — Dumps the tracker log
 
-`SHARE` - Change the tracker share settings
+`SHARE` — Change the tracker share settings
 
-`SLIST` - View or modify the list of trackers to obtain shared records from
+`SLIST` — View or modify the list of trackers to obtain shared records from
 
-`VTEST` - Trigger a tracker validation
+`VTEST` — Trigger a tracker validation
 
-`STATS` - Display the tracker statistics (describe)
+`STATS` — Display the tracker statistics (describe)
 
-`VERIFY` - Change the tracker verification settings
+`VERIFY` — Change the tracker verification settings
 
-`QUIT` - Exit the administration interface and close the connection
+`QUIT` — Exit the administration interface and close the connection
 
 
 ## Page Template Tag Syntax
 
 The [HTML page template](#pagetemplate) can be customized using the following pseudo-SGML tags to insert information into the page. Note that some tag names have changed in current releases of the tracker and are not backwards compatible.
 
-`<hit-counter/>` - The number of page views since the tracker was restarted
+`<hit-counter/>` — The number of page views since the tracker was restarted
 
-`<hit-counter-noun/>` - Singular or plural noun based on the page views ("time" vs "times")
+`<hit-counter-noun/>` — Singular or plural noun based on the page views (“time” vs “times”)
 
-`<http-doc/>` - What comes after the GET (usually "/")
+`<http-doc/>` — What comes after the GET (usually “/”)
 
-`<last-validation/>` - The date and time of the last validation or "Validation is in progress."
+`<last-validation/>` — The date and time of the last validation or “Validation is in progress.”
 
-`<meta-refresh/>` - The meta element containing the http-equiv="refresh" value
+`<meta-refresh/>` — The meta element containing the http-equiv="refresh" value
 
-`<servers/>` - The list of registered NPDS clients formatted as a table
+`<servers/>` — The list of registered NPDS clients formatted as a table
 
-`<server-counter/>` - The number of registered NPDS clients
+`<server-counter/>` — The number of registered NPDS clients
 
-`<server-noun/>` - Singular or plural noun based on number of clients ("server" vs "servers")
+`<server-noun/>` — Singular or plural noun based on number of clients (“server” vs “servers”)
 
-`<server-verb/>` - Singular or plural verb based on number of clients ("is" vs "are")
+`<server-verb/>` — Singular or plural verb based on number of clients (“is” vs “are”)
 
-`<server-shares/>` - A linked list of SHARE'd trackers formatted as an unordered list
+`<server-shares/>` — A linked list of SHARE’d trackers formatted as an unordered list
 
-`<stylesheet/>` - Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
+`<stylesheet/>` — Inserts the stylesheet as specified in npdstracker.ini (default: template.css)
 
-`<tracker-host/>` - The URL of the host site or tracker as specified in npdstracker.ini
+`<tracker-host/>` — The URL of the host site or tracker as specified in npdstracker.ini
 
-`<tracker-name/>` - The name of the host site or tracker as specified in npdstracker.ini
+`<tracker-name/>` — The name of the host site or tracker as specified in npdstracker.ini
 
-`<url/>` - The URL of this tracker, obtained by reading the HTTP header
+`<url/>` — The URL of this tracker, obtained by reading the HTTP header
 
-`<validate-time/>` - The time (in minutes) between validations
+`<validate-time/>` — The time (in minutes) between validations
 
-`<validate-time-noun/>` - Singular or plural noun based on the time period ("minute" vs "minutes")
+`<validate-time-noun/>` — Singular or plural noun based on the time period (“minute” vs “minutes”)
 
-`<version/>` - The current version of the tracker software
+`<version/>` — The current version of the tracker software
 
 
 
@@ -581,23 +584,12 @@ Coming soon.
 
 ## Version History
 
-### 0.1.39 - TBD
-+ [PPG] NPDS Tracker now supports serving image files. (Support for .gif and .ico image files)
-+ [PPG] Added property to .ini file to specify image directory.
-+ [PPG] Changed the way thread are handled to make it more efficient.
-+ [PPG] Added Sylvain Pilet's FANTASTIC tracker template.css, template.html and images.
-+ [PPG] Updated defaults to validate servers every 10 minutes and keep down servers in list for 1 day.
-+ [PPG] Shared servers will now reflect down status.
-+ [PPG] Verified all descriptiors are closed.
-+ [PPG] Fixed bug where saved servers had incorrect tag that prevented loading on restart.
-+ [PPG] Fixed bug where if you listed your server as a shared server duplicate entries would be displayed in tracker list.  (Of course you should not do that, but makes for easier development if I do not have to make multiple changes to .ini file during testing)
-
-### 0.1.38 - TBD
+### 0.1.38 — TBD
 + [GH] New `<server-noun/>` and `<server-verb/>` template tags because grammar
 + [GH] New `<hit-counter-noun/>` and `<validate-time-noun/>` template tags because grammar
 + [GH] Standardized template tag naming for `<tracker-host/>` and `<tracker-name/>`
 
-### 0.1.37 - 18 December 2012
+### 0.1.37 — 18 December 2012
 
 + [RP] New `<server-shares/>` template tag inserts a list of shared trackers
 + [GH] Added command line usage information
@@ -610,7 +602,7 @@ Coming soon.
 + [GH] Renamed several configuration parameters
 + [GH] Previous `npdstracker.ini` files are no longer compatible with this version of the tracker
 
-### 0.1.36 - 28 August 2012
+### 0.1.36 — 28 August 2012
 
 + [MA] Split out display of HTML status into its own method
 + [MA] Updated HTTP GET processing to support rendering the HTML status page
@@ -625,7 +617,7 @@ Coming soon.
 + [GH] Minor formatting and nomenclature edits abound!
 + [GH] Converted read me to Markdown format
 
-### 0.1.35 - 08 September 2010
+### 0.1.35 — 08 September 2010
 
 + [GH] Moved source to GitHub
 + [GH] Added user definable stylesheet template
@@ -634,11 +626,11 @@ Coming soon.
 + [GH] Minor text formatting updates
 + [GH] Changed all document encoding to UTF-8
 
-### 0.1.34 - 06 April 2006
+### 0.1.34 — 06 April 2006
 
 + [VR] Added `shouldIlog` setting in INI file to disable all logging
 
-### 0.1.33 - 22 February 2004
+### 0.1.33 — 22 February 2004
 
 + [MP] Added SSI tag for displaying the number of registered clients in the template
 + [MP] Made the `<meta-refresh/>` SSI XHTML-compatible
@@ -646,43 +638,43 @@ Coming soon.
 + [MP] Refined the listing table elements for extensive use of CSS
 + [MP] Added code to allow one hostname with a private IP to register
 
-### 0.1.32 - 02 May 2003
+### 0.1.32 — 02 May 2003
 
-+ [VR] Makes sure that the hostname isn't empty on a REGUP command
++ [VR] Makes sure that the hostname isn’t empty on a REGUP command
 + [VR] Changed `kRTFMStr` to reflect new NPDS website address
 	
-### 0.1.31 - 30 July 2002
+### 0.1.31 — 30 July 2002
 
 + [PG] The tracker can now listen on several ports
 
-### 0.1.30 - 28 April 2002
+### 0.1.30 — 28 April 2002
 
 + [PG] Fixed the bug in 192.168.* address filtering
 
-### 0.1.29 - 16 March 2002
+### 0.1.29 — 16 March 2002
 
 + [PG] Fixed the bug in processing of console commands, so now lowercase commands work
-+ [PG] The console now says "server validation test started" before it finishes the validation
++ [PG] The console now says “server validation test started” before it finishes the validation
 + [PG] The tracker was waiting forever for an answer from fellow trackers, which was bad
 + [PG] Added style information to colorize the table
 + [PG] The tracker performs a verification on startup
 + [PG] Vector copy constructor is no longer called, so this should compile on Java < 1.2 (but it will have problems because of bugs in the JVM)
 + [PG] The tracker now checks the hosts passed as REGUP parameters to be correct (to resolve and to be not private)
 
-### 0.1.28 - 29 November 2001
+### 0.1.28 — 29 November 2001
 
 + [PG] No longer dumps the shared trackers to npdscmd.txt
-+ [PG] Fixed the `shareEnabled` .ini read process (`getBoolean` is not what we want, it's `valueOf`)
++ [PG] Fixed the `shareEnabled` .ini read process (`getBoolean` is not what we want, it’s `valueOf`)
 
-### 0.1.27 - 20 October 2001
+### 0.1.27 — 20 October 2001
 
 + [VR] Now saves registered client information for automatic reloading upon a crash or restart
 
-### 0.1.26 - 18 August 2001
+### 0.1.26 — 18 August 2001
 
 + [PG] Fixed the `java.lang.ArrayIndexOutOfBoundsException` bug introduced in version 0.1.24
 
-### 0.1.25 - 06 June 2001
+### 0.1.25 — 06 June 2001
 
 + [PG] Fixed the `java.lang.IllegalArgumentException: timeout value is negative` bug (well, I think)
 
@@ -701,13 +693,13 @@ Coming soon.
 
 + [PG] Implemented the template stuff
 + [PG] Reorganized the `ProcessQuery` method
-+ [PG] There is now a single class with embedded sub classes (so we'll have a single .java binary)
++ [PG] There is now a single class with embedded sub classes (so we’ll have a single .java binary)
 + [PG] Improved answer to the GET request (with many headers now)
 
 ### 0.1.21
 
 + [PG] No longer uses the bugged URL interface to check if Newton clients are up. Instead, I use a socket
-+ [PG] The REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn't protocol-compliant)
++ [PG] The REGUP command tokenizer now accepts any standard token (and no longer only spaces which wasn’t protocol-compliant)
 + [PG] Added several syntax checking with an appropriate status message
 
 ### 0.1.20
@@ -761,7 +753,7 @@ Coming soon.
 
 + [VR] Added more features to GET code
 + [VR] Fixed up RFC times somewhat
-+ [VR] Fixed bug in validation code with "Connection Refused" socket exceptions
++ [VR] Fixed bug in validation code with “Connection Refused” socket exceptions
 
 ### 0.1.10
 
@@ -794,7 +786,7 @@ Coming soon.
 ### 0.0.5
 
 + [VR] Client validation actually works! Woo hoo!
-+ [VR] Implemented a socket timeout so that the loop doesn't get stuck
++ [VR] Implemented a socket timeout so that the loop doesn’t get stuck
 + [VR] Removed the QHTML extended command
 
 ### 0.0.4
