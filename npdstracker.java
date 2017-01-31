@@ -167,7 +167,7 @@ public class npdstracker
 				}	// while (true)
 			} catch (Exception e)
 			{
-				// Oops, some exception occured.
+				// Oops, some exception occurred.
 				npdstracker.logMessage("TValidator: Exception " + e + " occurred");
 				e.printStackTrace();
 			}
@@ -222,7 +222,7 @@ public class npdstracker
 				System.gc();
 			} catch (Exception e)
 			{
-				// Oops, some exception occured.
+				// Oops, some exception occurred.
 				npdstracker.logMessage("TConnection: Exception " + e + " occurred");
 			}
 		}
@@ -259,7 +259,7 @@ public class npdstracker
 
 				} catch (Exception e)
 				{
-					// Oops, some exception occured.
+					// Oops, some exception occurred.
 					npdstracker.logMessage("TServer: Exception " + e + " occurred");
 				}
 			}
@@ -274,7 +274,7 @@ public class npdstracker
 
 	public static class THostInfo
 	{
-		// The Newton's hostname (including IP)
+		// The Newton’s hostname (including IP)
 		public String mName;	// The string as shown in the logs and in the table.
 		public String mHost;	// The host name only (used to check the server)
 		public int mPort;		// The port only (default is 80)
@@ -1775,7 +1775,7 @@ public class npdstracker
 				for (int foo = 0; foo < mHostInfoVector.size(); foo++)
 				{
 					THostInfo theInfo = (THostInfo) mHostInfoVector.elementAt(foo);
-					// Dont save SHARE records
+					// Don’t save SHARE records
 					if ( !(theInfo.mStatus == -1 || theInfo.mStatus == -2 ) )
 					{
 						String templine = "REGUP " + theInfo.mHost;
@@ -1799,8 +1799,8 @@ public class npdstracker
 
 // ================================================	//
 //                                                  //
-//     "Beware of these column-writing CEOs."       //
+//     “Beware of these column-writing CEOs.”       //
 //                                                  //
-//             Jean-Louis Gassee, 24 May 2000       //
+//           — Jean-Louis Gassée, 24 May 2000       //
 //                                                  //
 // ================================================	//
