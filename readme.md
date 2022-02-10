@@ -66,7 +66,7 @@ This command will return the path where Java is installed on your system.
 For example:
 
 ```sh
-/usr/bin/java`
+/usr/bin/java
 ```
 
 If a path is not displayed after running this command, then Java is not currently installed on your system. You will need to download and install the [Java SE](http://www.oracle.com/technetwork/java/javase/) software before proceeding.
@@ -82,7 +82,7 @@ This command will return information about the current Java installation, includ
 For example:
 
 ```sh
-java version "1.6.0_30"`
+java version "1.6.0_30"
 ```
 
 ### Grab the source
